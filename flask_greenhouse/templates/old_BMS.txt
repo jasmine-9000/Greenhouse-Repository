@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block content %}
+	<h1>BMS Data</h1>
+		<script src="{{ url_for('static', filename='js/jquery-3.4.1.js') }}"></script>
+		<script type = "text/javascript" language = "javascript" src = "{{ url_for('static', filename='js/bms.js') }}"></script>
+
+		<p>You can either get instantaneous BMS data by clicking the button below </p>
+		<input type = "button" id="instantaneous_button" value="Get Instantaneous Data" />
+		{% if form %}
+		<p>Or, you can request a graph. Specify a start date, an end date, an interval the form below.</p>
+		{% endif %}
+		<div class="content-section">
+ 			<form method="POST" action="">
+				{{ form.hidden_tag() }}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">Fill out this form </legend>
+					
+					
+			
+					
+					<div class="form-group">
+						{{ form.start_date.label(class="form-control-label") }}
+						{% if form.start_date.errors %}
+							{{ form.start_date(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.start_date.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.start_date(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.end_date.label(class="form-control-label") }}
+						{% if form.end_date.errors %}
+							{{ form.end_date(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.end_date.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.end_date(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.step.label(class="form-control-label") }}
+						{% if form.step.errors %}
+							{{ form.step(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.step.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.step(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.parameter.label(class="form-control-label") }}
+						{% if form.parameter.errors %}
+							{{ form.parameter(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.parameter.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.parameter(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+				</fieldset>
+				<div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+				</div>
+			</form>
+		</div>
+		{% if returned_data %}
+			{{ returned_data }}
+		{% endif %}
+		<!--
+		<form id = "JSON_start_date_input" action="#" method="POST">
+			<label for="JSON_time"> Hour: </label>
+			<input type = "time" id="JSON_time" value="11:38"/>
+			<br />
+			<label for = "JSON_start_date"> Day: </label>
+			<input type = "start_date" id="JSON_start_date" value="2019-06-13"/>
+			<input type = "button" id = "submit_button" value="submit" onClick = ""/>
+		</form>
+		-->
+		<div id = "all"></div>
+{% endblock %}

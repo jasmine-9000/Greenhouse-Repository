@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+	<h1>Register a Sensor </h1>
+	<form method="POST" action="">
+		{{ form.csrf_token }}
+			<div class="form-group">
+			{{ form.owner.label }}
+			{{ form.owner }}
+			</div>
+			<div class="form-group">
+			{{ form.sensor_name.label }}
+			{{ form.sensor_name }}
+			</div>
+			<div class="form-group">
+			{{ form.units.label }}
+			{{ form.units }}
+			</div>
+			<div class="form-group">
+			{{ form.protocol.label }}
+			{{ form.protocol }}
+			</div>
+			<div class="form-group">
+			{{ form.submit }}
+			</div>
+		
+	</form>
+{% endblock %}

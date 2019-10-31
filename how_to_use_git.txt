@@ -1,0 +1,88 @@
+Git is a Distriuted VCS. Every developer has a backup of the code.
+
+Steps:
+
+1.) 
+
+install git.
+
+command:
+
+pip install git
+	
+2.) 
+Set config values.
+	
+Command: 
+
+git config --global user.name "William Kerr"
+git config --global user.email "wkerr@ucsc.edu"
+
+to see the configuration settings again, call:
+	
+git config --list
+
+you can get help with any git verb by calling:
+
+git config --help # config is the verb here. any verb will have the --help argument.
+
+3a.) If there's an existing repository (with no .git 
+
+Initialize your git repository.
+
+command:
+
+git init
+
+To stop tracking a project with git, remove the .git directory.
+
+
+3b.) If there's not an existing repository, create a folder, and then initialize your git repo.
+
+4.) 
+Before your first commit:
+
+Add your files. 
+
+see files added with git status. 
+
+Command: 
+
+git status
+
+	
+To ignore files, create a .gitignore file.
+
+Linux Commands:
+
+touch .gitignore
+
+Windows Commands:
+
+type nul > .gitignore
+
+Things you may want to add in your .gitignore file in a Python project:
+
+.DS_Store
+.project
+*.pyc
+
+You do want to commit the .gitignore file, though.
+
+
+5.)
+Add files to staging area. 
+
+There are 3 states: the working directory, the staging area, and the .git directory (repository)
+
+Untracked files will stay in your working directory. 
+
+Staging area is where we will organize what we want to be committed. We can pick and choose what we want committed.
+
+.git repository 
+
+The staging area is 
+
+
+
+

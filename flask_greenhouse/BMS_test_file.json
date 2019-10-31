@@ -1,0 +1,253 @@
+{
+	"name": "BMS",
+	"Battery Balancing Rate Summary": {
+		"number of cells": 2,
+		"minimum cell balancing rate": "1",
+		"maximum cell balancing rate": "2",
+		"average cell balancing rate": "1.5",
+		"balancing threshold": "1.2"
+	},
+	"Battery Balancing Rate Detail": {
+		"cell group 1": {
+			"cell string number": 1,
+			"first cell number": 1,
+			"size of group": 4,
+			"individual cell module balancing rate": 5
+		},
+		"cell group 2": {
+			"cell string number": 2,
+			"first cell number": 5,
+			"size of group": 4,
+			"individual cell module balancing rate": 5.1
+		}
+	},
+	"Battery Charge": {
+		"battery charge": 1,
+		"battery capacity": 2,
+		"state of charge": 0.1
+	},
+	"Battery Module Temperature Summary": {
+		"number of cells": 8,
+		"minimum cell module temperature": { "value": 40, "unit": "C"},
+		"maximum cell module temperature": { "value": 55, "unit": "C"},
+		"average cell module temperature": { "value": 45, "unit": "C"}
+	},
+	"Battery Module Temperature Detail": {
+		"cell group 1": {
+			"cell string number": 1,
+			"first cell number": 1,
+			"size of group": 4,
+			"individual cell module temperatures": {
+				"cell 1": {"value": 40, "unit":"C"},
+				"cell 2": {"value": 45, "unit":"C"},
+				"cell 3": {"value": 42, "unit":"C"},
+				"cell 4": {"value": 50, "unit":"C"}
+			}
+		},
+		"cell group 2": {
+			"cell string number": 2,
+			"first cell number": 5,
+			"size of group": 4,
+			"individual cell module temperatures": {
+				"cell 1": {"value": 20, "unit": "C"},
+				"cell 2": {"value": 21, "unit": "C"},
+				"cell 3": {"value": 23, "unit": "C"},
+				"cell 4": {"value": 24, "unit": "C"}
+			}
+		}
+	},
+	"Battery Cell Temperature Summary": {
+		"number of cells": 8,
+		"minimum cell temperature": {"value": 25, "unit": "C"},
+		"maximum cell temperature": {"value": 30, "unit": "C"},
+		"average cell temperature": {"value": 26, "unit": "C"}
+	},
+	"Battery Cell Temperature Detail": {
+		"cell group 1": {
+			"cell string number": 1,
+			"first cell number": 1,
+			"size of group": 4,
+			"individual cell module temperatures": {
+				"cell 1": 1,
+				"cell 2": 2,
+				"cell 3": 3,
+				"cell 4": 4
+			}
+		},
+		"cell group 2": {
+			"cell string number": 2,
+			"first cell number": 5,
+			"size of group": 4,
+			"individual cell module temperatures": {
+				"cell 1": 1,
+				"cell 2": 2,
+				"cell 3": 3,
+				"cell 4": 4
+			}
+		}
+	},
+	"BatteryVoltageSummary": {
+		"number of cells": 4,
+		"minimum cell voltage": 12,
+		"maximum cell voltage": 13,
+		"average cell voltage": 12.5
+	},
+	"BatteryVoltageDetail": {
+		"cell group 1": {
+			"cell string number": 1,
+			"first cell number": 1,
+			"size of group": 4,
+			"individual cell module voltages": {
+				"cell 1": {"value": 12, "unit": "V"},
+				"cell 2": {"value": 12, "unit": "V"},
+				"cell 3": {"value": 12, "unit": "V"},
+				"cell 4": {"value": 12, "unit": "V"}
+			}
+		},
+		"cell group 2": {
+			"cell string number": 2,
+			"first cell number": 5,
+			"size of group": 4,
+			"individual cell module voltages": {
+				"cell 1": {"value": 12, "unit": "V"},
+				"cell 2": {"value": 12, "unit": "V"},
+				"cell 3": {"value": 12, "unit": "V"},
+				"cell 4": {"value": 12, "unit": "V"}
+			}
+		}
+	},
+	"CANDevicesStatus": {
+		"CAN current sensor status": "OK",
+		"CAN cell group 1": {
+			"number of cells": 4,
+			"status": "OK"
+		},
+		"CAN cell group 2": {
+			"number of cells": 4,
+			"status": "OK"
+		}
+	},
+	"ReceivedCANMessages": {
+		"CAN identifier": "1",
+		"Identifier Extension Used": "True",
+		"Remote Transmission Used": "True",
+		"Data Length": 12,
+		"Unprocessed CAN data": "0x1ABC"
+	},
+	"ChargerStatus": {
+		"set voltage": {"value": 12, "unit": "V" },
+		"set current": {"value": 1, "unit": "A" },
+		"actual voltage": {"value": 12.1, "unit": "V" },
+		"actual current": {"value": 0.9, "unit": "A"},
+		"CAN charger status": {"value": 0, "unit": "N/A"}
+	},
+	"CurrentAndVoltage": {
+		"total voltage": {"value": 121, "unit": "V"},
+		"current": {"value": 12, "unit": "A"}
+	},
+	"Distance And Energy": {
+		"error": "not programmed"
+	},
+	"Input Pins": {
+		"AC SENSE": "True",
+		"IGN IN": "True",
+		"FAST CHG": "True"
+	},
+	"Events Log": {
+		"log event number 1": {
+			"log event": "Charging Finished",
+			"unix timestamp": 1560436361
+		},
+		"log event number 2": {
+			"log event": "Charging Finished",
+			"unix timestamp": 1560436361
+		}
+	},
+	"OutputPins": {
+		"CHARGER PIN": "True",
+		"HEATER": "True",
+		"BAT_LOW": "True",
+		"BUZZER": "False",
+		"CHG_IND": "True"
+	},
+	"Statistics": {
+		"statistic 1": {
+			"name": "Maximum Cell Voltage",
+			"value": 12,
+			"unit": "V",
+			"unix timestamp": 1560436361,
+			"Cell ID": 1
+		},
+		"statistic 2": {
+			"name": "Minimum Cell Voltage",
+			"value": 12,
+			"unit": "V",
+			"unix timestamp": 1560439961,
+			"Cell ID": 2
+		}
+	
+	},
+	"BMS Status": {
+		"Charging Stage": "NULL",
+		"Last Charging Error": "NONE",
+		"Last Charging Error Parameter": 0,
+		"Stage Duration": "1",
+		"Valid cell voltages": "True",
+		"Valid balancing rates": "True",
+		"valid number of live cells": "True",
+		"battery charging finished":"False",
+		"valid cell temperatures": "True",
+		"undervoltage": "True",
+		"overvoltage": "True",
+		"discharge overcurrent": "True",
+		"charge overcurrent": "True",
+		"cell module overheat": "True",
+		"leakage": "True",
+		"no_cell_comm": "True",
+		"cell_overheat": "True",
+		"warning: power reduction: low voltage": "True",
+		"warning: power reduction: high current": "True",
+		"warning: power reduction: high cell module temperature": "True", 
+		"warning: power reduction: high cell temperature": "True",
+		"no_function": "True",
+		"speed_sensor": "True",
+		"fast_charge_switch": "True",
+		"ign_key": "True",
+		"charger_mains_AC_sense": "True",
+		"heater_enable": "True",
+		"sound_buzzer": "True",
+		"battery_low": "True",
+		"charging_indication": "True",
+		"charger_enable_output": "True",
+		"state_of_charge": "True",
+		"battery_contactor": "True",
+		"battery_fan": "True",
+		"current_sensor": "True",
+		"leakage_sensor": "True",
+		"power_reduction": "True",
+		"charging_interlock": "True",
+		"analog_charger_control": "True",
+		"ZVU_boost_charge": "True",
+		"ZVU_slow_charge": "True",
+		"ZVU_buffer_mode": "True",
+		"BMS_failure": "True",
+		"equalization_enable": "True",
+		"DCDC_control": "True",
+		"ESM_rectifier_current_limit": "True",
+		"contactor_precharge": "True"
+	},
+	"Time And Date": {
+		"year": 2019,
+		"month": 6,
+		"day": 13,
+		"hour": 11,
+		"minute": 37,
+		"second": 12,
+		"uptime": 1111
+	},
+	"Version Number": {
+		"hardware version": "Emus BMS G1",
+		"serial number": "0000-0000-002",
+		"firmware version": "1.2"
+	}
+}

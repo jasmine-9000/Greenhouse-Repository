@@ -1,0 +1,24 @@
+
+To connect our GPRS, sned these series of commands:
+
+AT+SAPBR=3,1,"Contype","GPRS"
+AT+SAPBR=3,1,"APN","www"
+AT+SAPBR=1,1
+AT+SAPBR=2,1
+
+To post JSON data to a specific URL from a SIM900, send these series of commands:
+
+
+Our example string: {  " : 1,  "latitude" : 12.983027,  "longitude" : 80.2594,  "timestamp" : 100,  }
+
+
+AT+HTTPINIT
+AT+HTTPPARA="CID",1
+AT+HTTPPARA="URL","http://xxx.xxx.xx/Listener/" // Public server IP.
+AT+HTTPPARA="URL","http://testServer/Listener/" // Public server address
+AT+HTTPPARA="CONTENT", "application/json"
+AT+HTTPDATA=81,100000 // 81 is the length of the string in question.
+{  " : 1,  "latitude" : 12.983027,  "longitude" : 80.2594,  "timestamp" : 100,  }
+AT+HTTPACTION=1
+AT+HTTPREAD
+AT+HTTPTERM

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+	<h1> City Form </h1>
+	<form method="POST">
+		{{ form.csrf_token }}
+		{{ form.state }}
+		{{ form.city }}
+		<input type="submit">
+	</form>
+	<script type="text/javascript">
+		let state_select=document.getElementById('state');
+		let city_select=document.getElementById('city');
+		state_select.onchange = function() {
+			state = state_select.value;
+			fetch('/sensors/cities/' + state).then(function(response) {
+				response.json().then(function(data) {
+					// console.table(data);
+					let optionHTML = '';
+					for(let city of data.cities) {
+						optionHTML += '<option value="' + city.id + '">' + city.name + '</option>';
+					}
+					
+					city_select.innerHTML = optionHTML;
+					
+				});
+			});
+		}
+	</script>
+{% endblock %}

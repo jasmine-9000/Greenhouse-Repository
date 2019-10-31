@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block title %}This is an example page{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  {{ datepicker.loader() }}
+  {{ datepicker.picker(id=".dp") }}
+
+{% endblock %}
+
+{% block content %}
+	
+	<form method="POST" action="">
+		{{ form.hidden_tag() }} 
+		<fieldset class="form-group"> 
+			<legend class="border-bottom mb-4">Request BMS data</legend>
+				<div class="form-group">
+					{{ form.y_axis.label(class="form-control-label") }}
+					
+					{% if form.y_axis.errors %}
+						{{ form.y_axis(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.y_axis.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.y_axis(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group"> 
+					{{ form.start_date.label(class="form-control-label") }}
+					
+					{% if form.start_date.errors %}
+						{{ form.start_date(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.start_date.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.start_date(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group"> 
+					{{ form.end_date.label(class="form-control-label") }}
+					
+					{% if form.end_date.errors %}
+						{{ form.end_date(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.end_date.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.end_date(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				Interval must be a multiple of 10 minutes.
+				<div class="form-group"> 
+					{{ form.interval.label(class="form-control-label") }}
+					
+					{% if form.interval.errors %}
+						{{ form.interval(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.interval.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.interval(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.title.label(class="form-control-label") }}
+					
+					{% if form.title.errors %}
+						{{ form.title(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.title.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.title(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+		</fieldset>
+		<div class="form-group">
+			{{ form.submit(class="btn btn-outline-info") }}
+		</div>
+		
+	</form>
+	<div id="display_data">
+		{% if graph %}
+			<img src = "{{ url_for('static', filename='graphs/' + graph) }} " />
+		{% endif %}
+	</div>
+{% endblock %}
+
+
