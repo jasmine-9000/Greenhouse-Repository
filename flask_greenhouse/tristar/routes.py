@@ -20,4 +20,6 @@ def Tristar_Post():
 	new_Tristar_entry = TristarDataentry(JSON_data=req_data)
 	db.session.add(new_Tristar_entry)
 	db.session.commit()
+	# this is a comment for git
+	# this is another comment
 	return "your data has been received."

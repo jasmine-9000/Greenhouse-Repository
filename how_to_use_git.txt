@@ -73,15 +73,60 @@ You do want to commit the .gitignore file, though.
 5.)
 Add files to staging area. 
 
+Background:
 There are 3 states: the working directory, the staging area, and the .git directory (repository)
-
 Untracked files will stay in your working directory. 
-
 Staging area is where we will organize what we want to be committed. We can pick and choose what we want committed.
+.git directory is the place we actually store our repository.
 
-.git repository 
+To add files, use the git add command.
 
-The staging area is 
+Commands: 
+
+git add -A # this adds EVERYTHING that's not in the .gitignore file.
+git status # this will tell you that now everything is in the staging area.
+
+To remove something from the staging area, you can use git reset.
+
+Commands:
+
+git reset <filename>
+
+6.) To Make a commit, use git commit.
+
+git commit -m "Our first commit"
+
+the -m argument passes in a message. If you don't do that, git will open your text editor and prompt you for a message.
+
+
+7.) To Look at the commit log, use git log
+
+git log 
+
+
+
+8.) Cloning a remote repo;
+
+Cloning means to copy a repository from another location.
+
+Commands:
+
+git clone <url> <where to clone>
+
+9.) Viewing information about a remote repository:
+
+To list information about the repositry
+
+git remote -v
+
+to list all branches: 
+
+git branch -a
+
+
+
+
+
 
 
 
