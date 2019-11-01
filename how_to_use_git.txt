@@ -182,3 +182,12 @@ git branch -d <branch> # delete that branch locally.
 git push origin --delete <branch> delete that branch in the remote repository.
 
 
+16.) fast example:
+
+git branch subtract
+git checkout subtract
+git status # see that the working tree is clean.
+git add -A
+git commit -m <message>
+git push
+
