@@ -119,15 +119,66 @@ To list information about the repositry
 
 git remote -v
 
-to list all branches: 
+to list all branches in your repository, remotely and locally. 
 
 git branch -a
 
+To list the differences between the local files and the staging are files and the remote files:
+
+Commands:
+
+git diff
+
+-	removed lines
++	added lines
 
 
+10.) to add a remote origin:
 
 
+git remote add origin
 
 
+11.) To do a git pull: 
+
+git pull. 
+
+What it does: 
+Pulls any changes that have been made by other developers since the last pull.
+
+12.) To do a git push:
+
+git push origin <branch> # usually pushing to master branch in single-developer situation.
+
+what it does:
+
+pushes your changes to the master.
+
+13.) To change branches:
+
+To one that exists:
+
+git checkout <branch> 
+
+To create one:
+
+git branch <new branch name>
+
+14.) To push a branch to our remote repository:
+
+git push -u origin <branch> # we have pushed our new branch to our repository.
+git branch -a # see all branches.
+
+15.) To merge a branch to the master branch:
+
+Commands:
+
+git checkout master # switch to master branch. 
+git pull origin master # update the local copy of the master branch.
+git branch --merged # lists all the branches that have been merged with the current brangh. 
+git merge <branch> # merge the changes in <branch> into the master branch
+git branch --merged # see that the merge has worked.
+git branch -d <branch> # delete that branch locally.
+git push origin --delete <branch> delete that branch in the remote repository.
 
 
