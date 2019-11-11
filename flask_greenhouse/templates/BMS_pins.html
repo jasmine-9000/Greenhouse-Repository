@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+	<h1> Pins Attached </h1>
+	<ul>
+	{% for pin in pins %}
+		<li>{{ pin }}</li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}

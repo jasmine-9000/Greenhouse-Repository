@@ -4,6 +4,7 @@ from flask_greenhouse.models import BMSDataentry
 from flask_greenhouse.utils.plot import plot_graph, plot_date
 from flask_greenhouse import db
 import os
+import json
 from datetime import datetime, timedelta
 
 bms = Blueprint("bms", __name__, static_folder='flask_greenhouse/static')
@@ -32,25 +33,39 @@ def BMS():
 		intervaled_data_request = [];
 		
 
+
+# create a unit test.
 		#if it's the battery charge:
-		if form.y_axis.data == 'battery_charge':
-			x_data = []
-			y_data = []
-			for entry in data_request:
-				x_data.append(entry.date_posted)
-				y_data.append(entry.JSON_content["Battery Charge"]["battery charge"])
-			x_label = "Time"
-			y_label = "Charge (A)"
-			title = form.title.data
-			
-		else:
-			# fill in the x_data range with dummy values, starting from now to 40 minutes from now in steps of 10.
+		if form.y_axis.data == 'test':
+				# fill in the x_data range with dummy values, starting from now to 40 minutes from now in steps of 10.
 			# this guarantees 4 date points which the dummy y data will automatically correlate.
 			x_data = [(datetime.now() + timedelta(minutes=step)) for step in range(0,40,10)]
 			y_data = [4,6,8,10]
 			x_label = "x-axis dummy data"
 			y_label = "y-axis dummy data"
 			title = "Hello world"
+			style = form.style.data
+			marker = form.marker.data
+			tight_layout = True
+			logarithmic_scale = False
+			linestyle='solid'
+			date_format = "%H:%M"
+		else:
+			#retrieve the data, and put it into x_data and y_data.
+			x_data = []
+			y_data = []
+			for entry in data_request:
+				x_data.append(entry.date_posted)
+				y_data.append(entry.JSON_content["Battery Charge"]["battery charge"])
+			x_label = form.xlabel.data
+			y_label = form.ylabel.data
+			title = form.title.data
+			style = form.style.data
+			marker = form.marker.data
+			tight_layout = form.tight_layout.data
+			logarithmic_scale = form.logarithmic_scale.data
+			date_format = form.date_format.data
+			linestyle='solid'
 		
 		#build the filepath.
 		filepath = "flask_greenhouse/static/graphs/"#os.path.join(app.root_path, 'static/graphs/')	
@@ -61,15 +76,38 @@ def BMS():
 			os.remove(filepath+filename)
 		
 		#saves a graph to the filepath. (root/static/graphs/plot.png)
-		plot_date(x_data, y_data, x_label, y_label, title, filepath, filename)
+		plot_date(x_data, y_data, x_label, y_label, title, filepath, filename,
+					style=style, marker=marker, logarithmic_scale=logarithmic_scale,tight_layout=tight_layout, linestyle=linestyle,
+					date_format=date_format)
 		
 		return render_template('BMS.html', form=form, graph=filename)
 	return render_template('BMS.html', form=form)
+
+@bms.route("/BMS/instantaneous", methods=["GET"])
+@bms.route("/BMS/Instantaneous", methods=["GET"])
+def BMS_Instantaneous():
+	filepath = "flask_greenhouse/BMS_test_file.json"
+	with open(filepath, "r") as fp:	
+		data = json.load(fp)
+	return render_template("BMS_Instantaneous.html", data=data)
+
+@bms.route("/BMS/pins", methods=["GET"])
+def BMS_pins():
+	filepath = "flask_greenhouse/BMS_test_file.json"
+	with open(filepath, "r") as fp:	
+		data = json.load(fp)
+		pins = data["BMS Status"]["Pins Connected"]
+	p = pins.split(',')
+	return render_template("BMS_pins.html", pins=p)
+
 #post BMS JSON data to this address.
 @bms.route("/BMS/post-json", methods=["POST"]) #get requests will be blocked.
 def BMS_Post():
-	req_data = request.get_json()
-	new_BMS_entry = BMSDataentry(JSON_content=req_data)
+	"""
+		The route for which BMS JSON data is posted. Will be sent by the Raspberry Pi we have on site.
+	"""
+	req_data = request.get_json() #extract JSON data from your request
+	new_BMS_entry = BMSDataentry(JSON_content=req_data) # create new instance of 
 	db.session.add(new_BMS_entry)
 	db.session.commit()
 	return "your data has been received."

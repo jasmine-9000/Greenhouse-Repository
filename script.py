@@ -1,10 +1,14 @@
+# this script will fill the database with BMS JSON data.
+# fills it from the time of execution to 24 hours from execution in increments of 10 minutes.
+
+
 from datetime import datetime, timedelta
 from flask_greenhouse import db
 from flask_greenhouse.models import BMSDataentry
 import json
 today = datetime.now()
 current_time = today
-step = timedelta(minutes = 10)
+time_step = 10
 tomorrow = today + timedelta(days = 1)
 
 charge = 0.0
@@ -22,9 +26,10 @@ while current_time < tomorrow:
 	bms["Battery Charge"]["battery charge"] = charge
 	new_data = BMSDataentry(date_posted=current_time, JSON_content=bms)
 	db.session.add(new_data)
-	db.session.commit()
+
 	file.close()
 	charge += step
-	current_time = current_time + step
-	
+	current_time = current_time + timedelta(minutes=time_step)
+
+db.session.commit()	
 	

@@ -1,3 +1,4 @@
+# this is our secret configuration file. It's stored as a python class. 
 class Config:	
 	SECRET_KEY = 'e2a66d067f6ef25bda6011bd50d587ab' #os.environ.get('SECRET_KEY')
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db' #os.environ.get('SQLALCHEMY_DATABASE_URI') # database path relative to flaskblog.py

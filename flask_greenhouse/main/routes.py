@@ -1,6 +1,9 @@
-from flask import render_template, request, Blueprint
+from flask import render_template, request, Blueprint, send_from_directory, flash
+import os 
+import json
 
-main = Blueprint("main", __name__)
+from flask_greenhouse.utils.warnings import flash_ts_warnings, flash_bms_warnings
+main = Blueprint("main", __name__, static_folder="flask_greenhouse/static")
 
 
 # a route is where we are going.
@@ -10,6 +13,10 @@ main = Blueprint("main", __name__)
 @main.route("/")# this is our main route decorator.
 @main.route("/home")
 def home():	
+	ts_filepath = "flask_greenhouse/Tristar_instantaneous_test_file.json"
+	bms_filepath = "flask_greenhouse/BMS_test_file.json"
+	flash_ts_warnings(ts_filepath)
+	flash_bms_warnings(bms_filepath)
 	return render_template('home.html', title="Home")
 
 @main.route("/about")

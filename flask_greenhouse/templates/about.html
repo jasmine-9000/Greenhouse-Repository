@@ -2,4 +2,10 @@
 {% block content %}
 	<h1> About </h1>
 	<p> This page was created by William Kerr for his senior thesis.</p>
+	
+	<img class = "img-fluid" alt="Responsive image" src = {{ url_for('static', filename="flask-icon.png") }} />
+	<p> This website was developed using the Flask microframework, powered by Python. Look at their documentation <a href = "http://flask.palletsprojects.com/en/1.1.x/">here</a>.</p>
+	
+	<p> This website was designed using the Bootstrap 4 JS + CSS library. Look at their documentation <a href = "https://getbootstrap.com/">here</a>.
+	</p>
 {% endblock %}

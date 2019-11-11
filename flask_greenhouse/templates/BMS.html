@@ -86,6 +86,103 @@
 						{{ form.title(class="form-control form-control-lg") }}
 					{% endif %}
 				</div>
+				<div class="form-group">
+					{{ form.xlabel.label(class="form-control-label") }}
+					
+					{% if form.xlabel.errors %}
+						{{ form.xlabel(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.xlabel.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.xlabel(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.ylabel.label(class="form-control-label") }}
+					
+					{% if form.ylabel.errors %}
+						{{ form.ylabel(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.ylabel.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.ylabel(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.date_format.label(class="form-control-label") }} <a href="https://www.programiz.com/python-programming/datetime/strftime#format-code">Click here for a list of formats</a>
+					
+					{% if form.date_format.errors %}
+						{{ form.date_format(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.date_format.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.date_format(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.style.label(class="form-control-label") }}
+					
+					{% if form.style.errors %}
+						{{ form.style(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.style.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.style(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.tight_layout.label(class="form-control-label") }}
+					
+					{% if form.tight_layout.errors %}
+						{{ form.tight_layout(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.tight_layout.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.tight_layout(class="form-control form-control-lg") }}
+					{% endif %}
+					
+					{{ form.logarithmic_scale.label(class="form-control-label") }}
+					
+					{% if form.logarithmic_scale.errors %}
+						{{ form.logarithmic_scale(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.logarithmic_scale.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.logarithmic_scale(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.marker.label(class="form-control-label") }}
+					
+					{% if form.marker.errors %}
+						{{ form.marker(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.marker.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.marker(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
 		</fieldset>
 		<div class="form-group">
 			{{ form.submit(class="btn btn-outline-info") }}
@@ -97,6 +194,10 @@
 			<img src = "{{ url_for('static', filename='graphs/' + graph) }} " />
 		{% endif %}
 	</div>
+	<p>
+		<a href = "{{ url_for('bms.BMS_Instantaneous') }}">See instantaneous values</a><br />
+		<a href = "{{ url_for('bms.BMS_pins') }}">See pins currently attached</a>
+	</p>
 {% endblock %}
 
 

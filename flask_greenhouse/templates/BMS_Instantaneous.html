@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- https://getbootstrap.com/docs/4.3/content/tables/ -->
+	<h1> BMS Values Now </h1>
+	
+	{% for key, dict in data.items() %}
+		{% if dict is mapping %}
+			<h2>{{ key }}</h2>
+			<table class="table">
+				<thead> 
+					<th scope="col">Name</th>
+					<th scope="col">Value</th>
+				</thead>
+				<tbody>
+					{% for k in dict %}
+					<tr>
+						<td>{{ k }}</td>
+						<td>{{ dict[k] }}</td>
+					</tr>
+					{% endfor %}
+					
+				</tbody>
+			</table>
+		{% endif %}
+	{% endfor %}
+{% endblock %}

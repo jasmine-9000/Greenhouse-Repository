@@ -1,0 +1,12 @@
+[program:flaskblog]
+directory=/home/wrkerr9/corey_schafer_flask
+command=/home/wrkerr9/corey_schafer_flask/corey_schafer_flask/venv/bin/gunicorn -w 3 run:app
+user=wrkerr9
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+stderr_logfile=/var/log/flaskblog/flaskblog.err.log
+stdout_logfile=/var/log/flaskblog/flaskblog.err.log
+
+

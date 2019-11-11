@@ -1,0 +1,22 @@
+server {
+        listen 80;
+        server_name 173.230.157.20;
+
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log warn;
+
+        location = /static {
+                #alias /home/wrkerr9/corey_schafer_flask/flaskblog/static;
+                autoindex on;
+        }
+
+        #location ~$ \.(jpe?g|png|gif|ico)$ {
+        #       autoindex on;
+        #}
+
+        location / {
+                proxy_pass http://localhost:8000;
+                include /etc/nginx/proxy_params;
+                proxy_redirect off;
+        }
+}

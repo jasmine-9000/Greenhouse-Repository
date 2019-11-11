@@ -189,5 +189,8 @@ git checkout subtract
 git status # see that the working tree is clean.
 git add -A
 git commit -m <message>
-git push
-
+git push -u origin subtract # push this new branch to the remote repo
+git checkout master 
+git pull origin master # pull all changes (if there are any). 
+git merge subtract 
+git push origin master # push changes 

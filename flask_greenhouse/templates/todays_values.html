@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- https://getbootstrap.com/docs/4.3/content/tables/ -->
+	<h1> Today's Values </h1>
+	<table class="table">
+		<thead> 
+			<th scope="col">Name</th>
+			<th scope="col">Value</th>
+		</thead>
+		<tbody>
+			
+			{% for key, val in daily_values.items() %}
+			<tr>
+				<th scope="row">{{ key }}</th>
+				<td>{{ val }} </td>
+			</tr>
+			{% endfor %}
+			
+		</tbody>
+	</table>
+{% endblock %}
