@@ -1,199 +1,87 @@
 {% extends "layout.html" %}
 
-{% block title %}This is an example page{% endblock %}
-
-{% block scripts %}
-  {{ super() }}
-  {{ datepicker.loader() }}
-  {{ datepicker.picker(id=".dp") }}
-
-{% endblock %}
-
 {% block content %}
-	
-	<form method="POST" action="">
-		{{ form.hidden_tag() }} 
-		<fieldset class="form-group"> 
-			<legend class="border-bottom mb-4">Request BMS data</legend>
-				<div class="form-group">
-					{{ form.y_axis.label(class="form-control-label") }}
-					
-					{% if form.y_axis.errors %}
-						{{ form.y_axis(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.y_axis.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.y_axis(class="form-control form-control-lg") }}
-					{% endif %}
+	<h1>Request BMS Data</h1>
+	<script>
+	const BMS_URL = "{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}";
+	</script>
+	<form action="#" id="BMS_form" onsubmit="return chartIt(BMS_URL)">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<label for="startdate">Start Date</label>
+					<input type="datetime-local" id="startdate">
+					<small class="form-text text-muted">Start date must be before 10/12/2019</small>
 				</div>
-				<div class="form-group"> 
-					{{ form.start_date.label(class="form-control-label") }}
-					
-					{% if form.start_date.errors %}
-						{{ form.start_date(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.start_date.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.start_date(class="form-control form-control-lg") }}
-					{% endif %}
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<label for="enddate">End Date</label>
+					<input type="datetime-local" id="enddate">
+					<small class="form-text text-muted">Start date must be before end date.</small>
 				</div>
-				<div class="form-group"> 
-					{{ form.end_date.label(class="form-control-label") }}
-					
-					{% if form.end_date.errors %}
-						{{ form.end_date(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.end_date.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.end_date(class="form-control form-control-lg") }}
-					{% endif %}
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<label for="interval">Interval (minutes)</label>
+					<input type="text" id="interval">
+					<small class="form-text text-muted">Interval must be a multiple of 10 minutes.</small>
 				</div>
-				Interval must be a multiple of 10 minutes.
-				<div class="form-group"> 
-					{{ form.interval.label(class="form-control-label") }}
-					
-					{% if form.interval.errors %}
-						{{ form.interval(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.interval.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.interval(class="form-control form-control-lg") }}
-					{% endif %}
+			</div>
+			<div class="form-group">
+				<label for="units">Units</label><br />
+				<select name="units" id="units">
+					<option value="bat_charge">Battery Charge</option>
+					<option value="pv_voltage">PV voltage</option>
+					<option value="pv_current">PV current</option>
+					<option value="bat_voltage">Battery Voltage</option>
+				</select>
+			</div>	
+			<div class="form-group">
+				<label for="title">Title</label><br />
+				<input type="text" name="title" id="title" value="Untitled Graph">
+			</div>
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<label for="xaxistitle">X-axis title</label><br />
+					<input type="text" name="xaxistitle" id="xaxistitle">
 				</div>
-				<div class="form-group">
-					{{ form.title.label(class="form-control-label") }}
-					
-					{% if form.title.errors %}
-						{{ form.title(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.title.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.title(class="form-control form-control-lg") }}
-					{% endif %}
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<label for="yaxistitle">Y-axis title</label><br />
+					<input type="text" name="yaxistitle" id="yaxistitle">
 				</div>
-				<div class="form-group">
-					{{ form.xlabel.label(class="form-control-label") }}
-					
-					{% if form.xlabel.errors %}
-						{{ form.xlabel(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.xlabel.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.xlabel(class="form-control form-control-lg") }}
-					{% endif %}
+			</div>
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+					<label for="font_family">Font Family</label><br />
+					<select name="font_family" id="style">
+						<option value="Courier New">Courier New</option>
+						<option value="Serif">Serif</option>
+						<option value="Sans Serif">Sans Serif</option>
+					</select>
 				</div>
-				<div class="form-group">
-					{{ form.ylabel.label(class="form-control-label") }}
-					
-					{% if form.ylabel.errors %}
-						{{ form.ylabel(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.ylabel.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.ylabel(class="form-control form-control-lg") }}
-					{% endif %}
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+					<label for="marker">Marker</label><br />
+					<select name="marker" id="marker">
+						<option value="fivethirtyeight">No Marker</option>
+						<option value="classic">Star</option>
+					</select>
 				</div>
-				<div class="form-group">
-					{{ form.date_format.label(class="form-control-label") }} <a href="https://www.programiz.com/python-programming/datetime/strftime#format-code">Click here for a list of formats</a>
-					
-					{% if form.date_format.errors %}
-						{{ form.date_format(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.date_format.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.date_format(class="form-control form-control-lg") }}
-					{% endif %}
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="tightlayout">Tight Layout</label>
+					<input type="checkbox" name="tightlayout" id="tightlayout">
 				</div>
-				<div class="form-group">
-					{{ form.style.label(class="form-control-label") }}
-					
-					{% if form.style.errors %}
-						{{ form.style(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.style.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.style(class="form-control form-control-lg") }}
-					{% endif %}
+				<div class="col">
+					<label for="logarithmic">Y-axis Logarithmic Scale</label>
+					<input type="checkbox" name="logarithmic" id="logarithmic">
 				</div>
-				<div class="form-group">
-					{{ form.tight_layout.label(class="form-control-label") }}
-					
-					{% if form.tight_layout.errors %}
-						{{ form.tight_layout(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.tight_layout.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.tight_layout(class="form-control form-control-lg") }}
-					{% endif %}
-					
-					{{ form.logarithmic_scale.label(class="form-control-label") }}
-					
-					{% if form.logarithmic_scale.errors %}
-						{{ form.logarithmic_scale(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.logarithmic_scale.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.logarithmic_scale(class="form-control form-control-lg") }}
-					{% endif %}
-				</div>
-				<div class="form-group">
-					{{ form.marker.label(class="form-control-label") }}
-					
-					{% if form.marker.errors %}
-						{{ form.marker(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.marker.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.marker(class="form-control form-control-lg") }}
-					{% endif %}
-				</div>
-		</fieldset>
-		<div class="form-group">
-			{{ form.submit(class="btn btn-outline-info") }}
-		</div>
+			</div>
+			<input type="submit" value="Request Graph">
+		</form>
 		
 	</form>
-	<div id="display_data">
-		{% if graph %}
-			<img src = "{{ url_for('static', filename='graphs/' + graph) }} " />
-		{% endif %}
-	</div>
+	<div id="chart"></div>
+	<script src="{{ url_for('static', filename='BMS_graph_loader.js') }}"></script>
+	
+	<!-- we're keeping a local copy of plotly-latest for faster load speeds.-->
+	<script src="{{ url_for('static', filename='plotly-latest.min.js') }}"> </script>
 	<p>
 		<a href = "{{ url_for('bms.BMS_Instantaneous') }}">See instantaneous values</a><br />
 		<a href = "{{ url_for('bms.BMS_pins') }}">See pins currently attached</a>

@@ -1,0 +1,42 @@
+Testing out Plotly.
+/*
+		document.querySelector('form').addEventListener('submit', (e) => {
+		  const formData = new FormData(e.target);
+		  var x = formData.get('style');
+		  var x_values = [];
+		  var y_values = [];
+		  var y = 1;
+		  var start = new Date(2019, 11,5,10,30,30,0);
+		  var end = new Date(2019,11,6,10,30,30,0);
+		  var interval = 10;
+		  while(start < end) {
+			var current_date = DateFormatter(start);
+			console.log(current_date);
+			x_values.push(current_date);
+			y_values.push(y);
+			y += 1;
+			start = addMinutes(start, interval);
+		  }
+		  console.log(x_values);
+		  console.log(y_values);
+		  var trace = {
+			x: x_values,
+			y: y_values,
+			type: 'line'
+		  };
+		  var layout = {
+			xaxis: {
+				type: 'date' // you should specify that xaxis is a date.
+			},
+			yaxis: {
+				type: 'linear',
+				autorange: true
+			},
+			margin: {
+				t: 0
+			}
+		  };
+		  // plot the graph. Will display in the div id 
+		  Plotly.plot('chart', [trace], layout);
+		});
+		*/

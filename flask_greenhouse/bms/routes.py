@@ -1,4 +1,4 @@
-from flask import render_template, request, Blueprint,flash, url_for
+from flask import render_template, request, Blueprint,flash, url_for, jsonify
 from flask_greenhouse.forms import Date_Form
 from flask_greenhouse.models import BMSDataentry
 from flask_greenhouse.utils.plot import plot_graph, plot_date
@@ -10,6 +10,19 @@ from datetime import datetime, timedelta
 bms = Blueprint("bms", __name__, static_folder='flask_greenhouse/static')
 
 @bms.route("/BMS", methods=["POST", "GET"])
+def BMS_JS():
+	return render_template("BMS.html", title="JS BMS data loader")
+
+@bms.route("/BMS/date/<string:date>/<string:parameter>", methods=["GET"])
+def BMS_data_retrieval(date, parameter):
+	JSON_response = {
+		"x": 1,
+		"date": date,
+		"parameter": parameter
+	}
+	return jsonify(JSON_response)
+
+@bms.route("/BMS/serverside", methods=["POST", "GET"])
 def BMS():
 	form = Date_Form()
 	if form.validate_on_submit():	
@@ -80,8 +93,8 @@ def BMS():
 					style=style, marker=marker, logarithmic_scale=logarithmic_scale,tight_layout=tight_layout, linestyle=linestyle,
 					date_format=date_format)
 		
-		return render_template('BMS.html', form=form, graph=filename)
-	return render_template('BMS.html', form=form)
+		return render_template('BMS_Server_side.html', form=form, graph=filename)
+	return render_template('BMS_Server_side.html', form=form)
 
 @bms.route("/BMS/instantaneous", methods=["GET"])
 @bms.route("/BMS/Instantaneous", methods=["GET"])
