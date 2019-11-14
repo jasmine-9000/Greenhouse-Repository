@@ -1,6 +1,6 @@
 flask
 flask_sqlalchemy
 flask_datepicker
-flask_wtforms
+Flask-WTF
 matplotlib
 numpy
