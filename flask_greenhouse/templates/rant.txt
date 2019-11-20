@@ -1,0 +1,12 @@
+
+Question: what are you working on?
+
+Answer: 
+A website that logs sensor data, MPPT data, and BMS data from a Raspberry Pi located on a Greenhouse site, powered with 24 solar panels. My client has also requested the ability to graph the data using a web form. 
+Hopefully I'll be done by the 10th of December. It's 56% done (I think). I'm running my website on my own Linode server instead of the University server. My University only has one person on IT staff because of all of the strikes going on, so I'm using my private server to save time. It's my first time deploying a Python server. Wish me luck.
+Everything's written in Python. Even the MPPT reader code, the BMS reader code, and the Sensor reader code. 
+Major Libraries used: Flask, Flask-Admin: to give Client control over all databases created and used by the website
+Flask-SQLAlchemy: to save JSON data sent from Raspberry Pi to database
+Flask-****: to log users in and out. Admin will see ALL sensors connected, plus a few secret sensors that they requested to have.
+I had to learn all of these things from scratch; I'm predisposed to Computer Science, so it wasn't THAT hard.
+Not gonna lie, I feel pretty screwed.

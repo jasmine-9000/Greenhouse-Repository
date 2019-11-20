@@ -1,0 +1,5 @@
+Things to do when I get my internet back:
+
+1.) Download the entirety of the JavaScript and Python documentation onto my laptop
+2.) Learn how Promises in JavaScript work.
+3.) 

@@ -61,7 +61,7 @@ def plot_pie_chart(slices, labels, colors, title, filepath, filename, style="fiv
 
 
 
-def plot_stack_plot(xrange, *yranges, xlabel="X-label", ylabels=[],title="stackplot", legendlocation="upper left", filepath="#", filename="#", style="fivethirtyeight", tightlayout=True):
+def plot_stack_plot(filepath, filename, xrange, *yranges, xlabel="X-label", ylabels=[],title="stackplot", legendlocation="upper_left", style= "fivethirtyeight", tightlayout=True):
 	"""
 			plots a stack plot. xrange is of dimension M.
 			yranges is a list of arrays, all of dimension M. Default is an empty array.

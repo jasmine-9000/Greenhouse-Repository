@@ -27,6 +27,8 @@ def sensors():
 		
 	return render_template("sensors.html", title="sensors",form=form)
 
+
+
 # This route only returns a JSON file containing the sensor id, the name, and the units in which the sensors store information.
 # It retrives data from our SQLite database (automatically grabs it from our Sensor class table).
 # It retrives all sensors owned by a specified owner (e.g. Bob).
@@ -66,6 +68,11 @@ def register():
 		# return redirect(url_for('sensor_nodes.sensors'))
 	return render_template("register.html", title="Register",form=form)
 
+
+
+
+
+
 # this is the route where you post JSON data to from your Sensor.
 @sensor_nodes.route("/sensors/post-json/<int:owner_id>/<int:sensor>", methods=["POST"])
 def sensor_json(owner, sensor):
@@ -85,6 +92,12 @@ def get_all_sensor_data(sensor_id):
 				.order_by(SensorDataEntry.date_posted.desc())
 	#HTML_template = query.toHTML()
 	return render_template("get_all.html", sensor=sensor, dataset=dataset)
+	
+	
+	
+		
+	
+	
 	
 	
 	

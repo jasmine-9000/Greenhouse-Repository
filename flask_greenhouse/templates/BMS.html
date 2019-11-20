@@ -4,12 +4,35 @@
 	<h1>Request BMS Data</h1>
 	<script>
 	const BMS_URL = "{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}";
+	console.log("URL TO MAKE REQUESTS TO \(UNFORMATTED\):" + BMS_URL);
+	
+	// make default dates to now.
+	window.addEventListener("load", function() {
+		var now = new Date();
+		var utcString = now.toISOString().substring(0,19);
+		var year = now.getFullYear();
+		var month = now.getMonth() + 1;
+		var day = now.getDate();
+		var hour = now.getHours();
+		var minute = now.getMinutes();
+		var second = now.getSeconds();
+		var localDatetime = year + "-" +
+						  (month < 10 ? "0" + month.toString() : month) + "-" +
+						  (day < 10 ? "0" + day.toString() : day) + "T" +
+						  (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+						  (minute < 10 ? "0" + minute.toString() : minute) +
+						  utcString.substring(16,19);
+		var datetimeField = document.getElementById("startdate");
+		datetimeField.value = localDatetime;
+		var datetimeField2 = document.getElementById("enddate");
+		datetimeField2.value = localDatetime;
+	});
 	</script>
-	<form action="#" id="BMS_form" onsubmit="return chartIt(BMS_URL)">
+	<form action="#" id="BMS_form">
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<label for="startdate">Start Date</label>
-					<input type="datetime-local" id="startdate">
+					<input type="datetime-local" id="startdate" value="Today">
 					<small class="form-text text-muted">Start date must be before 10/12/2019</small>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -73,7 +96,8 @@
 					<input type="checkbox" name="logarithmic" id="logarithmic">
 				</div>
 			</div>
-			<input type="submit" value="Request Graph">
+			<!--<input type="submit" value="Request Graph">  This element will break the webpage.-->
+			<button type="button" onclick="return setup_graph(BMS_URL);">Submit</button>
 		</form>
 		
 	</form>

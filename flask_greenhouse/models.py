@@ -1,5 +1,6 @@
 # imports
-from flask_greenhouse import db
+from flask_greenhouse import db, admin
+from flask_admin.contrib.sqla import ModelView
 from datetime import datetime
 import json
 
@@ -39,4 +40,5 @@ class BMSDataentry(JSONDataEntry):
 class TristarDataEntry(JSONDataEntry):
 	__tablename__ = 'Tristar Data'
 
-	
+admin.add_view(ModelView(BMSDataentry, db.session))
+admin.add_view(ModelView(TristarDataEntry, db.session))

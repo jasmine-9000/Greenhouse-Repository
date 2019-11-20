@@ -13,13 +13,20 @@ bms = Blueprint("bms", __name__, static_folder='flask_greenhouse/static')
 def BMS_JS():
 	return render_template("BMS.html", title="JS BMS data loader")
 
+i = 1
 @bms.route("/BMS/date/<string:date>/<string:parameter>", methods=["GET"])
 def BMS_data_retrieval(date, parameter):
+	global i
+	print(date)
+	datetime_from_JS = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
+	print(datetime_from_JS)
+	print(parameter)
 	JSON_response = {
-		"x": 1,
+		"x": i,
 		"date": date,
 		"parameter": parameter
 	}
+	i += 1
 	return jsonify(JSON_response)
 
 @bms.route("/BMS/serverside", methods=["POST", "GET"])
