@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_datepicker import datepicker
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 
 
 #initialize our "app" object of Flask type.
@@ -21,6 +23,12 @@ datepicker(app)
 
 # initialize Administration viewer.
 admin = Admin(app) 
+
+# initialize Login Manager
+login_manager = LoginManager(app)
+
+# initialize our Bcrypt encryption service.
+bcrypt = Bcrypt(app)
 
 
 #import our blueprints. These are our route handlers in package form.

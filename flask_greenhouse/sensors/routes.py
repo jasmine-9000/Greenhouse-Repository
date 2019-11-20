@@ -4,9 +4,13 @@ from flask import render_template, request, Blueprint,flash, url_for, jsonify, r
 from flask_greenhouse.forms import Date_Form
 from flask_greenhouse.models import BMSDataentry
 from flask_greenhouse.utils.plot import plot_graph
-from flask_greenhouse import db
-from flask_greenhouse.sensors.forms import CityForm, SensorForm, SensorRegistrationForm
-from flask_greenhouse.sensors.models import City, Sensor, SensorDataEntry
+from flask_greenhouse import db, login_manager, bcrypt
+from flask_greenhouse.sensors.forms import CityForm
+from flask_greenhouse.sensors.forms import UserRegistrationForm, UserLoginForm, SensorRequestForm, SensorRegistrationForm
+from flask_greenhouse.sensors.models import City, User, Sensor, SensorDataEntry
+
+from flask_login import login_required, login_user, current_user, logout_user
+
 
 import os
 from datetime import datetime
@@ -14,49 +18,62 @@ from datetime import datetime
 #export our Blueprint as "sensor_nodes".
 sensor_nodes = Blueprint("sensor_nodes", __name__, static_folder='flask_greenhouse/static')
 
+#tells the login manager how to load users.
+@login_manager.user_loader
+def load_user(user_id):
+	return User.query.get(int(user_id))
 
 # our route decorators
 # main route decorator for sensor data retrieval form.
 # this one's written in JavaScript. see sensors.js for details.
+# only works if the user is logged in.
 @sensor_nodes.route("/sensors/", methods=["POST", "GET"])
 @sensor_nodes.route("/sensors", methods=["POST", "GET"])
+@login_required
 def sensors():
-	form = SensorForm()
+	if not current_user.is_authenticated:
+		return redirect(url_for('sensor_nodes.user_login'))
+	form = SensorRequestForm()
 	if form.validate_on_submit():	
 		flash(f"Your request has been receieved. Scroll down for your graph.")
 		
-	return render_template("sensors.html", title="sensors",form=form)
+	return render_template("sensors.html", title="sensors", form=form)
 
 
 
+# @sensor_nodes.route("/sensors/users/<string:username>")
+# def sensors_by_username(username):
+	# user = User.query.filter_by(username=username).first()
+	
+# junk code:
 # This route only returns a JSON file containing the sensor id, the name, and the units in which the sensors store information.
 # It retrives data from our SQLite database (automatically grabs it from our Sensor class table).
 # It retrives all sensors owned by a specified owner (e.g. Bob).
 # All sensors owned by Bob are contained in sObj.
 # returns a JSON object with 'sensors': sObj as its content.
-@sensor_nodes.route("/sensors/people/<owner>", methods=["POST", "GET"])
-def retrive_sensors(owner):
-	sensors = Sensor.query.filter_by(owner=owner).all()
-	sensorArray = []
-	for sensor in sensors: 
-		sObj = {}
-		sObj['id'] = sensor.id;
-		sObj['name'] = sensor.name;
-		sObj['units'] = sensor.units;
-		sensorArray.append(sObj)
-	return jsonify({'sensors': sensorArray})
+# @sensor_nodes.route("/sensors/users/<owner>", methods=["POST", "GET"])
+# def retrive_sensors(owner):
+	# sensors = Sensor.query.filter_by(owner=owner).all()
+	# sensorArray = []
+	# for sensor in sensors: 
+		# sObj = {}
+		# sObj['id'] = sensor.id;
+		# sObj['name'] = sensor.name;
+		# sObj['units'] = sensor.units;
+		# sensorArray.append(sObj)
+	# return jsonify({'sensors': sensorArray})
 
 # Sensor Registration Form.
 # allows you to register a sensor. 
 @sensor_nodes.route("/sensors/register", methods=["POST","GET"])
-def register():
+@login_required
+def register_sensor():
 	form = SensorRegistrationForm()
-	
 	# I couldn't get the form to validate_on_submit, so I'm just making it take all POST requests, regardless of
 	# whether or not they're valid. It's not secure, but it needs to work NOW. I'M TIRED.
-	if request.method=="POST":
+	if form.validate_on_submit():
 		flash("Your sensor has been registered", "success")
-		new_sensor_entry = Sensor(owner=form.owner.data, name=form.sensor_name.data, units=form.units.data)
+		new_sensor_entry = Sensor(user_id = current_user.id,name=form.sensor_name.data, units=form.units.data)
 		db.session.add(new_sensor_entry)
 		db.session.commit()
 		return redirect(url_for('sensor_nodes.sensors'))
@@ -68,24 +85,66 @@ def register():
 		# return redirect(url_for('sensor_nodes.sensors'))
 	return render_template("register.html", title="Register",form=form)
 
+# registers a user into the database.
+# hashes a password from our password field. 
+@sensor_nodes.route("/sensors/users/register", methods=["POST", "GET"])
+def register_user():
+	if current_user.is_authenticated: 
+		return redirect(url_for('sensor_nodes.sensors'))
+	form = UserRegistrationForm()
+	if form.validate_on_submit():
+		hashed_password = bcrypt.generate_password_hash(form.password.data)
+		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+		db.session.add(user)
+		db.session.commit()
+		flash("You have been registered", 'success')	
+		return redirect(url_for('sensor_nodes.user_login'))
+	return render_template('user_register.html', form=form)
 
+# logs in a user
+# checks password using bcrypt.check_password_hash()
+@sensor_nodes.route("/sensors/users/login", methods=["POST", "GET"])
+def user_login():
+	form = UserLoginForm();
+	if form.validate_on_submit():
+		user = User.query.filter_by(username=form.username.data).first()
+		if user and bcrypt.check_password_hash(user.password, form.password.data):
+			login_user(user, remember = form.remember.data)
+			flash("You have been logged in", 'success')
+			return redirect(url_for('sensor_nodes.sensors'))
+		flash('Login attempt unsuccessful. Check username or password.', 'danger')
+	return render_template('user_login.html', title="Login", form=form)
 
-
-
+# logs out a user.
+@sensor_nodes.route("/logout")
+def user_logout():
+	logout_user()
+	return redirect(url_for('main.home'))
+	
+	
 
 # this is the route where you post JSON data to from your Sensor.
-@sensor_nodes.route("/sensors/post-json/<int:owner_id>/<int:sensor>", methods=["POST"])
-def sensor_json(owner, sensor):
+@sensor_nodes.route("/sensors/post-json/<string:username>/<string:sensor_name>", methods=["POST"])
+def sensor_json(username, sensor_name):
+	user = User.query.filter_by(name=username).first()
+	sensor = user.sensorlist.filter_by(name=sensor_name).first()
+	if not user:
+		return "User not found."
+	if not sensor: 
+		return "Sensor not found."
 	req_data = request.get_json() # extract JSON data from POST request.
+	
 	print(str(owner)) # print for debugging
 	print(str(sensor))
+	
 	new_sensor_data_entry = SensorDataEntry(JSON_content=req_data, sensor=sensor)
 			#create new instance of Sensor Data entry, link it to sensor
 	db.session.add(new_sensor_data_entry) # post it to the database
 	db.session.commit()
 	return "your data has been received."
 
-@sensor_nodes.route("/sensors/<int:sensor_id>/getall")
+# get all data by 
+@sensor_nodes.route("/sensors/get-data-by-sensor-id/<int:sensor_id>")
 def get_all_sensor_data(sensor_id):
 	sensor = Sensor.query.filter_by(id=sensor_id) # find the sensor in the database by ID number.
 	dataset = SensorDataEntry.query.filter_by(author=sensor)\

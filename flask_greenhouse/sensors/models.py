@@ -1,7 +1,16 @@
-# imports.
-from flask_greenhouse import db
+# imports
+from flask_greenhouse import db, admin
 from datetime import datetime
 import json
+from flask_login import LoginManager, UserMixin, login_required, login_user, current_user, logout_user
+from flask_admin.contrib.sqla import ModelView
+
+
+
+
+
+# login required models 
+
 
 # this class enables JSON storage.
 # it inherits the TypeDecorator class, so we need to redefine process_bind_param and process_result_value.
@@ -24,16 +33,29 @@ class JsonEncodedDict(db.TypeDecorator):
             return {}
         else:
             return json.loads(value)
+			
+			
+# If it's a faculty sensor, name="Admin"
+# if it's a student sensor, name="<name of student>"
+class User(db.Model, UserMixin):
+	__tablename__ = 'User'
+	id = db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String(60), unique=True, nullable=False)
+	email = db.Column(db.String(60), unique=True, nullable=False)
+	password = db.Column(db.String(60), nullable=False)
+	sensorlist = db.relationship('Sensor', backref='master', lazy=True)
+	
+	def __repr__(self):
+		return f"User('{self.username}, '{self.sensorlist}')"
 
 # This is a Sensor Class.
-# If it's a faculty sensor, owner="Admin"
-# if it's a student sensor, owner="<name of student>"
+
 # Name is the name of the sensor (e.g. VEML7700, light_sensor_1, etc.)
 # units is the name of the unit it measures.
 class Sensor(db.Model):
-	__tablename__ = 'sensors'
+	__tablename__ = 'Sensor'
 	id = db.Column(db.Integer, primary_key=True)
-	owner = db.Column(db.String(20))
+	user_id = db.Column(db.Integer, db.ForeignKey('User.id'),nullable=False)
 	name = db.Column(db.String(20))
 	type = db.Column(db.String(20))
 	units = db.Column(db.String(20))
@@ -41,9 +63,9 @@ class Sensor(db.Model):
 							# lazy argument means that SQLAlchemy will load the data as necessary in 1 go.
 							# backref allows us to access the Sensor who created the data entry. I set it to "author" because we probably won't be using it.
 							# This relationship will get all Sensor Data Entries based on 1 Sensor.
-							
+							# source: https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/
 	def __repr__(self): # how we print this out on the console:
-		return f"{self.name}: {self.type}({self.units}), owned by {self.owner}, id {self.id}"
+		return f"{self.name}: {self.type}({self.units}), owned by {self.master.username}, id {self.id}"
 
 # this is a Sensor Data Entry Class.
 # Every Sensor Data Entry is attached to a Sensor class (i.e. every piece of data has to be produced by a physical sensor)
@@ -53,12 +75,16 @@ class SensorDataEntry(db.Model):
 	id = db.Column(db.Integer, primary_key=True) #the id number of the entry itself.
 	date_posted = db.Column(db.DateTime(100), nullable=False, default=datetime.utcnow())  # the date when it came.
 	JSON_content = db.Column(JsonEncodedDict) #the actual content.
-	sensor_id = db.Column(db.Integer, db.ForeignKey('sensors.id'),nullable=False) # the id number of the sensor that the data entry came from.
+	sensor_id = db.Column(db.Integer, db.ForeignKey('Sensor.id'),nullable=False) # the id number of the sensor that the data entry came from.
 						#Specifies that we have a foreign relationship with a Sensor class.
 						#db.ForeignKey references the table name, not the class name. so, we read from the sensors table. 
 						
 	def __repr__(self): # how do we print this to the console?
 		return f"{self.author} at {self.date_posted}: {self.JSON_content}"
+
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Sensor, db.session))
+admin.add_view(ModelView(SensorDataEntry, db.session))
 
 #test class.
 class City(db.Model):
