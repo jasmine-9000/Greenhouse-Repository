@@ -27,9 +27,9 @@ def load_user(user_id):
 # main route decorator for sensor data retrieval form.
 # this one's written in JavaScript. see sensors.js for details.
 # only works if the user is logged in.
+#@login_required
 @sensor_nodes.route("/sensors/", methods=["POST", "GET"])
 @sensor_nodes.route("/sensors", methods=["POST", "GET"])
-@login_required
 def sensors():
 	if not current_user.is_authenticated:
 		return redirect(url_for('sensor_nodes.user_login'))

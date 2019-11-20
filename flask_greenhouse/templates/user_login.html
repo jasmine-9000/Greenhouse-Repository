@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-	<h1> Sensor Data Request Form </h1>
+	<h1> Login </h1>
 	<form method="POST">
 		{{ form.csrf_token }}
-		<legend class="border-bottom mb-4">Request Sensor data (graph)</legend>
+		<legend class="border-bottom mb-4">Please Login</legend>
 			<div class="form-group">
 			{{ form.username.label }}
 			{{ form.username }}
@@ -15,4 +15,5 @@
 			{{ form.submit }}
 	</form>
 	Not registered? <a href="{{ url_for('sensor_nodes.register_user') }}">Register.</a>
+	Forgot your password? <a href="#">Reset your email</a>
 {% endblock %}
