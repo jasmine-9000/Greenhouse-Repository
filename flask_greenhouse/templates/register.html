@@ -6,6 +6,7 @@
 			<div class="form-group">
 			{{ form.sensor_name.label }}
 			{{ form.sensor_name }}
+			<small class="form-text text-muted">(What do you want to call your sensor)</small>
 			</div>
 			<div class="form-group">
 			{{ form.units.label }}
@@ -14,6 +15,12 @@
 			<div class="form-group">
 			{{ form.protocol.label }}
 			{{ form.protocol }}
+			<small class="form-text text-muted">(Optional)</small>
+			</div>
+			<div class="form-group">
+			{{ form.type.label }}
+			{{ form.type }} <br>
+			<small class="form-text text-muted">(What type of sensor are you registering?)</small>
 			</div>
 			<div class="form-group">
 			{{ form.submit }}

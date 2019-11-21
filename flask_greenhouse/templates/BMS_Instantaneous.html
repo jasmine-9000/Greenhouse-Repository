@@ -1,26 +1,76 @@
 {% extends "layout.html" %}
+{% import "macros.jinja" as macros %}
 {% block content %}
 <!-- https://getbootstrap.com/docs/4.3/content/tables/ -->
 	<h1> BMS Values Now </h1>
+	{% if data %}
+		{{ macros.table_creator('Battery Balancing Rate Summary', data["Battery Balancing Rate Summary"] ) }}
+		
+		<h1>Battery Balancing Rate Detail</h1>
+		{% for key, dict in data["Battery Balancing Rate Detail"].items() %}
+			{{ macros.table_creator_with_units(key, dict) }}
+		{% endfor %}
+		
+		{{ macros.table_creator_with_units('Battery Charge', data["Battery Charge"]) }}
+		
+		{{ macros.table_creator_with_units('Battery Module Temperature Summary', data["Battery Module Temperature Summary"]) }}
+		
+		<h1>Battery Module Temperature Detail</h1>
+		{% for key, dict in data["Battery Module Temperature Detail"].items() %}
+			{{ macros.table_creator_BMTD(key, dict) }}
+		{% endfor %}
+		
+		{{ macros.table_creator_with_units("Battery Cell Temperature Summary", data["Battery Cell Temperature Summary"]) }}
+		
+		<h1>Battery Cell Temperature Detail</h1>
+		{% set dd = data["Battery Cell Temperature Detail"].items() %}
+		{% for key, dict in dd %}
+			{{ macros.table_creator_BMTD(key, dict) }}
+		{% endfor %}
+		
+		<h1>Battery Voltage Summary</h1>
+		{{ macros.table_creator_with_units('Battery Voltage Summary', data['BatteryVoltageSummary']) }}
+		
+		<h1>Battery Voltage Detail</h1>
+		{% set dd = data["BatteryVoltageDetail"].items() %}
+		{% for key, dict in dd %}
+			{{ macros.table_creator_BVD(key, dict) }}
+		{% endfor %}
+		<!-- receieved CAN bus Data -->
+		{{ macros.table_creator('CAN Devices Status', data["CANDevicesStatus"]) }}
+		{{ macros.table_creator("Received CAN Messages", data["ReceivedCANMessages"]) }}
+
+		<!-- charger status -->
+		{{ macros.table_creator_with_units("Charger Status", data["ChargerStatus"]) }}
+		
+		<!-- Current and voltage -->
+		{{ macros.table_creator_with_units("Current and Voltage", data["CurrentAndVoltage"]) }}
+		
+		<!-- Input Pins -->
+		{{ macros.table_creator_with_units("Input Pins", data["InputPins"]) }}
+		
+		<!-- Events Log -->
+		{{ macros.table_creator_EVENT_LOG("Events Log", data["Events Log"]) }}
+		
+		<!-- Output Pins -->
+		{{ macros.table_creator_with_units("Output Pins", data["OutputPins"]) }}
+		
+		<!--Statistics -->
+		{{ macros.table_creator_EVENT_LOG("Statistics", data["Statistics"]) }}
+		
+		<!--BMS Status -->
+		{{ macros.table_creator('BMS Status', data["BMS Status"]) }}
+		
+		<!-- Time and date according to the BMS unit -->
+		<small class="text-muted">This is the Time and date according to the BMS internal clock at the moment. </small>
+		{{ macros.table_creator('Time and Date', data["Time And Date"]) }}
+			
+			
+		<!--"Version Number" -->
+		{{ macros.table_creator('Version Data', data["Version Number"]) }}
+	{% endif %}
+
 	
-	{% for key, dict in data.items() %}
-		{% if dict is mapping %}
-			<h2>{{ key }}</h2>
-			<table class="table">
-				<thead> 
-					<th scope="col">Name</th>
-					<th scope="col">Value</th>
-				</thead>
-				<tbody>
-					{% for k in dict %}
-					<tr>
-						<td>{{ k }}</td>
-						<td>{{ dict[k] }}</td>
-					</tr>
-					{% endfor %}
-					
-				</tbody>
-			</table>
-		{% endif %}
-	{% endfor %}
+	
+
 {% endblock %}

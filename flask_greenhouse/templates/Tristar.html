@@ -1,13 +1,5 @@
 {% extends "layout.html" %}
 
-{% block title %}This is an example page{% endblock %}
-
-{% block scripts %}
-  {{ super() }}
-  {{ datepicker.loader() }}
-  {{ datepicker.picker(id=".dp") }}
-
-{% endblock %}
 
 {% block content %}
 	<form method="POST" action="">

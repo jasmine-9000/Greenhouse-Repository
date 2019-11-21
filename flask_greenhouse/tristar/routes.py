@@ -5,6 +5,7 @@ import json
 tristar = Blueprint("tristar", __name__)
 
 
+
 @tristar.route("/Tristar", methods=["POST", "GET"])
 def Tristar():
 	form = Date_Form()

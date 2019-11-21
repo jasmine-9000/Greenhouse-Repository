@@ -65,5 +65,6 @@ class SensorRegistrationForm(FlaskForm):
 	sensor_name = StringField('Enter The Name of the Sensor')
 	units = StringField('Enter what units this sensor is measuring')
 	protocol = StringField('Enter what protocol this sensor is using (optional at the moment)')
+	type = StringField('Enter what your sensor is measuring')
 	submit = SubmitField('Register your sensor')
 

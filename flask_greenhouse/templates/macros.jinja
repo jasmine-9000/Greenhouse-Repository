@@ -1,0 +1,219 @@
+
+
+{% macro table_creator(title, data) %}
+	<h2>{{ title }}</h2>
+	<table class="table">
+		<thead> 
+			<th scope="col">Name</th>
+			<th scope="col">Value</th>
+		</thead>
+		<tbody>
+			{% for k in data %}
+			<tr>
+				<td>{{ k }}</td>
+				<td>{{ data[k] }}</td>
+			</tr>
+			{% endfor %}
+			
+		</tbody>
+	</table>
+{%- endmacro %}
+
+{% macro table_creator_with_units(title, data) %}
+	<h2>{{ title }}</h2>
+	<table class="table">
+		<thead> 
+			<th scope="col">Name</th>
+			<th scope="col">Value</th>
+		</thead>
+		<tbody>
+			{% for k in data %}
+			<tr>
+				<td>{{ k }}</td>
+				{% if data[k].value and data[k].unit %}
+					<td>{{ data[k].value}} {{ data[k].unit }} </td>
+				{% else %}
+					<td>{{ data[k] }}</td>
+				{% endif %}
+				
+			</tr>
+			{% endfor %}
+			
+		</tbody>
+	</table>
+{%- endmacro %}
+
+{% macro table_creator_BMTD(title, data) %}
+	{% set icmt_table = namespace(table=[]) %}
+	<h2>{{ title }}</h2>
+	<table class="table">
+		<thead> 
+			<th scope="col">Name</th>
+			<th scope="col">Value</th>
+		</thead>
+		<tbody>
+			{% for k in data %}
+				{% if k != "individual cell module temperatures"  %} {# don't print out cell module temperatures now. do it later. #}
+					<tr>
+						<td>{{ k }}</td>
+						{% if data[k].value and data[k].unit %}
+							<td>{{ data[k].value|e}} {{ data[k].unit|e }} </td>
+						{% else %}
+							<td>{{ data[k] }}</td>
+						{% endif %}
+						
+					</tr>
+				{% endif %}
+			{% endfor %}
+		</tbody>
+	</table>
+	<table class="table">
+		<h3> Individual Cell Module Temperatures </h3>
+		<thead> 
+			<th scope="col">Name</th>
+			<th scope="col">Value</th>
+		</thead>
+		<tbody>
+			{% set icmt = data["individual cell module temperatures"] %}
+			{% for k, v in icmt.items() %}
+			<tr>
+				<td>{{ k }}</td>
+				
+				{% if icmt[k].value and icmt[k].unit %}
+					<td>{{ icmt[k].value}} {{ icmt[k].unit }} </td>
+				{% else %}
+					<td>{{ icmt[k] }}</td>
+				{% endif %}
+				
+			</tr>
+			{% endfor %}
+			
+		</tbody>
+	</table>
+{%- endmacro %}
+
+
+
+{% macro table_creator_BVD(title, data) %}
+	{% set icmt_table = namespace(table=[]) %}
+	<h2>{{ title }}</h2>
+	<table class="table">
+		<thead> 
+			<th scope="col">Name</th>
+			<th scope="col">Value</th>
+		</thead>
+		<tbody>
+			{% for k in data %}
+				{% if k != "individual cell module voltages"  %} {# don't print out cell module voltages now. do it later. #}
+					<tr>
+						<td>{{ k }}</td>
+						{% if data[k].value and data[k].unit %}
+							<td>{{ data[k].value|e}} {{ data[k].unit|e }} </td>
+						{% else %}
+							<td>{{ data[k] }}</td>
+						{% endif %}
+						
+					</tr>
+				{% endif %}
+			{% endfor %}
+		</tbody>
+	</table>
+	<table class="table">
+		<h3> Individual Cell Module Voltages</h3>
+		<thead> 
+			<th scope="col">Name</th>
+			<th scope="col">Value</th>
+		</thead>
+		<tbody>
+			{% set icmt = data["individual cell module voltages"] %}
+			{% for k, v in icmt.items() %}
+			<tr>
+				<td>{{ k }}</td>
+				
+				{% if icmt[k].value and icmt[k].unit %}
+					<td>{{ icmt[k].value}} {{ icmt[k].unit }} </td>
+				{% else %}
+					<td>{{ icmt[k] }}</td>
+				{% endif %}
+				
+			</tr>
+			{% endfor %}
+			
+		</tbody>
+	</table>
+{%- endmacro %}
+
+{% macro table_creator_CAN_STATUS(title, data) %}
+	<h2>{{ title }}</h2>
+	<table class="table">
+		<thead> 
+			<th scope="col">Name</th>
+			<th scope="col">Value</th>
+		</thead>
+		<tbody>
+			{% for k in data %}
+				{% if k != "individual cell module voltages"  %} {# don't print out cell module voltages now. do it later. #}
+					<tr>
+						<td>{{ k }}</td>
+						{% if data[k].value and data[k].unit %}
+							<td>{{ data[k].value|e}} {{ data[k].unit|e }} </td>
+						{% else %}
+							<td>{{ data[k] }}</td>
+						{% endif %}
+						
+					</tr>
+				{% endif %}
+			{% endfor %}
+		</tbody>
+	</table>
+{%- endmacro %}
+
+{% macro table_creator_EVENT_LOG(title, data) %}
+	<h2>{{ title }}</h2>
+	{% for k in data %}
+		<h3>{{ k }}</h3>
+		<table class="table">
+			<thead> 
+				<th scope="col">Name</th>
+				<th scope="col">Value</th>
+			</thead>
+			<tbody>
+				{% for kk in data[k] %}
+					<tr>
+						<td> {{ kk }} </td>
+						{% if kk == "unix timestamp" %}
+							<td> {{ data[k][kk] | ctime }} </td>
+						{% else %}
+							<td> {{ data[k][kk] }} </td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endfor %}
+	
+	
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+
+
+	{# this is a comment.
+	this templater doesn't work anymore. ignore it.
+	
+	source: https://jinja.palletsprojects.com/en/2.10.x/templates/#comments
+	
+	{% for key, dict in data.items() %}
+		{% if dict is mapping %}
+			{{ table_creator(key, dict) }}
+		{% endif %}
+	{% endfor %} 
+	
+	#}
