@@ -65,7 +65,8 @@ class Sensor(db.Model):
 							# This relationship will get all Sensor Data Entries based on 1 Sensor.
 							# source: https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/
 	def __repr__(self): # how we print this out on the console:
-		return f"{self.name}: {self.type}({self.units}), owned by {self.master.username}, id {self.id}"
+		#return f"{self.name}: {self.type}({self.units}), owned by {self.master.username}, id {self.id}"
+		return self.name
 
 # this is a Sensor Data Entry Class.
 # Every Sensor Data Entry is attached to a Sensor class (i.e. every piece of data has to be produced by a physical sensor)

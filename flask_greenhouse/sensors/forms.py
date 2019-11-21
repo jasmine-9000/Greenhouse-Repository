@@ -11,6 +11,7 @@ from datetime import datetime
 from wtforms.fields.html5 import DateTimeLocalField
 from datetime import datetime
 from flask_greenhouse.sensors.models import User, Sensor, SensorDataEntry
+#from flask_greenhouse.sensors.routes import current_user
 
 # login manager. It must be here to interact with things. 
 from flask_login import login_required, login_user, current_user, logout_user
@@ -47,29 +48,17 @@ class UserLoginForm(FlaskForm):
 	remember = BooleanField('Remember Me')
 	submit = SubmitField('Login')
 	
-
-
-# login required Forms
-# returns a list 
-def sensor_choice_query():
-	print("Current User: ", current_user)
-	if current_user:
-		#current_sensors = current_user.sensorlist
-		query = Sensor.query.filter_by(user_id = current_user.id).all()
-		return query
-	else:
-		return ([1,2],[1,2],[1,2])
 	
 class SensorRequestForm(FlaskForm):
-	#sensors_owned = QuerySelectField(query_factory=choice_query, allow_blank=True)
-	sensors_owned = SelectField(choices = sensor_choice_query())
+	sensors_owned = SelectField('Sensors owned', coerce=int, validators=[DataRequired()])
+	#https://stackoverflow.com/questions/46921823/dynamic-choices-wtforms-flask-selectfield
 	start_date = DateTimeLocalField('Start Date', default=datetime.now())
 	end_date = DateTimeLocalField('End Date', default=datetime.now())
-	interval = IntegerField('Time Interval (must be a multiple of 10 minutes)')
+	interval = IntegerField('Time Interval')
 	def validate_interval(form, interval):	# custom validators must be named "validate_<name of variable>".
 		if (interval.data % 10): 
 			raise ValidationError("Values must be a multiple of 10.")
-	submit = SubmitField('Request Data')
+	submit = SubmitField('Request Data') 
 
 		
 class SensorRegistrationForm(FlaskForm):

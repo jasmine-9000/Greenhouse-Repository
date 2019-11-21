@@ -31,9 +31,17 @@ def load_user(user_id):
 @sensor_nodes.route("/sensors/", methods=["POST", "GET"])
 @sensor_nodes.route("/sensors", methods=["POST", "GET"])
 def sensors():
+	# if you're not logged in, redirect to the login page.
 	if not current_user.is_authenticated:
 		return redirect(url_for('sensor_nodes.user_login'))
+	# retrieve sensor choices from database, then add them to the form.
+	sensor_results = Sensor.query.filter_by(user_id = current_user.id).all()
+	# one line for loop warning.
+	# returns a tuple with 
+	sensor_list = [(sensor.id, sensor.name) for sensor in sensor_results]
+	print(sensor_list)
 	form = SensorRequestForm()
+	form.sensors_owned.choices = sensor_list
 	if form.validate_on_submit():	
 		flash(f"Your request has been receieved. Scroll down for your graph.")
 		

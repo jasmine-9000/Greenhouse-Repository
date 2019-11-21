@@ -15,10 +15,12 @@
 			<div class="form-group">
 			{{ form.end_date.label }}
 			{{ form.end_date }}
+			<small class="form-text text-muted">Start Date must be before end date.</small>
 			</div>
 			<div class="form-group">
 			{{ form.interval.label }}
 			{{ form.interval }}
+			<small class="form-text text-muted">Interval must be a multiple of 10 minutes.</small>
 			</div>
 			{{ form.submit }}
 	</form>
@@ -28,6 +30,7 @@
 		{% endif %}
 	</div>
 	Don't see your sensor listed? <a href="{{ url_for('sensor_nodes.register_sensor') }}">Register a sensor.</a>
-	
-	Don't see anything at all? <a href="{{ url_for('sensor_nodes.user_login') }}">Login</a>
+	<br >
+	Don't see anything at all? Please report this page to the webmaster.
+	<a href="{{ url_for('sensor_nodes.user_login') }}">Here's the login form just in case.</a>
 {% endblock %}
