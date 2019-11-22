@@ -134,18 +134,18 @@ def user_logout():
 # this is the route where you post JSON data to from your Sensor.
 @sensor_nodes.route("/sensors/post-json/<string:username>/<string:sensor_name>", methods=["POST"])
 def sensor_json(username, sensor_name):
-	user = User.query.filter_by(name=username).first()
-	sensor = user.sensorlist.filter_by(name=sensor_name).first()
+	user = User.query.filter_by(username=username).first()
 	if not user:
-		return "User not found."
-	if not sensor: 
+		return "Username is incorrect."
+	sensor = Sensor.query.filter_by(name=sensor_name).first()
+	print(sensor)
+	sensorlist = user.sensorlist
+	print(sensorlist)
+	if sensor not in sensorlist: 
 		return "Sensor not found."
 	req_data = request.get_json() # extract JSON data from POST request.
 	
-	print(str(owner)) # print for debugging
-	print(str(sensor))
-	
-	new_sensor_data_entry = SensorDataEntry(JSON_content=req_data, sensor=sensor)
+	new_sensor_data_entry = SensorDataEntry(JSON_content=req_data, sensor_id=sensor.id)
 			#create new instance of Sensor Data entry, link it to sensor
 	db.session.add(new_sensor_data_entry) # post it to the database
 	db.session.commit()
@@ -154,9 +154,9 @@ def sensor_json(username, sensor_name):
 # get all data by 
 @sensor_nodes.route("/sensors/get-data-by-sensor-id/<int:sensor_id>")
 def get_all_sensor_data(sensor_id):
-	sensor = Sensor.query.filter_by(id=sensor_id) # find the sensor in the database by ID number.
-	dataset = SensorDataEntry.query.filter_by(author=sensor)\
-				.order_by(SensorDataEntry.date_posted.desc())
+	sensor = Sensor.query.filter_by(id=sensor_id).first() # find the sensor in the database by ID number.
+	dataset = sensor.dataset #SensorDataEntry.query.filter_by(author=sensor).order_by(SensorDataEntry.date_posted.desc())
+	print(dataset)
 	#HTML_template = query.toHTML()
 	return render_template("get_all.html", sensor=sensor, dataset=dataset)
 	

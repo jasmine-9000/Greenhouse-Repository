@@ -15,12 +15,18 @@ app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-import time
+
+
+import time,json
 # Template filters
 @app.template_filter('ctime')
 def timectime(s):
     return time.ctime(s) # datetime.datetime.fromtimestamp(s)
-	
+
+@app.template_filter('json_unpacker')
+def json_unpacker(s):
+	return json.load(s)
+
 # initialize database
 db = SQLAlchemy(app)
 

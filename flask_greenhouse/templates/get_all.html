@@ -1,14 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
-	<h1 class="mb-3">Data from {{ sensor.name }} ({{ sensor.owner}})</h1>
-	{% for data in dataset.items %}
+	<h1 class="mb-3">Data from {{ sensor.name }}, owned by {{ sensor.master.username}}</h1>
+	{% for data in dataset %}
 		<article class="media content-section">
 		  <div class="media-body">
 			<div class="article-metadata">
-			  <a class="mr-2" href="{{ url_for('users.user_posts', username=post.author.username)}}">{{ data.author.username }}</a>
+			  <a class="mr-2" href="#">{{ data.author.master.username }}</a>
 			  <small class="text-muted">{{ data.date_posted.strftime('%Y-%m-%d') }}</small> <!-- strf time is googleable -->
 			</div>
-			<p class="article-content">{{ data.JSON_content }}</p>
+			{% set json_dict = data.JSON_content %}
+			<p class="article-content">
+				<table class="table table-responsive-sm">
+					<thead>
+						<td class="col">Name</td>
+						<td class="col">Value</td>
+					</thead>
+					<tr>
+					{% for key in json_dict %} 
+						<td>{{ key }}</td><td>{{ json_dict[key] }}</td>
+					{% endfor %}
+					</tr>
+				</table>
+			</p>
 		  </div>
 		</article>
 	{% endfor %}
