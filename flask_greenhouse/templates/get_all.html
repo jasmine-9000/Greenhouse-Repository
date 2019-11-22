@@ -15,11 +15,11 @@
 						<td class="col">Name</td>
 						<td class="col">Value</td>
 					</thead>
-					<tr>
 					{% for key in json_dict %} 
+					<tr>
 						<td>{{ key }}</td><td>{{ json_dict[key] }}</td>
-					{% endfor %}
 					</tr>
+					{% endfor %}
 				</table>
 			</p>
 		  </div>
