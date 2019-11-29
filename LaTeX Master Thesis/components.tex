@@ -1,0 +1,868 @@
+\section{Solar Panels}
+% adapted from the MS word document.
+\subsection{Introduction}
+
+This is a client request. These solar panels let certain wavelengths of light through them, and absorb the rest of the spectrum. This allows plants to grow inside.
+
+\subsection{Data}
+Model: LUMO 20M100GH \\
+Quantity: 24x \\
+Company: Soliculture \\
+Company Website: \href{http://www.soliculture.com/}{http://www.soliculture.com/} \\
+Product Page: \href{http://www.soliculture.com/product/}{http://www.soliculture.com/} \\
+
+\subsection{Datasheet}
+todo
+ 
+\section{Charge Controller}
+\subsection{Introduction}
+
+Solar panels cannot charge batteries directly for these reasons: 
+\begin{itemize}
+	\item They have unstable voltages, and thus should not be connected directly to the battery. 
+	\item Batteries with different chemical compositions charge differently. 
+	\item One solar panel cannot provide enough power to the battery alone, even if it reaches the nominal voltage of 12V. 
+	\item If we string 12 solar panels in series together and plug it into the batteries, the batteries will become permanently damaged.
+\end{itemize}
+
+Solar panels cannot charge batteries properly by themselves. We must have a charge controller to accompany the solar panels in order to charge the batteries properly. I like the TS-MPPT-60 because it is custom-programmable, and it can monitor a significant amount of values that could be useful someday. I included the values it can monitor below.
+
+\subsection{Data}
+Model: MORNINGSTAR TS-MPPT-60 TriStar MPPT 150V\\
+Company: Morningstar\\
+Company Website: \href{https://www.morningstarcorp.com}{https://www.morningstarcorp.com}\\
+Product link: \href{https://www.morningstarcorp.com/products/tristar-mppt/}{https://www.morningstarcorp.com/products/tristar-mppt/}\\
+Quantity: 2x\\
+\subsubsection{Features}
+\begin{itemize}
+	\item Customizable Charge Settings
+	\item Great networking capabilities
+	\item RS-232 electrical interface for Microcontroller communication.
+	\item Uses royalty-free MODBUS protocol for easy data harvesting
+	\item Operating Range: -40\degree C to 40\degree C
+	\item Up to 60A continuous battery current
+	\item Compatible with 12V, 24V, and 48V battery systems
+	\item Maximum 150V solar panels in series
+	\item Keyholes for mounting
+	\item Uses TrakStar MPPT technology to track the maximum power point of the solar panels.
+	\item Temperature compensation
+	\item Two Tristar Morningstar MPPT’s can be attached to the same battery pack
+\end{itemize}
+
+\subsubsection{Drawbacks}
+
+The internal PLC settings can only be changed with a PC that can run MSView, Morningstar’s proprietary program that can program any Morningstar device, that can be downloaded from Morningstar’s website, located here:\\
+
+\href{https://www.morningstarcorp.com/msview/}{https://www.morningstarcorp.com/msview/}\\
+
+It can only handle 150V of solar panels. We have 24 solar panels, which in series total to a nominal voltage of 192V. Therefore, we must have at least 2.
+
+
+\subsection{Monitoring}
+
+A Tristar Morningstar MPPT can monitor these variables:
+
+\paragraph{Internal ADC chips}
+
+
+\begin{itemize}
+	\item Battery Voltage
+	\item Battery Terminal Voltage
+	\item Battery Sense Voltage
+	\item Array Voltage (of the solar panels)
+	\item Battery Current
+	\item Array Current (of the solar panels)
+	\item 12V supply
+	\item 3V supply
+	\item meterbus voltage
+	\item 1.8V supply
+	\item Reference voltage
+\end{itemize}
+\par
+\paragraph{Temperature Data}
+\begin{itemize}
+	\item Heatsink Temperature
+	\item RTS temperature
+	\item Battery Regulation Temperature
+\end{itemize}
+\par 
+
+\paragraph{Status Data}
+\begin{itemize}
+	\item Battery Voltage (slow)
+	\item Charging Current (slow)
+	\item Minimum Battery Voltage
+	\item Maximum Battery Voltage
+	\item Hourmeter
+	\item Faults raised
+	\item Alarms raised
+	\item LED state
+	\item DIP switch status
+\end{itemize}
+\par
+
+\paragraph{MPPT Data}
+\begin{itemize}
+	\item Output Power
+	\item Input Power
+	\item Max power of last sweep
+	\item Vmp of last sweep
+	\item Voc of last sweep
+\end{itemize}
+\par
+
+\paragraph{Charger Data}
+\begin{itemize}
+	\item Charge state
+	\item Target Regulation Voltage
+	\item Ah charge resettable:
+	\item Ah charge total
+	\item kWhr charge resettable
+	\item kWhr charge total
+\end{itemize}
+\par
+
+\paragraph{Daily Data}
+\begin{itemize}
+	\item Battery Voltage Minimum
+	\item Battery Voltage Maximum
+	\item Input Voltage Maximum
+	\item Amp Hours accumulated
+	\item Watt hours accumulated
+	\item Minimum Power output
+	\item Minimum temperature
+	\item Maximum temperature
+	\item Time in equalize stage
+	\item Time in float stage
+	\item Alarms of the day
+	\item Faults of the day
+	\item Flags of the day
+\end{itemize}
+\par
+
+\paragraph{Current Charge Settings}
+\begin{itemize}
+	\item EV\_absorp
+	\item EV\_float
+	\item Et\_absorp
+	\item Et\_absorp\_ext
+	\item EV\_absorp\_ext
+	\item EV\_float\_cancel
+	\item Et\_float\_exit\_cum
+	\item EV\_eq
+	\item Et\_eqcalendar
+	\item Et\_eq\_above
+	\item Et\_eq\_reg
+	\item Et\_battery\_service
+	\item EV\_tempcomp
+	\item EV\_hvd
+	\item EV\_hvr
+	\item Evb\_ref\_lim
+	\item ETb\_max
+	\item Etb\_min
+	\item Elb\_lim
+	\item EVa\_ref\_fixed\_init
+	\item EVa\_ref\_fixed\_pet\_init
+\end{itemize}
+\par
+
+\paragraph{LED settings}
+\begin{itemize}
+	\item EV\_soc\_g\_gy
+	\item EV\_soc\_gy\_y
+	\item EV\_soc\_y\_yr
+	\item EV\_soc\_yr\_r
+\end{itemize}
+\par
+
+\subsection{Recommended Accessories}
+
+\subsubsection{Remote Temperature Sensor}
+
+\paragraph{Introduction}
+
+The greenhouse will naturally change temperature more than 5 C during the year. The Morningstar Corporation recommends that you add the RTS sensor for the Charge Controller to operate more effectively under these circumstances. It is simple to install. Follow Morningstar’s guide to installation.\\
+\\
+Model: Remote Temperature Sensor\\
+Quantity: 2x\\
+Company: Morningstar\\
+Company Website: \href{https://www.morningstarcorp.com/}{https://www.morningstarcorp.com/}\\
+Product Page: \href{https://www.morningstarcorp.com/products/remote-temperature-sensor/}{https://www.morningstarcorp.com/products/remote-temperature-sensor/
+}
+\par
+
+\subsubsection{RS-232 to USB cable}
+
+\paragraph{Introduction}
+
+RS-232 must be converted to USB format for easy monitoring by the Raspberry Pi. Luckily, I don’t have to reinvent the wheel. I can simply use this cable. It has an FTDI chip and board embedded inside the plug, so I don’t have to worry about fabricating a chip.\\
+ \\
+I’m going with a USB terminal because my microcontroller is a Raspberry Pi, and it’s simpler to use a USB and create a virtual COM port inside the Raspberry Pi’s Linux operating system.\\
+ \\
+Model: C2G 26886 USB to DB9 Serial RS232 Adapter Cable, Blue (1.5 Feet, 0.45 Meters)\\
+Quantity: 2x\\
+Company: C2G\\
+Company Website: \href{https://www.cablestogo.com/}{https://www.cablestogo.com/} \\
+Product Page: \href{https://www.amazon.com/C2G-Cables-26886-Serial-Adapter/dp/B000067RVJ}{https://www.amazon.com/C2G-Cables-26886-Serial-Adapter/dp/B000067RVJ}
+
+\par
+
+\section{Batteries}
+
+\subsection{Lithium-ion Battery Cell}
+
+\subsubsection{Introduction}
+
+Solar panels do not produce power all the time. Even when they do produce power, they often don’t produce enough power to satisfy the consumer. During the day, when the solar panels produce the most power, the consumer often isn’t using the system. To resolve this, we need to have a battery pack. During the day, the battery pack will be charged by the solar panels, and during the evening, the battery pack will be discharged by the consumer.\\
+ \\
+Model: IFP71/180/278-CA180FI\\
+Quantity: 8\\
+Company:  CALB
+Company website: \href{http://www.calbusainc.com/}{http://www.calbusainc.com/}
+Product Page: \href{https://www.ev-power.eu/LiFePO4-small-cells/Prismatic/CALB-CA180FI-Lithium-Cell-LiFePO4-3-2V-180Ah.html}{ https://www.ev-power.eu/LiFePO4-small-cells/Prismatic/CALB-CA180FI-Lithium-Cell-LiFePO4-3-2V-180Ah.html}
+
+\subsubsection{Datasheet}
+TODO
+
+\section{Battery Management System}
+
+\subsection{Introduction}
+Batteries don’t discharge evenly. Every battery has its own individual chemistry due to imperfections in the manufacturing process. If we discharge batteries unevenly, one battery could be worn out while another battery remains untouched. To resolve this, we use a Battery Management System.\\
+
+\subsection{Main Controller}
+
+Model: G1 EMUS BMS control unit\\
+Quantity: 1\\
+Company: Emus\\
+Company Website: \href{https://emusbms.com/}{https://emusbms.com/} \\
+Product Page: \href{https://emusbms.com/product/g1-bms-control-unit}{https://emusbms.com/product/g1-bms-control-unit} \\
+
+\subsection{Features}
+Automatically controls the battery operation process utilizing various interfaces for measurement, control, data exchange, configuration and indication, and works with any charge controller.
+\paragraph{Application}
+\begin{itemize}
+	\item Any lithium chemistry, series connected battery pack of up to 254 cells if using serial cell communication
+	\item Any lithium chemistry, series connected battery pack, or pack of multiple parallel strings, up to 8128 cells total, if using EMUS CAN Cell Group Modules.
+	\item Storage Temperature: -40\degree C to 95\degree C
+	\item Operation Temperature: -40\degree C to 80\degree C
+	\item USB interface for Microcontroller reading
+	\item Proprietary serial interface for cell communication
+\end{itemize}
+
+\subsection{Monitoring}
+
+BMS control unit can monitor:
+
+\subsubsection{System Status}
+\begin{itemize}
+	\item Battery Charge
+	\item Charger Status
+	\item Current and Voltage
+	\item Distance and Energy (if applied to an electric vehicle)
+	\item BMS status
+	\item Time and Date
+	\item Version Number
+\end{itemize}
+
+\subsubsection{System status and Individual Cells}
+\begin{itemize}
+	\item Battery Balancing Rate
+	\item Temperature
+	\item Battery Voltage
+\end{itemize}
+
+\subsubsection{Statistics}
+Has an internal events log (each event happening at a recorded time)
+
+Has a statistics log at a recorded time. Possible statistics to log:
+\begin{itemize}
+	\item Total Discharge
+	\item Total Charge
+	\item Total Discharge Energy
+	\item Total Charge Energy
+	\item Total Discharge Time
+	\item Total Charge Time
+	\item Total Distance
+	\item Max Discharge Current
+	\item Max Charge Current
+	\item Min Cell Voltage
+	\item Max Cell Voltage
+	\item Max cell Voltage Difference
+	\item Min pack voltage
+	\item Max pack voltage
+	\item Min Cell Module Temperature
+	\item Max Cell Module Temperature
+	\item Max Cell Module Temperature Difference
+	\item Protection Counts (undervoltage, overvoltage, discharge overcurrent, charge overcurrent, cell module overheat, leakage protection, no cell communication, low voltage power reduction, high current power reduction, high cell module temperature power reduction, charger connect, charger disconnect, cell overheat, high cell module temperature power reduction)
+	\item Miscellaneous counts (number of Preheat stages, Precharge stages, main charge stages, balancing stages, charging finished stages, charging errors, charging retries, trips, charge restarts)
+	\item Min Cell Temperature
+	\item Max Cell Temperature
+	\item Max Cell Temperature Difference
+\end{itemize}
+\subsection{Necessary Accessories}
+
+\subsubsection{Cell Isolators}
+
+The BMS system requires that you have isolators to protect the main module. Only works if only 1 group of batteries is used.
+ \\
+Model: G1 Top/Bottom Isolator\\
+Company Website: \href{https://emusbms.com/}{https://emusbms.com/} \\
+Product Page: \href{https://emusbms.com/product/g1-top-bot-isolator}{https://emusbms.com/product/g1-top-bot-isolator} \\
+Quantity: 2x \\
+
+\subsubsection{Cell Modules}
+
+Every battery must have its own cell module. Different batteries require different cell modules.You can find all types of cell modules here:
+ \\
+\href{https://emusbms.com/product-category/cell_modules}{https://emusbms.com/product-category/cell\_modules}
+ \\
+The standard solution is the A/B type, so that’s what we’re going with.We must order this package for each battery.
+
+\paragraph{Ordering Schematic}
+EMUS BMS Cell Module A – 1x
+EMUS BMS Cell Module B – 1x
+Ring Terminal M8 – 2x
+Communication Cable – 16cm – 2x
+\par
+\paragraph{Ordering details}
+
+Model: G1 Cell Module – A/B type\\
+Company: Emus\\
+Company Website: \href{https://emusbms.com}{https://emusbms.com/} \\
+Product Page: \href{https://emusbms.com/product/g1-cell-module-ab}{https://emusbms.com/product/g1-cell-module-ab} \\
+Quantity: 8x \\
+
+\subsubsection{CAN Cell Group Module}
+
+We need to group batteries into groups.
+Since the batteries we picked are 3.2V, we group batteries into groups of 4.  
+ \\
+Model: G1 CAN Cell Group Module\\
+Company: Emus \\
+Company Website: https://emusbms.com/ \\
+Product Page: https://emusbms.com/product/g1-can-cell-group-module \\
+Quantity: 2x\\
+
+
+\subsection{Recommended Accessories}
+
+\subsubsection{Current Sensor}
+
+In order to monitor current dispensing from the batteries to the load, you must have a current sensor. It’s not necessary for operation, but it’s recommended to have one. This one works using the hall effect, so it does not require contact with the wires; it only needs to have the wire running through its hole. \\
+ \\
+Model: G1 Loop Style Dual Range Current Sensor\\
+Company: Emus \\
+Company Website: \href{https://emusbms.com/}{https://emusbms.com/}
+Product Page: \href{https://emusbms.com/product/g1-loop-style-dual-range-current-sensor}{https://emusbms.com/product/g1-loop-style-dual-range-current-sensor}\\
+Quantity: 1x \\
+
+
+
+ 
+\section{Sensors – Faculty}
+\subsection{Introduction}
+The client wants their own sensors exclusive for faculty. They want to measure temperature, humidity, and light. I propose that we use these classes of sensors for this:\\
+\begin{itemize}
+	\item Temperature and Humidity Sensor
+	\item Light Sensor
+\end{itemize}
+The product page for the parts and their respective datasheets will be hosted by different companies. This is because it is easier to order a breakout board than it is to order the individual parts, order a custom PCB for the sensor, and solder the parts onto the board. Companies that sell breakout boards and companies that manufacture parts are separate from one another.
+
+\subsection{Temperature and Humidity Sensor}
+Model: BME280 \\
+Company: Bosch \\
+Company Website: \href{https://bosch.us/}{https://bosch.us} \\
+Product Page: \href{https://www.adafruit.com/product/2652}{https://www.adafruit.com/product/2652} \\
+Datasheet: \href{https://cdn-shop.adafruit.com/product-files/2652/2652.pdf}{https://cdn-shop.adafruit.com/product-files/2652/2652.pdf}
+
+\subsubsection{Details}
+\begin{itemize}
+	\item $ \pm $3\% accuracy for humidity
+	\item $ \pm $1\% accuracy for temperature
+	\item 1s response time maximum
+	\item Operating range: -40C to 85C
+	\item I2C interface
+	\item Measures pressure if necessary
+\end{itemize}
+
+See datasheet for reading this sensor properly. Create a class in C++/python to read it.
+
+\subsection{Light Sensor}
+
+Model: VEML7700 \\
+Quantity: 2 \\
+Company: Vishay Semiconductors \\
+Company Website: \\
+Product Page: \href{https://www.adafruit.com/product/4162?gclid=EAIaIQobChMIyOmfve7Q4wIV6f_jBx07fQ1yEAQYASABEgJti_D_BwE}{https://www.adafruit.com/product/4162?gclid=EAIaIQobChMIyOmfve7Q4wIV6f\_jBx07fQ1yEAQYASABEgJti\_D\_BwE} \\
+Datasheet: \href{https://www.vishay.com/docs/84286/veml7700.pdf}{https://www.vishay.com/docs/84286/veml7700.pdf} \\ 
+
+\subsubsection{Details}
+High resolution: 0.0036 lux/ct at night, 1.8 lux/ct in bright sunlight \\
+Maximum 120,000 lux (bright sunlight) \\
+I2C interface \\
+
+See datasheet for reading this sensor properly (i.e. what  addresses to read from, what slave address to use, etc.)
+Create a class in Python/C++ to read it.
+
+\section{Microcontroler Decision}
+\input{./microcontroller_decision.tex}
+
+\section{Faculty Microcontroller}
+
+\subsection{Introduction}
+In every computer system, there must be a main processor. In this greenhouse system, a master microcontroller is utilized to harvest data, process it, and send it to a main server somewhere on campus. See the website manual for details on how it’s processed there. The main microcontroller must be able to communicate with the Faculty Sensors somehow, and communicate with the slave microcontrollers when we implement them. I have chosen to interface the main microcontroller with the slave microcontrollers via Bluetooth. Bluetooth is wireless, and easy to program. Does not require any wires running across the greenhouse floor, and reduces tripping hazard. So, our Microcontroller  has these requirements:
+\begin{itemize}
+	\item Must be capable of sending packets of data over a 2G internet connection to a server somewhere at UCSC.
+	\item Must be capable of communicating over Bluetooth to a slave microcontroller somewhere in the greenhouse.
+	\item Must be capable of reading I2C data.
+\end{itemize}
+
+\par
+The microcontroller I have chosen for this job is the Raspberry Pi Model 3B+. It is a capable microcontroller. It runs Linux on its systems, so it’s easy to debug on site if necessary. The code can be stored on an SD card. If necessary, it will be possible to retrieve a log of the past 30 days of data from the Raspberry Pi. The Raspberry Pi Raspbian system uses a FAT32 file system, meaning the absolute maximum amount of data it is possible of addressing is 32GB. So, it should be enough for at least 30 days worth of data. But, the SD card also has to store the operating system it will use (Raspbian). 
+\par
+This microcontroller uses a +5V power source. Therefore, we will have to design a power source for it. The tolerance values for the microcontroller are tight: it only accepts +4.5V to +5.5V. It can draw up to 2A of current when running a stress-test. So, let’s just say it draws a maximum of 10W of power.
+
+\subsection{Details}
+
+Model: Raspberry Pi 3 Model B+\\
+Quantity: 1 \\
+Company: Raspberry Pi \\
+Company page: \href{https://www.raspberrypi.org/}{https://www.raspberrypi.org/}
+Product Page:  \href{https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/}{https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/}
+
+\subsubsection{Features}
+\begin{itemize}
+	\item 1.6GHz ARM processor
+	\item C++ compiler
+	\item Python interpreter
+	\item 4 USB ports
+	\item 20 GPIO pins
+	\item I2C, UART, and SPI interface
+	\item Runs Linux
+	\item Bluetooth and Wi-Fi Capabilities
+	\item Upgradeable
+\end{itemize}
+
+\subsubsection{Drawbacks}
+
+Requires +4.5V to +5.5V of power.\\
+Requires a Micro USB to power it. We can fabricate something that can deliver the necessary power to run it.
+
+\subsection{Recommended Accessories}
+
+\subsubsection{Sixfab’s GSM/GPRS shield}
+
+I don’t like the FONA module. I would like to replace it. I would like to instead use this GSM/GPRS shield. It slides easily onto the master Raspberry Pi, and can also fit another shield onto it if so desired. I will be fabricating a faculty sensor shield utilizing the I2C protocol. This shield utilizes the UART protocol. The Raspberry Pi can only accommodate 1 use of the UART protocol using the GPIO pins. The others will be using the Virtual COM ports of the Raspberry Pi. The Tristars will be using a RS-232 to USB converters with an FTDI chip installed in them for communication, and the BMS system will be using a split-open USB wire that will connect directly to the BMS control unit.\\
+ \\
+ \\
+Model: Raspberry Pi GSM/GPRS shield \\
+Company: Sixfab \\
+Company Page: \href{http://sixfab.com/}{http://sixfab.com/}
+Product Page: \href{https://sixfab.com/product/gsmgprs-shield/}{https://sixfab.com/product/gsmgprs-shield/}
+
+\paragraph{Features}
+\begin{itemize}
+	\item Uses Quectel M66 2G IoT modem.
+	\item Fully compatible with Raspberry Pi models that have the 40-pin GPIO header (3, 2, B+, A+, Zero)
+	\item High Data Speed: GPRS Multi-slot class 12, 85.6kbps downlink and 85.6kbps uplink data rates
+	\item Quad-band: 850/900/1800/1900MHz
+	\item Built-in PCB antenna, also there is an external antenna port available
+	\item Supported Protocols: TCP/ UDP/ PPP/ FTP/ HTTP/ SMTP/ CMUX/ SSL
+	\item Quectel’s QuecLocator Feature, lets you get the location without GPS/GNSS
+	\item Extremely low standby power consumption by M66, 1.3mA at DRX=5
+	\item Efficient and low quiescent current regulator circuit can hold up to 3.6A
+	\item Bluetooth Function, V3.0 specification, SPP and OPP profiles available.
+	\item Micro SIM Card socket can easily reachable on the downside of the shield.
+	\item Can be used standalone with PC/Laptop over micro USB, without stacking with Raspberry Pi thanks to FTDI chip on the shield.
+	\item Sending/Receiving standard V.25ter AT commands over UART port to Raspberry Pi is available
+	\item Working temperature range: -30\degree C to +80\degree C
+\end{itemize}
+
+\subsubsection{Antenna}
+Any antenna that can physically connect to this shield will do. But, here’s one from Sixfab:\\
+ \\
+Model: GSM 2G/3G Antenna – u.FL PCB Antenna – 0dBi\\
+Company: Sixfab\\
+Company page: \href{https://sixfab.com/}{https://sixfab.com/}
+Product Page: \href{https://sixfab.com/product/gsm-2g-3g-antenna-u-fl-pcb-antenna-0dbi/}{https://sixfab.com/product/gsm-2g-3g-antenna-u-fl-pcb-antenna-0dbi/}
+
+\subsubsection{SIM Card}
+If we will be sending data with our GSM module, we must have a SIM card to tell the cell phone tower what carrier we are using, and if we have permission to use their cell phone tower. The SIM card only stores 1 piece of data: our ID number. That’s all it does, but it’s very important.\\
+ \\
+Model: Ting GSM SIM card \\
+Quantity: 1 \\
+Carrier: Ting \\
+Company Website: \href{https://ting.com/}{https://ting.com/} \\
+Product Page:  \href{https://ting.com/shop/gsmSIM}{https://ting.com/shop/gsmSIM} \\
+
+You must register with Ting and pay a monthly fee of \$50 for an unlimited 2G service plan.
+
+\subsubsection{Custom-fabricated I2C shield for Raspberry Pi}
+
+Will be custom-designed at home here at UCSC. Will be rushed, though. If I find a design, will be using it. Will have these features:
+\begin{itemize}
+	\item Capable of holding at least 8 I2C devices
+	\item Capable of detaching I2C devices at will, like a plug.
+	\item Has Pull-up resistors embedded inside
+\end{itemize}
+
+Touch screen for Raspberry Pi\\
+ \\
+This is not completely necessary, but it would be nice to be able to see what is happening inside the raspberry pi 3 at any given moment.
+ \\
+Model: Raspberry Pi Touch Display\\
+Company: Raspberry Pi \\
+Company Page: \href{https://www.raspberrypi.org/}{https://www.raspberrypi.org/} \\
+Product Page: \href{https://www.raspberrypi.org/products/raspberry-pi-touch-display/}{https://www.raspberrypi.org/products/raspberry-pi-touch-display/} \\
+ \\
+\subsubsection{Case for Raspberry Pi Touch Display}
+If we have a Raspberry Pi touch display, we will need a case for it to add that extra touch. We will need to find a way to mount it, though. \\
+ \\
+Model: RS Raspberry Pi 7-Inch LCD Touch Screen Case, Black, Model number FBA\_102035\\
+Company: Raspberry Pi \\
+Company Page: \href{https://raspberrypi.org/}{https://raspberrypi.org/} \\
+Product Page:\href{ https://www.amazon.com/Raspberry-Pi-7-Inch-Touch-Screen/dp/B01GQFUWIC/ref=asc_df_B01GQFUWIC/?tag=hyprod-20&linkCode=df0&hvadid=309751315916&hvpos=1o1&hvnetw=g&hvrand=10505497938605347385&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9061320&hvtargid=pla-406360183578&psc=1&tag=&ref=&adgrpid=67183599252&hvpone=&hvptwo=&hvadid=309751315916&hvpos=1o1&hvnetw=g&hvrand=10505497938605347385&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9061320&hvtargid=pla-406360183578}{Amazon.com}
+
+\section{Sensors – Student}
+
+\subsection{Introduction}
+
+As an optional feature, the client would like the system to be capable of having students be able to use their own sensors. Here are some potentially useful sensors for students:
+
+\subsection{Water Temperature sensors}
+
+\subsubsection{DS18B20}
+
+The DS18B20 is sold in a different form factor from ADAFRUIT. This form factor is more usable, so we will be using that one. The sensor and its datasheet are provided by Maxim Integrated.
+
+Model: DS18B20\\
+Quantity: 1\\
+Company: Maxim Integrated \\
+Company Website: \href{https://www.maximintegrated.com/en.html/}{https://www.maximintegrated.com/en.html/} \\
+Product Page: \href{https://www.adafruit.com/product/381?gclid=EAIaIQobChMIh5e--PmU4wIViJWzCh3vLA9XEAQYASABEgKZSfD_BwE/}{https://www.adafruit.com/product/381?gclid=EAIaIQobChMIh5e--PmU4wIViJWzCh3vLA9XEAQYASABEgKZSfD\_BwE/} \\
+Datasheet: \href{https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf}{https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf} \\
+
+\subsubsection{Details}
+\begin{itemize}
+	\item Interface: One-wire
+	\item Reduce Component Count with Integrated Temperature Sensor and EEPROM
+	\item Unique 1-Wire Interface Requires Only One Port Pin for Communication
+	\item Measures Temperatures from -55\degree C to +125\degree C (-67\degree F to +257\degree F)
+	\item +- 0.5\degree C Accuracy from -10\degree C to +85\degree C
+	\item Programmable Resolution from 9 Bits to 12 Bits
+	\item No External Components Required
+	\item Parasitic Power Mode Requires Only 2 Pins for Operation (DQ and GND)
+	\item Simplifies Distributed Temperature-Sensing Applications with Multidrop Capability
+	\item Each Device Has a Unique 64-Bit Serial Code Stored in On-Board ROM
+	\item Flexible User-Definable Nonvolatile (NV) Alarm Settings with Alarm Search Command
+	\item Identifies Devices with Temperatures Outside Programmed Limits
+	\item Available in 8-Pin SO (150 mils), 8-Pin  uSOP, and 3-Pin TO-92 Packages 
+\end{itemize}
+
+\subsection{Soil Moisture Sensors}
+This one is a potential keeper for students. \\
+Model: I2C Soil Moisture Sensor \\
+Company: White Boxes \\
+Company Page: \href{https://www.whiteboxes.ch/}{https://www.whiteboxes.ch/} \\
+Product Page: \href{https://www.whiteboxes.ch/shop/i2c-soil-moisture-sensor/?v=7516fd43adaa}{https://www.whiteboxes.ch/shop/i2c-soil-moisture-sensor/?v=7516fd43adaa} \\
+
+\subsubsection{Features}
+\begin{itemize}
+	\item Comes with its own Arduino and Raspberry Pi examples library, located here: 
+	\item \href{https://github.com/Miceuz/i2c-moisture-sensor}{https://github.com/Miceuz/i2c-moisture-sensor}
+	\item Version 2.7.5
+	\item Supply voltage 3.3V – 5V
+	\item Current consumption: 1.1mA @ 5V, 0.7mA @ 3.3V when idle, 14mA @ 5V, 7.8mA @ 3.3V when taking a measurement. When constantly polling sensor at full speed, current consumption averages to 4.5mA @ 5V, 2.8mA @ 3.3V
+	\item Operating temperature 0\degree C – 85\degree C
+	\item Moisture reading drift with temperature – $<$ 10 \% over full temp range
+\end{itemize}
+\subsection{Pressure Sensors}
+
+Honeywell manufactures this pressure sensor, but ADAFRUIT distributes it. \\
+ \\
+Model: Adafruit MPRLS Ported Pressure Sensor Breakout - 0 to 25 PSI \\
+Company: Honeywell \\
+Company Page: \href{https://sensing.honeywell.com/}{https://sensing.honeywell.com/} \\
+Product Page: \href{https://www.adafruit.com/product/3965?gclid=EAIaIQobChMIx4HYxr7-5AIVDtvACh3JSggcEAQYBSABEgJE7_D_BwE}{https://www.adafruit.com/product/3965?gclid=EAIaIQobChMIx4HYxr7-5AIVDtvACh3JSggcEAQYBSABEgJE7\_D\_BwE} \\
+Datasheet: \href{https://sensing.honeywell.com/micropressure-mpr-series}{https://sensing.honeywell.com/micropressure-mpr-series} \\
+ \\
+Comes with its own example code library: \href{https://github.com/adafruit/Adafruit_MPRLS}{https://github.com/adafruit/Adafruit\_MPRLS} \\
+
+\section{Student Microcontroller}
+
+\subsection{Introduction}
+Instead of having every student plug into one microcontroller (which would require a lot of cables running around), I propose that for every experiment, we have a separate microcontroller that the student can take with them. The Raspberry Pi 3 Zero W is a great candidate for this. It’s Bluetooth enabled, so they aren’t burdened by a cable length. It’s just as powerful as the normal Raspberry Pi, with the addition of writing their own code for their own sensors. \\
+ \\
+We will have to use our own sensor shields.
+
+\subsection{Raspberry Pi Zero W}
+Model: Raspberry Pi 3 Zero W \\
+Quantity: 2 \\
+Company: Raspberry Pi
+Company Website: \href{https://raspberrypi.org/}{https://raspberrypi.org/} \\
+Product page: \href{https://www.adafruit.com/product/3400?gclid=EAIaIQobChMI9Lbyu_qU4wIVDp6fCh3MuA5QEAQYASABEgJT5PD_BwE/}{raspberrypi.org} \\
+\subsubsection{ Details }
+\begin{itemize}
+	\item 1GHz, single-core CPU
+	\item 512MB RAM
+	\item Mini HDMI and USB On-The-Go ports
+	\item Micro USB power
+	\item HAT-compatible 40-pin header
+	\item Composite video and reset headers
+	\item CSI camera connector
+\end{itemize}
+
+\subsubsection{Networking}
+\begin{itemize}
+	\item 802.11 b/g/n wireless LAN
+	\item Bluetooth 4.1
+	\item Bluetooth Low Energy (BLE)
+\end{itemize}
+
+\subsubsection{Drawbacks}
+\begin{itemize}
+	\item Requires a voltage range of +4.5V to +5.5V, and a power converter.
+	\item Requires a Micro USB.
+\end{itemize}
+ 
+\subsection{Recommended Accessories}
+
+\subsubsection{Custom SPI, I2C, UART, and One-Wire shield}
+
+Will be designed in-house. Everything will be documented. Requirements:
+\begin{itemize}
+	\item Take these data formatting protocols: SPI, I2C, UART, 1-wire.
+	\item Be a wall bug. It will plug in to a 12V power supply with a 12V converter.
+\end{itemize}
+\subsubsection{Custom Housing}
+
+Will be designed in-house. Everything will be documented. Requirements:
+
+\begin{itemize}
+	\item Cover the Raspberry Pi Zero W from the elements.
+	\item Have ports for:
+	\item The 5V Power supply
+	\item The SPI, I2C, UART, and 1-Wire
+	\item Optional: Covers for the ports. 
+	\item Heater – Battery pack
+\end{itemize}
+
+\section{Heater - Battery Pack}
+\subsection{Introduction}
+
+All battery packs must have a heater. When batteries get too cold, there is a possibility of permanent damage to the batteries, and an unnatural reduction of life cycles might occur. There is no heater for the battery pack currently on-site, but here is my proposal: install a heater for wherever the batteries are stored. The heater will be controlled by a relay, which will be controlled by the BMS system. The BMS system has temperature sensors on-board to tell when the batteries are getting too cold. \\
+ \\
+Model: Asixx Air Heater, 100W 12V Energy Saving PTC Car Fan Air Heater Constant Temperature Heating Element Heaters for Heater, Humidifier, Air Conditioning and More \\
+Company: Asixx \\
+Company Website: \\
+Product Page: \href{https://www.amazon.com/Asixx-Constant-Temperature-Humidifier-Conditioning/dp/B07HCB95SJ/ref=asc_df_B07HCB95SJ/?tag=hyprod-20&linkCode=df0&hvadid=309851778232&hvpos=1o1&hvnetw=g&hvrand=4833336270821486334&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9061320&hvtargid=pla-574478162578&psc=1}{amazon.com} \\
+
+\subsection{Details}
+
+Rated Voltage: 12V
+Rated Power: 100W
+
+\paragraph{Dimension Specs}
+\begin{itemize}
+	\item Mounting Hole Distance: Approx. 87mm / 3.4inch
+	\item Mounting Hole Size: Approx. 4mm / 0.2inch
+	\item Product Size: Approx. 6 * 6 * 4.2cm / 2.4 * 2.4 * 1.7inch
+	\item Product Weight: Approx. 120g
+\end{itemize}
+\par
+
+We will mount this wherever the battery pack is.
+
+\section{Cooler – Battery pack}
+\subsection{Introduction}
+
+We should be burying our batteries underground to protect against warmer temperatures (according to forum rumors). If the batteries have an excessive load, they become at risk for overheating. If the batteries are overheated for too long, they will become permanently damaged. We must have a cooler for our battery pack to cool the batteries. I propose we install a fan or a radiator. The air underground usually stays at least 25 – 30 C, so we can use that air to cool the batteries. \\
+ \\
+I don’t have a solid choice of cooler yet, but this is my best choice so far: \\
+\subsection{Data}
+Model: \\
+Company: \\
+Company Page: \\
+Product Page: \href{https://www.amazon.com/Performance-Electric-Radiator-Mounting-%EF%BC%88Diameter/dp/B01N0686K5/ref=asc_df_B01N0686K5/?tag=hyprod-20&linkCode=df0&hvadid=241994092016&hvpos=1o4&hvnetw=g&hvrand=169244523548284450&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9061320&hvtargid=pla-449411562922&psc=1}{amazon.com}
+
+
+\subsection{Details}
+\begin{itemize}
+	\item Overall Diameter:11.73 INCH, 
+	\item Overall Thickness:2.56 INCH 
+	\item 1550 CFM Car Cooling Fans
+	\item Amp Draw: 6.6 amp 
+	\item Watts:80W
+	\item Blade Length: 11inch
+	\item Number of Blades: 10
+	\item Blade Type: straight
+	\item High-quality, lightweight, and durable; great as replacement or upgrade from factory parts.
+	\item Simple installation, no modifications required. Fan can be used as pusher or puller with the adaptable mounting kit.
+	\item How to choose the correct fan?
+	\item Step 1: Confirm the width and depth of your radiator
+	\item Step 2: Compare the fan diameter and depth with radiator 
+	\item Step 3: Choose the right size fan 
+	\item ATTENTION: It can be installed only if the diameter of the fan is smaller than the width of radiator! Make sure the depth of the fan is smaller than the gap of radiator and other parts! 
+\end{itemize}
+
+\section{AC outlet}
+
+\subsection{Introduction}
+
+Every once in a while, somebody will want to use an AC outlet to power a laptop or charge a phone. An AC outlet is absolutely necessary to do these things. To have an AC outlet on a DC power grid, we must have an inverter. Here’s our inverter:
+
+\subsection{Data}
+Model: Morningstar Suresine Inverter 300W \\
+Model number: SI-300-115V-UL (60Hz) \\
+Company: Morningstar \\
+Company Website: https://www.morningstarcorp.com/ \\
+Product Page: https://www.morningstarcorp.com/products/suresine/ \\
+
+\subsection{Details}
+\begin{itemize}
+	\item Data Communications: RJ-11Connection with Morningstar Meterbus / MODBUS RTU (16-bit) 
+	\item Continuous Power Rating: 300W @ 25\degree C 
+	\item Peak Power Rating (10 minutes): 600W 
+	\item DC input voltage: 10.0V  - 15.5 V 
+	\item Waveform: Pure Sine Waveform 
+	\item AC Output Voltage (RMS): 220V or 115V $\pm$ 10\% 
+	\item AC Output Voltage Frequency: 50 or 60 Hz $\pm$ 0.1\% 
+	\item Peak efficiency: 92\%
+	\item Total Harmonic Distortion (THD): $<$ 4\%
+	\item Self Consumption: 
+	\begin{itemize}
+		\item Inverter On (no load): 450mA
+		\item Inverter Off: 25mA
+		\item Stand-by: 55mA
+	\end{itemize}
+	\item Low voltage Disconnect (LVD): 11.5V or 10.5V 
+	\item Low Voltage Reconnect: 12.6V or 11.6V
+	\item LVD Warning Threshold (buzzer): 11.8V or 10.8V
+	\item LVD Delay Period: 4 minutes
+	\item High voltage disconnect: 15.5V
+	\item High Voltage Reconnect: 14.5V
+	\item Standby On Threshold: ~8W
+	\item Standby Off Threshold: ~8W
+	\item High Temperature Disconnect: 95\degree C  (heatsink)
+	\item High temperature Reconnect: 80\degree C (heatisnk)
+\end{itemize}
+\subsubsection{Electronic Protections}
+\begin{itemize}
+	\item Reverse Polarity (fused)
+	\item AC Short Circuit
+	\item AC overload
+	\item DC Terminals: Max wire size: 2.5 to 35 mm\textsuperscript{2} / 14 to 2 AWG
+	\item Remote On/Off terminals: Max. Wire size: 0.25 to 1.0 mm\textsuperscript{2} / 24 to 16 AWG
+	\item Enclosure: IP20
+	\item Cast anodized Aluminum
+\end{itemize}
+
+\subsubsection{Physical Characteristics}
+\begin{itemize}
+	\item Dimensions: 213 x 152 x 105 mm (8.4 x 6.0 x 4.1 in)
+	\item Weight: 4.5 Kg/10.0lbs
+	\item AC terminals: Max wire size: 4 mm\textsuperscript{2} / 12AWG
+\end{itemize}
+
+\subsubsection{Environmental Protections}
+\begin{itemize}
+	\item Ambient Operating Temperature: -40\degree C to +45\degree C
+	\item Storage Temperature: -55\degree C to +85\degree C
+	\item Humidity: 100\% (non-condensing)
+	\item Tropicalization: Conformal coating on PCBs. Epoxy encapsulated transformer and inductors.
+\end{itemize}
+
+
+
+\subsection{Accessories}
+
+\subsubsection{3A fuse}
+\subsubsection{100A fuse}
+\subsubsection{GFCI outlet}
+Model: 15 Amp Self-Test smartlock pro slim duplex GFCI Outlet, white \\
+Company: Home Depot \\
+Company Website: \href{https://www.homedepot.com/}{https://www.homedepot.com/} \\
+Product Page: \href{https://www.homedepot.com/p/Leviton-15-Amp-Self-Test-SmartlockPro-Slim-Duplex-GFCI-Outlet-White-R02-GFNT1-0KW/206001533}{https://www.homedepot.com/p/Leviton-15-Amp-Self-Test-SmartlockPro-Slim-Duplex-GFCI-Outlet-White-R02-GFNT1-0KW/206001533} \\
+
+
+\subsubsection{GFCI outlet box}
+Model: 1-Gang Weather Box While-In-Use cover \\
+Company: Home Depot\\
+Company Website: https://www.homedepot.com \\
+Product Page: \href{https://www.homedepot.com/p/1-Gang-Weather-Box-While-In-Use-Cover-WIU-1/206469236?cm_mmc=Shopping%7CG%7CVF%7CD27E%7C27-6_CONDUIT-BOXES-FITTINGS%7CNA%7CPLA%7c71700000033099037%7c58700003867178937%7c92700031086148565&gclid=EAIaIQobChMI2PLwrenQ4wIVAf_jBx2q5Q92EAkYASABEgKGrPD_BwE&gclsrc=aw.ds}{homedepot.com} \\
+
+\subsection{Recommended Accessories}
+
+\subsubsection{RJ-11 Meterbus to USB MODBUS adapter}
+Model: Morningstar USB MeterBus Adapter $>$ UMC-1 \\
+Company: Morningstar \\
+Company Website: https://www.morningstarcorp.com \\
+Product Page: \href{https://solarflexion.com/umc-1?_vsrefdom=adwords&gclid=EAIaIQobChMIs6q9_eTQ4wIVef_jBx3u-AdIEAQYBSABEgKaCPD_BwE}{solarflexion.com} \\
+
+
+\subsubsection{RJ-11 data communications cable}
+Model: USB Meterbus Adapter \\
+Company: Morningstar \\ 
+Company Website: \href{https://www.morningstarcorp.com/}{https://www.morningstarcorp.com/}
+Product Page: \href{https://www.morningstarcorp.com/products/usb-meterbus-adapter/}{https://www.morningstarcorp.com/products/usb-meterbus-adapter/}
+ 
+\section{Web Server}
+
+\subsection{Introduction}
+
+We must have a server to send the data to. I’m sending all my data in JSON format so it’s easier for the website to read it.
+
+
+Also, I would like to call upon the help of a professor for this one.
+
+Host: ucsc.edu \\
+Website link: arboretum-backend.soe.ucsc.edu/ (user requested) \\
+Server Location: somewhere at UCSC. It's hard to tell. 
+Who to call when things go bad: Heidi. This is an unsupported virtual machine, so we are on our own. Try referencing the Website Troubleshooting section of this document first. \\
+Uptime Percentage: 99\% (when power is on )
+Language Programmed in: Python
+
+\section{Power Conversion}
+
+\subsection{Introduction}
+All our microcontrollers that we are using need +5V to operate properly. Our batteries distribute power in +12V packages. Therefore, we need a way to convert that power reliably.
+\subsection{Requirements}
+\begin{itemize}
+	\item Tolerance ranges: +4.5V to +5.5V
+	\item Ends in a Micro-USB plug
+\end{itemize}
+\paragraph{}
+We can either design a DC-DC voltage converter ourselves, or we could try to get one from a commercial retailer and hope it has good enough tolerances for our Raspberry Pi. Either way, we must have a DC-DC voltage converter.
+I propose that we get one from a commercial retailer. That way, if there are any malfunctions with it, we don’t have to build another one ourselves, we can simply buy another one from the same retailer. 
+\par
+
+\subsection{Details}
+Model: DC-DC 12V to 5V 3A Micro USB Converter Voltage Step Down Regulator Waterproof Power Converters for Car Smartphone \\
+Company: Car Power Technlogies (CPT) \\
+Company Website: N/A \\
+Product Pages: \href{https://www.amazon.com/Converter-Regulator-Waterproof-Converters-Smartphone/dp/B07H7X37T6/ref=asc_df_B07H7X37T6/?tag=hyprod-20&linkCode=df0&hvadid=241968535606&hvpos=1o1&hvnetw=g&hvrand=2561462318447783132&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9061320&hvtargid=pla-600746528101&psc=1}{amazon.com} and \href{https://www.aliexpress.com/item/32581610768.html}{https://www.aliexpress.com/item/32581610768.html} \\
+
+\subsection{Sales pitch}
+\begin{itemize}
+	\item This voltage converter uses high quality industrial-grade chip, with high conversion rate and stability
+	\item Widely used for car stereo, radio, monitoring, LED display, electric fan, motors and other electrical appliances, etc.
+	\item It supports 3 intelligent security protection including over-current protection, over temperature protection and output short circuit protection
+	\item Copper wire has great electrical conductivity, low thermal, low carbon and save more power
+	\item Fire retardant plastic casing and organic silicone sealing technology has strong thermal conductivity, IP67 ingress rating, waterproof and shockproof
+	\item Type: Non-isolated step-down voltage converter
+\end{itemize}
+
+\subsection{Features}
+\begin{itemize}
+	\item Output Connector: Micro USB
+	\item Input Voltage: DC12V
+	\item Output Voltage: DC5V
+	\item Output Current: 3A, 2.5A(no need to enhance heat dissipation for long time use)
+	\item Output Power: 15W
+	\item Max. Efficiency: $>$95\%
+	\item Operating Temperature: -40\degree C to 80\degree C
+	\item Overall Length: 50cm/19.7in
+	\item Block Size: 6.4*2.7*1.4cm/2.5*1.1*0.6in
+	\item Weight: 41g(approx.)
+	\item Working temperature: -40\degree C to 80\degree C
+\end{itemize}

@@ -101,7 +101,7 @@ function dateLessThan(start, end) {
 
 
 async function RetrieveAllData(start, end, interval, parameter, baseURL) {
-	let data = {};
+	let data = {}; // return value. will contain "x" and "y".
 	
 	let dates = [];
 	let y_values = [];
@@ -118,12 +118,23 @@ async function RetrieveAllData(start, end, interval, parameter, baseURL) {
 	}
 	// console.log(returnURL(baseURL, DateFormatter("10-31-2019", "baby")));
 	
+	// map all dates to the fetch function.
+	// fetch them to 
+	// baseURL has these elements replaced:
+	// <date> => date_item instance
+	// <parameter> => parameter requested.
+	
+	// requests variable turns into a list of promises. 
 	let requests = dates.map(date_item => fetch( returnURL(baseURL, DateFormatter(date_item), parameter ) ) );
 	console.log("Dates: ");
 	console.log(dates);
 	console.log("Requests: ");
 	console.log(requests);
 	
+	// resolve all Promises in requests[].
+	// Then, after those promises resolve, map all of the response's JSON values.
+	// Then, after the JSON values have been retrieved, push them all to the y_values variable.
+	//
 	Promise.all(requests).then(responses => {
 		for(let response of responses) {
 		 console.log(`${response.url}: ${response.status}`); // shows 200 for every url

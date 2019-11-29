@@ -1,0 +1,33 @@
+\subsection{Introduction}
+
+The slave microcontroller chosen needs to be able to:
+\begin{itemize}
+	\item Collect 5 pieces of sensor data (minimum)
+	\item Communicate with another microcontroller in some way (Bluetooth or RS-232), and send data to it.
+	\item Collect power data from the Solar Panels themselves (current and Voltage for each panel)
+	\item The master microcontroller chosen needs to be able to:
+	\item Communicate with another microcontroller in some way (Bluetooth or RS-232), and request and receive data from it.
+	\item Process data sent from the slave microcontroller.
+	\item Collect Power data from both Tristar Controllers (String 1 and String 2)
+	\item Collect Power data from the BMS (Current being driven, Current Battery voltage, How much power is currently in the battery bank, etc.)
+	\item Communicate with the FONA device to send data to a web server.
+\end{itemize}
+
+ 
+\subsection{Arduino}
+\paragraph{}
+The Arduino has the capability of being a slave, but not a master. It can collect I2C data, UART data, and One-Wire data, but collecting more than 1 type of RS-232 data will be a challenge. Bluetooth communication requires purchase of an extra module, but it can be done. It requires the use of a UART port. However, the Bluetooth driver will likely require a lot of space.  
+\paragraph{}
+If we go the Bluetooth route, and we want to add more slaves, we can buy another Arduino with a Bluetooth shield from their website, or we can buy a Raspberry Pi Zero W, which also comes with Bluetooth. Bluetooth requires no Wi-Fi, data plan, or wires. However, it uses a little more power this way. The Arduino uses 526mW of power on average with 10 pins. However, it is more than likely that these pins will either be insufficient, or not deliver enough power to power all our sensors due to hardware limitations. Most of the Arduino power data I found comes from forums, from people who tested the power consumption themselves, since reading microcontroller documentation is very difficult. But, the Raspberry Pi power data comes straight from their website.
+ 
+
+\subsection{Raspberry Pi}
+\paragraph{}
+There are many raspberry pi models, but only 1 can truly be a master: the Raspberry Pi Model 3B+. The Raspberry Pi Model 3B+ has the capability of being a master or a slave. It can collect I2C data, UART data, One-wire data, and can multiplex a RS-232 bus. Bluetooth communication comes built-in with the Raspberry Pi 3B+. The Raspberry Pi uses 3.5W of power on average bare-boarded. This will be more than enough power to drive all the sensors. Since the amount of power is not limited by any hardware on the raspberry pi (i.e. it’s only limited by the power supply and the connectors), we can plug in as many pins as we want. The recommended current limit is 2.5A, which translates to 12.5W. The 3.3V voltage regulator on the board is rumored to have a maximum of 1000mA before it breaks. A maximum of 100mA per pin should be more than enough. I don’t know how much power the sensors have, so that’s something I need to research.
+\paragraph{}
+The Raspberry Pi is capable of being programmed remotely by connecting it to Wi-Fi or Data, and SSH-ing into the controller from a remote computer, much like a server would be. I haven’t yet figured out how to do it on my compute module, but I know it can be done. I have a Raspberry Pi compute module at home. I bought it because I thought I could design an I/O board for myself that includes an RS-232 header. Afterwards, I thought I could plug in an RS-232 hub into it, and plug in more microcontrollers. I ran out of time, and I found a website to do this:
+\href{https://geppetto.gumstix.com/}{https://geppetto.gumstix.com/}. But, the site costs \$2000 for an initial setup fee! That’s outrageous! I tried looking up resources to do this myself, but it’s too complicated. I have no idea how to work with the Compute Module’s SO-DIMM package! I need a teammate that knows how to work with SO-DIMM to design a custom I/O board with me in order to use the compute module.
+ 
+\subsection{Final Decision}
+I am going to go with the Raspberry Pi 3 Model B+.
+ 

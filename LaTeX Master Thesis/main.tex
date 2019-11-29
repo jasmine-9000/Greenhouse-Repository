@@ -1,0 +1,92 @@
+% this is a modular LaTeX document. Please learn about it at these links:
+% https://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include
+% https://en.wikibooks.org/wiki/LaTeX/Modular_Documents
+
+\documentclass[a4paper,12pt]{report}
+%\usepackage[a4paper,inner=1.7cm, outer=2.7cm, top=2cm, bottom=2cm, bindingoffset=1.2cm]{geometry} 
+\usepackage[english]{babel} % use the english babel package. 
+\usepackage[scaled=.92]{helvet} % tells you to use the helvetica font. 
+
+% Graphics Packages and Declarations
+\usepackage{graphicx} % allows you to use pictures in your document.
+\usepackage{caption} % allows you to have captions
+\usepackage{subcaption} % allows you to use subcaptions and subgraphics.
+\usepackage{wrapfig} % allows you to wrap text around your picture.
+ \usepackage{pdfpages} 
+\graphicspath{{"C:/Users/LocalAdmin/Desktop/LaTeX Master Thesis/graphics"}}
+%\graphicspath{ 	{C:/Users/LocalAdmin/Desktop/LaTeX Master Thesis/graphics} %main graphics path
+			%{C:/Users/LocalAdmin/Desktop/LaTeX Master Thesis } % main path
+			%{C:/Users/LocalAdmin/Desktop/LaTeX Master Thesis/graphics/tsmppt_troubleshooting} % MS view path
+		%}
+%\DeclareGraphicsExtensions{.eps,.png,.pdf}
+
+
+\usepackage{enumitem}% have your lists look nicer.
+%\usepackage{fancyhdr} % allows you to have nice looking headers.
+\usepackage{amsmath} % allows you to write math formula.
+\usepackage{index} % allows you to use indexes that are automatically generated.
+\usepackage{hyperref} % allows you to insert hyperlinks.
+\usepackage{gensymb} % allows you to use symbols. 
+% makes an index.
+\makeindex
+
+
+% this is the actual environment.
+\begin{document}
+%title, author, and date specifications
+
+\title{\Large{\textbf{Senior Thesis}}}
+\author{By William Kerr}
+\iffalse
+\date{\date{\parbox{\linewidth}{\centering%
+  \today\endgraf\bigskip
+  Coordinator 1 \hspace*{3cm} Coordinator 2\endgraf\medskip
+  Dept.\ of Physics \endgraf
+  ABC College}}}
+\fi
+\maketitle % Automatically generates the title page.
+\tableofcontents %Automatically generates a table of contents page.
+
+%metadata
+% page numbering data
+\pagenumbering{roman} %sets page numbering style to "roman numerals"
+\setcounter{page}{2} % start page numbering on page 2.
+
+% header data
+%\fancyhf{} % clear default headers.
+%\renewcommand{\headrulewidth}{2pt} % redefine headrulewidth to 2pt.
+%\renewcommand{\footrulewidth}{1pt} % redefine footrulewdith to 1pt. (make it different)
+%\fancyhead[LE]{\leftmark} % show the left makr on the Left side of hte page.
+%\fancyhead[RO]{\nouppercase{\rightmark}} % on the right side of the page, display the chapter name.
+%\fancyfoot[LE,RO]{\thepage} % just show the page number. 
+
+\chapter{Abstract}
+Lorem Ipsum 
+\chapter{Introduction}% start a new chapter.
+\input{./introduction.tex}
+
+% the \input{} command includes a tex file into this main.text file.
+% this makes this document modular, so I don't have to maintain it as much as a single gigantic file.
+
+\chapter{Components Section}
+\input{./components.tex}
+
+\chapter{Grand Plan}
+\input{./grand_plan.tex}
+
+\chapter{Morningstar Code Design Document }
+\input{./morningstar_design_doc.tex}
+
+\chapter{BMS Code Design Document}
+\input{./bms_design_doc.tex}
+
+\chapter{Website Design Document}
+\input{./website_design_doc.tex}
+
+\chapter{Troubleshooting}
+\input{./troubleshooting.tex}
+
+\chapter{Datasheets}
+\input{./datasheets.tex}
+
+\end{document}

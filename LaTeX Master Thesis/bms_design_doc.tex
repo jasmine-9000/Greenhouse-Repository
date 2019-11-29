@@ -1,0 +1,159 @@
+\section{Introduction}
+The Battery Management System (BMS) has a Programmable Logic Controller (PLC) in it. It can be used to monitor things such as charge dissipated, voltage levels of each individual cell, etc.
+The internal PLC can be monitored using a USB interface. This is what the Raspberry Pi will do using the interpreted Python Language.
+The Python language is dependent on classes to process data. So, I will be writing a Python class to extract data from the BMS PLC.
+
+\section{Dependencies}
+\subsection{pyserial}
+This is a serial library for Python. It’s easy to use, and free. Provided as-is. Install with pip install pyserial. Use by calling “import serial”. ©2015 Chris Liechi clichi@gmx.net  All Rights Reserved. 
+Usage: https://pyserial.readthedocs.io/en/latest/pyserial.html
+
+\subsection{crc8\_dallas} 
+This is a CRC-8 library that uses the exact polynomial we need for this application: x\textsuperscript{8} + x\textsuperscript{2}+x+1.  I had to modify the code to work with Python 3, since it was originally developed for Python 2.
+
+\subsection{sys}
+Comes with every distribution of python. Necessary to have a test bench.
+\subsubsection{Usage}
+https://docs.python.org/3/library/sys.html
+
+\subsection{json}
+Comes with every distribution of python. Necessary to convert dictionaries into JSON format and dump it directly to an outfile.
+Usage: https://docs.python.org/3/library/json.html
+Initialization:
+Create a BMS() object, passing in PORT and BAUDRATE. This will initialize the serial connection to the BMS PLC.
+The BMS() object will destroy itself when python exits.
+
+\section{Classes}
+
+\subsection{BMSStatistic()}
+\subsubsection{Description}
+An internal class that contains a statistic from the sentence SS1(). Makes it easier to do mass data collection from a series of sentences if a request for every statistic available is made.
+\subsubsection{Variables}
+Every BMSStatistic object contains at least 4 variables:
+\begin{itemize}
+	\item statisticIdentifier: what is the ID of this statistic (i.e. what protocol to use to process it)
+	\item statisticValue: what is the value spat out (in decimal converted earlier from hexadecimal) from the BMS system?
+	\item statisticValueAdditionalInfo: any additional information spat out from the BMS system (e.g. Cell ID)?
+	\item timestamp: what time (in seconds since January 1, 1970 at 00:00 GMT) recorded. The BMS sys-tem records it in seconds since January 1, 2000 at 00:00 GMT).
+\end{itemize}
+
+Possible additional variables the class can have: 
+\begin{itemize}
+	\item Name: What is the real name of the statistic?
+	\item Unit: what unit is the value recorded in (e.g. V, mA, W)? If N/A, the value is simply how many times an event occurred.
+	\item Cell\_ID: What is the ID of the cell the statistic came from?
+\end{itemize}
+
+\subsubsection{Methods}
+\begin{itemize}
+	\item .dict(): converts this class into a dictionary with keys being the class variables it has, and their cor-responding values.
+	\item .string(): converts this class into a string in JSON format. 
+	\item .\_\_init\_\_(): initializes the object. Takes statisticIdentifi-er,statisticValue,statisticValueAdditionalInfo,timestamp. Upon creation, runs a specific protocol to process the data based on its statisticIdentifier.
+\end{itemize}
+
+\subsection{BMS()}
+\subsubsection{Description}
+A class that can read the BMS system. Call the .DumpToJSONFile() method to dump all data to an outfile. Details below.
+\subsubsection{Variables}
+Every BMS() object contains at least 3 variables:
+\begin{itemize}
+	\item PORT: what port number is the Raspberry Pi reading from?
+	\item BAUDRATE: at what baudrate (in bits/second) is the Raspberry Pi reading at?
+	\item ser: the serial object (from the pyserial library) that sends and receives data from the BMS.
+\end{itemize}
+\subsubsection{Methods}
+\begin{itemize}
+	\item .VR1(): returns a dictionary containing hardware type, serial number, and firmware version.
+	\item .BB1(): returns a dictionary containing number of cells, minimum balancing rate, and average cell balancing rate.
+	\item .BB2(): returns a dictionary containing cell string number, first cell number, size of group, and in-dividual cell module balancing rate of each cell group. 
+	\item .BC1(): returns a dictionary containing battery charge, battery capacity, and state of charge.
+	\item .BT1(): returns a dictionary containing the summary of cell module temperature values of the bat-tery pack.
+	\item .BT2(): This sentence contains individual cell module temperatures of a group of cells. Each group consists of 1 to 8 cells. This sentence is sent only after Control Unit receives a request sentence from external device, where the only data field is ‘?’ symbol. The normal response to BT2 request message, when battery pack is made up of two parallel cell strings:
+	\item .BT3(): This sentence contains the summary of cell temperature values of the battery pack. It is sent periodically with configurable time intervals for active and sleep states (Data Transmission to Display Period).	
+	\item .BT4(): This sentence contains individual cell temperatures of a group of cells. Each group con-sists of 1 to 8 cells.
+	\item .BV1(): Returns a dictionary containing a summary of cell voltages. contains number of cells, min-imum cell voltage, maximum cell voltage, average cell voltage, and total voltage.
+	\item .BV2(): This sentence contains individual voltages of a group of cells. Each group consists of 1 to 8 cells.
+	\item .CF2(parameterID): returns the parameter data of the parameter ID. Must be processed separately.
+	\item .CG1(): This sentence contains the statuses of Emus internal CAN peripherals. Can include CAN current sensor, and CAN cell group, along with the cell group number.
+	\item .CN1(): This sentence reports the CAN messages received on CAN bus by Emus BMS Control Unit, if “Send to RS232/USB” function is enabled.
+	\item .CN2(): This sentence reports the CAN messages sent on CAN bus if "Send to RS232/USB func-tion is enabled.
+	\item .CS1(): Returns a dictionary containing the parameters and status of the charger. Includes set volt-age, set current, actual voltage, actual current, number of connected charger, and CAN charger status.
+	\item .CV1(): Returns a dictionary containing the values of total voltage of battery pack, and current flowing through the battery pack.
+	\item .DT1(): This is a placeholder for an electric vehicle sentence. The code is being specifically pro-grammed for a greenhouse, so this sentence will not be programmed and return an error.
+	\item .FD1(): This sentence resets the unit to factory defaults. Use at your own risk.
+	\item .IN1(): This sentence returns a dictionary containing the status of the input pins (AC sense, IGN In, FAST\_CHG).
+	\item .LG1(clear): This sentence can either: retrieve events logged, or clear the event logger.
+	\begin{itemize}
+		\item Retrieve Events Logged: pass in ‘N’ or a null value. Every event is recorded in a dictionary form like this: [“log event number 1”]: [“log event”: “No event”, “unix time stamp”: 1567014467\\
+		Possible events:
+		\begin{itemize}
+			\item No Event
+			\item BMS started
+			\item Lost communication to cells
+			\item Established communication to cells
+			\item Cells voltage critically low
+			\item Critical low voltage recovered
+			\item Cells voltage critically high
+			\item Critical high voltage recovered
+			\item Discharge current critically high
+			\item Discharge critical high current recovered
+			\item Charge current critically high
+			\item Charge critical high current recovered
+			\item Cell module temperature critically high
+			\item Critical high cell module temperature recovered
+			\item Leakage detected
+			\item Leakage recovered
+			\item Warning: low voltage – reducing power
+			\item Power reduction due to low voltage recovered
+			\item Warning: high current – reducing power
+			\item Power reduction due to high current recovered
+			\item Warning: High Cell module temperature – reducing power
+			\item Power reduction due to high cell module temperature recovered.
+			\item Charger connected 
+			\item Charger disconnected
+			\item Started pre-heating stage
+			\item Started pre-charging stage
+			\item Started main charging stage
+			\item Started balancing stage
+			\item Charging finished
+			\item Charging error occurred
+			\item Retrying charging
+			\item Restarting charging
+			\item Cell Temperature Critically high
+			\item Critically high cell temperature recovered
+			\item Warning: High cell temperature – reducing power
+			\item Unix Timestamp: Time recorded in seconds since January 1, 1970 at 00:00 GMT.
+			\item Log event number: what event number it 
+		\end{itemize}
+		\item Clear Event Logger: pass in the ascii value ‘C’ or ‘c’.
+	\end{itemize}
+	\item .OT1(): Returns a dictionary containing the status of output pins (Charger pin, heater, bat. low, buzzer, chg. ind.)
+	\item .PW1(request, password): Check the admin status with PW1(‘?’). Log into BMS system with PW1(‘P’, password). Logout with PW1().
+	\item .PW2(request, newPassword): Sets a new password, or clears a password. To set new password, call PW2('S',"mynewpassword"), and substitute “mynewpassword” with whatever password you want. To clear your password, call PW2('C'). Returns true if successful, false if not successful.
+	\item .RC1(): Resets the current sensor reading to zero. Used after current sensor is initially installed.
+	\item .RS1(): Resets the Emus BMS control unit entirely. Like a sudo reboot on a linux machine. Re-quires admin clearance.
+	\item .RS2(): This sentence is used to retrieve the reset source history log.
+	\item .SC1(percentage): This sentence sets the current state of the charge of the battery in %. Send in an integer from 0 to 100. This method will convert to hexadecimal format first. Returns False if not successful or invalid percentage is passed. Returns True if successful.
+	\item .SS1(request, statisticIdentifier): This sentence can either: Request All Statistics, Request a Specific Statistic (pass in a number), or Clear all unprotected statistics.
+	\begin{itemize}
+		\item Request All Statistics: call SS1(‘?’). This will return all statistics the BMS currently has in the form of dictionaries converted from BMSstatistic classes.
+		\item Request a Specific Statistic: call SS1(‘N’, number), where number is a positive integer. Re-turns a dictionary containing a single statistic.
+		\item Clear all unprotected statistics: call SS1(‘c’). 
+	\end{itemize}
+	\item .ST1(): This sentence returns the status of the BMS in dictionary form. It contains these statistics:
+	\begin{itemize}
+		\item Charging flags: charging stage, last charging error, last charging error parameter (for de-bugging purposes), stage duration, 
+		\item Status flags: Valid cell voltages, Valid balancing rates, valid number of live cells, battery charging finished, valid cell temperatures
+		\item Protection flags: undervoltage, overvoltage, discharge overcurrent, charge overcurrent, cell module overheat, leakage, no\_cell\_comm, cell\_overheat
+		\item Power flags: warning: power reduction: low voltage, warning: power reduction: high cur-rent, warning: power reduction: high cell module temperature,  warning: power reduction: high cell temperature
+		\item Pin flags: no\_function, speed\_sensor, fast\_charge\_switch, ign\_key, charger\_mains\_AC\_sense, heater\_enable, sound\_buzzer, battery\_low, charging\_indication, charger\_enable\_output, state\_of\_charge, battery\_contactor, battery\_fan, current\_sensor, leakage\_sensor, power\_reduction, charging\_interlock, analog\_charger\_control, ZVU\_boost\_charge, ZVU\_slow\_charge, ZVU\_buffer\_mode, BMS\_failure, equaliza-tion\_enable, DCDC\_control, ESM\_rectifier\_current\_limit, contactor\_precharge
+	\end{itemize}
+	\item .TD1(): Returns time and date according the BMS in dictionary form. Returns year, month, day, hour, minute, second, and the amount of uptime the unit has in seconds.
+	\item .TC2(): Used to calibrate cell temperature by a PC, not a microcontroller.
+	\item .DumpToJSONfile(outfile): Calls all data methods listed above, then dumps all data returned into an outfile in JSON format.
+\end{itemize}
+Note: Every data harvesting method returns “Cannot communicate to cells” if it fails.
+Private Methods:
+bitAt(bitfield, position): 
+Description:
+Returns True if the bit is 1 at the position of the bitfield, False of 0. Used to analyze bitfields with fewer lines.

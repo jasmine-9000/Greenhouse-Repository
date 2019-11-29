@@ -13,7 +13,7 @@ from flask_login import login_required, login_user, current_user, logout_user
 
 
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 #export our Blueprint as "sensor_nodes".
 sensor_nodes = Blueprint("sensor_nodes", __name__, static_folder='flask_greenhouse/static')
@@ -151,7 +151,7 @@ def sensor_json(username, sensor_name):
 	db.session.commit()
 	return "your data has been received."
 
-# get all data by 
+# get all data by sensor ID number.
 @sensor_nodes.route("/sensors/get-data-by-sensor-id/<int:sensor_id>")
 def get_all_sensor_data(sensor_id):
 	sensor = Sensor.query.filter_by(id=sensor_id).first() # find the sensor in the database by ID number.
@@ -160,11 +160,27 @@ def get_all_sensor_data(sensor_id):
 	#HTML_template = query.toHTML()
 	return render_template("get_all.html", sensor=sensor, dataset=dataset)
 	
+@sensor_nodes.route("/sensors/get-sensor-json-data-by-id/<int:sensor_id>/<string:date>")
+def sensor_id_JSON(sensor_id,date):
+	sensor = Sensor.query.filter_by(id=sensor_id).first() # find the sensor in the database by ID number.
+	dataset = sensor.dataset #SensorDataEntry.query.filter_by(author=sensor).order_by(SensorDataEntry.date_posted.desc())
 	
+	date_requested = datetime.strptime(date, "%M-%d-%Y")
+	
+	for data in dataset:
+		if inRange(data.date_posted,date_requested):
+			return data.JSON_content
+	return "{\"lux\": 1234}"
 	
 		
 	
-	
+def inRange(date_posted, date_requested, interval=timedelta(minutes=10)):
+	if date_requested > (date_posted + interval):
+		return True
+	elif date_requested < (date_posted - interval):
+		return True
+	else:
+		return False 
 	
 	
 	

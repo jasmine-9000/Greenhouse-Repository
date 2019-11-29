@@ -1,0 +1,39 @@
+\end{subfigure}
+	\begin{subfigure}{.25\textwidth}
+		\includegraphics{./ms_9.png}
+	\end{subfigure}
+\end{figure}
+asdfaos;dfas;dfj
+\begin{figure}
+	
+	\begin{subfigure}{.5\textwidth}
+		\includegraphics{./ms_10.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_11.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_12.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_13.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_14.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_15.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_16.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_17.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_18.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+  		\includegraphics{./ms_19.png}
+	\end{subfigure}
+\end{figure}

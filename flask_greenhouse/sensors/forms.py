@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 
-from wtforms.validators import DataRequired, ValidationError, EqualTo, Email
+from wtforms.validators import DataRequired, ValidationError, EqualTo, Email, NumberRange
 from wtforms_components import DateTimeField, DateRange
 from wtforms_sqlalchemy.fields import QuerySelectField
 
@@ -54,7 +54,7 @@ class SensorRequestForm(FlaskForm):
 	#https://stackoverflow.com/questions/46921823/dynamic-choices-wtforms-flask-selectfield
 	start_date = DateTimeLocalField('Start Date', default=datetime.now())
 	end_date = DateTimeLocalField('End Date', default=datetime.now())
-	interval = IntegerField('Time Interval')
+	interval = IntegerField('Time Interval', default=10, validators=[DataRequired(), NumberRange(10,1000)])
 	def validate_interval(form, interval):	# custom validators must be named "validate_<name of variable>".
 		if (interval.data % 10): 
 			raise ValidationError("Values must be a multiple of 10.")
