@@ -1,6 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
 	<h1> Sensor Data Request Form </h1>
+	<script>
+	// make default dates to now.
+	window.addEventListener("load", function() {
+		var now = new Date();
+		var utcString = now.toISOString().substring(0,19);
+		var year = now.getFullYear();
+		var month = now.getMonth() + 1;
+		var day = now.getDate();
+		var hour = now.getHours();
+		var minute = now.getMinutes();
+		var second = now.getSeconds();
+		var localDatetime = year + "-" +
+						  (month < 10 ? "0" + month.toString() : month) + "-" +
+						  (day < 10 ? "0" + day.toString() : day) + "T" +
+						  (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+						  (minute < 10 ? "0" + minute.toString() : minute);
+		//console.log(localDatetime);
+		//console.log(utcString.substring(16,19));
+		var datetimeField = document.getElementById("{{ form.start_date.id }}");
+		datetimeField.value = localDatetime;
+		var datetimeField2 = document.getElementById("{{ form.end_date.id }}");
+		datetimeField2.value = localDatetime;
+	});
+	</script>
 	<form method="POST" onsubmit="return ChartIt()">
 		{{ form.csrf_token }}
 		<legend class="border-bottom mb-4">Request Sensor data (graph)</legend>
@@ -36,20 +60,41 @@
 
 	<script>
 		function ChartIt() {
-			// sensor data
-			var sensors_owned = document.getElementById("{{ form.sensors_owned.id }}");
-			var username = "{{ current_user.username }}"; //console.log("{{ current_user.username }}");
-
+			// sensor data from elements retreival
+			var sensors_owned_element = document.getElementById("{{ form.sensors_owned.id }}");
 			// range data
-			var start_date = document.getElementById("{{ form.start_date.id }}");
-			var end_date = document.getElementById("{{ form.end_date.id}}");
-			var interval = document.getElementById("{{ form.interval.id}}");
-			alert("HELLO WORLD");
-			console.log(start_date.value);
+			var start_date_element = document.getElementById("{{ form.start_date.id }}");
+			var end_date_element = document.getElementById("{{ form.end_date.id}}");
+			var interval_element = document.getElementById("{{ form.interval.id}}");
+			alert("Hello, " + username);
+			
+			// extract values
+			var username = "{{ current_user.username }}";
+			var start_date = start_date_element.value;
+			var end_date = end_date_element.value;
+			var interval = interval_element.value;
+			var sensors_owned = sensors_owned_element.value;
+			// log them to the console.
+			console.log(start_date);
 			console.log(end_date);
 			console.log(interval);
+			console.log(sensors_owned);
+			var sensor_id = sensors_owned.value;  // database id of the sensor number you want. 
+			var base_URL = "{{ url_for('sensor_nodes.sensor_id_JSON', sensor_id=-1, date='<d>') }}"
+			var promises = [];
+			var dates = [];
+			
+			while(start_date < end_date) {
+				dates.push(start_date);
+				console.log(start_date);
+				start_date = start_date + interval;
+			}
+			console.log(dates);
+				
+			
 			return false;
 		}
+		
 	</script>
 	<div id='chart'>
 	
