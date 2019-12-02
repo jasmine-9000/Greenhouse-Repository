@@ -1,0 +1,139 @@
+
+// old setup_graph code.
+
+async function setup_graph(baseURL) {
+	// $("BMS_form").serializeArray();
+	// retrieve form contents
+	var form = document.getElementById("BMS_form");
+	let start = parseYMDHM(form["startdate"].value);
+	let end = parseYMDHM(form["enddate"].value);
+	let interval = form["interval"].value;
+
+	// interval validation
+	// default interval value if none provided.	
+	console.log("Interval before validation: " + interval);
+	if (interval == null || interval == "") { 
+		interval = 10; 
+	}
+	else if (interval % 10) {
+		if (interval < 10) {
+			interval = 10
+		} else {
+			interval = Math.floor(interval / 10);
+		}
+	}
+	console.log("Interval after validation: " + interval);
+	// retrieve graph metadata from form.
+	let trace_name = form["units"].value;
+	let x_title = form["xaxistitle"].value;
+	let y_title = form["yaxistitle"].value;
+	let main_title = form["title"].value;
+	
+	// log form contents.
+	console.log("Start Date: " + start);
+	console.log("End Date: " + end);
+	console.log("Interval: " + interval);
+	console.log("Trace Name: " + trace_name);
+	console.log("X Title: " + x_title);
+	console.log("Y Title: " + y_title);
+	console.log("Main Title: " + main_title);
+	
+	/*
+	// Generate All Dates required.
+	let dates = [start];
+	while(start < end) {
+		start = addMinutes(start, interval);
+		dates.push(start);
+	}
+	*/
+	// Retrieve Graph Data
+	let allData = await RetrieveAllData( start,  
+										end, 
+										interval, 
+										'battery', 
+										baseURL)
+	// Log data retrieved.
+	console.log("Data Retrived: ");
+	console.log(allData);
+	
+	// Create data dictionary out of form data.
+	let data = {};
+	data["title"] = main_title;
+	data["x title"] = x_title;
+	data["y title"] = y_title;
+	data["trace name"] = trace_name;
+	data["interval"] = interval;
+	data["start date"] = start;
+	data["end date"] = end;
+	data["x values"] = allData["x"];
+	data["y values"] = allData["y"];
+	console.log(data);
+	
+	// Chart the graph using the ChartIt() method created earlier.
+	ChartIt(data);
+	return false;
+}	
+
+
+
+
+
+
+
+// based on form contents, retrieve data from database from the Base URL provided by the website.
+// RetrieveData() calls the fetch() method. It returns a promise, so you use the await keyword to wait until it is done fetching.
+
+
+async function RetrieveAllData(start, end, interval, parameter, baseURL) {
+	let data = {}; // return value. will contain "x" and "y".
+	
+	let dates = [];
+	let y_values = [];
+	console.log("Start: ");
+	console.log(start);
+	console.log("End: ");
+	console.log(end);
+
+	while(dateLessThan(start, end)) {
+		dates.push(start);
+		console.log(start);
+		start = addMinutes(start, interval);
+		console.log(start);
+	}
+	// console.log(returnURL(baseURL, DateFormatter("10-31-2019", "baby")));
+	
+	// map all dates to the fetch function.
+	// fetch them to 
+	// baseURL has these elements replaced:
+	// <date> => date_item instance
+	// <parameter> => parameter requested.
+	
+	// requests variable turns into a list of promises. 
+	let requests = dates.map(date_item => fetch( returnURL(baseURL, DateFormatter(date_item), parameter ) ) );
+	console.log("Dates: ");
+	console.log(dates);
+	console.log("Requests: ");
+	console.log(requests);
+	
+	// resolve all Promises in requests[].
+	// Then, after those promises resolve, map all of the response's JSON values.
+	// Then, after the JSON values have been retrieved, push them all to the y_values variable.
+	//
+	Promise.all(requests).then(responses => {
+		for(let response of responses) {
+		 console.log(`${response.url}: ${response.status}`); // shows 200 for every url
+		}
+		return responses;
+	})
+	.then(responses => Promise.all(responses.map(r => r.json() )))
+	.then(values => values.forEach(value => {
+		y_values.push(value["x"])
+		console.log(value);
+	}
+	));
+	data["x"] = dates;
+	data["y"] = y_values;
+	console.log(data);
+	return data;
+}
+

@@ -4,10 +4,10 @@
 // Character Translation from Python strings to HTML using the Jinja2 template engine is weird.
 
 */
-var parameter_placeholder = "%3Cparameter%3E";
+var sensor_id_placeholder = "-1";
 var date_placeholder = "%3Cdate%3E";
-function returnURL(baseURL, date, parameter ) {
-	return baseURL.replace(date_placeholder, date).replace(parameter_placeholder, parameter);
+function returnURL(baseURL, sensor_id, date ) {
+	return baseURL.replace(date_placeholder, date).replace(sensor_id_placeholder, sensor_id);
 }
 
 /*
@@ -82,18 +82,19 @@ function dateLessThan(start, end) {
 */
 
 $(function() {
-	var absolute_localhost_URL = "http://localhost/sensors/get-sensor-json-data-by-id/1/10-31-2019";
-	var sensorBaseURL = "http://localhost/sensors/get-sensor-json-data-by-id/<sensor_id>/<date>";
-	var BMSBaseURL = $('#BMS_form').data('base_url');// on a local machine, it's http://localhost/BMS/date/<date>/<parameter>
+	var SensorBaseURL = $('#sensor_form').data('base_url'); // retrieve the data-* parameter that was added in HTML5. Ours is data-base_url. 
+															// the templating engine won't let us pass a variable directly into the JS file.
+	console.log("Base URL: ", SensorBaseURL);
 	
-	
-	$('#BMS_form').on('submit', function() {
-		// retrieve dates
-		console.log($('#startdate').val());
-		let start = parseYMDHM($("#startdate").val());
-		let end = parseYMDHM($("#enddate").val());
+	// add jQuery event listener. On Submit, it will extrapolate data from the form,
+	// request data from the server, and Chart thhat data
+	$('#sensor_form').on('submit', function() {
+		// retrieve dates from form.
+		let start = parseYMDHM($("#start_date").val());
+		let end = parseYMDHM($("#end_date").val());
 		let interval = $("#interval").val();
-		let dates = [];
+	
+		// interval validation
 		if (interval == null || interval == "") { 
 			interval = 10; 
 		}
@@ -104,36 +105,44 @@ $(function() {
 				interval = Math.floor(interval / 10);
 			}
 		}
-		
+		// Generate all dates from start to end date in interval steps.
+		let dates = [];
 		while(dateLessThan(start, end)) {
 			dates.push(start);
 			start = addMinutes(start, interval);
 		}
 		
-		// parameter to graph.
-		let parameter = $('#units').val()
+		// sensor_id to retrieve JSON data from.
+		let sensor_id = $('#sensors_owned').val()
 		// graph metadata
-		let trace_name = $("#units").val();
+		let trace_name = 'lux' //$("#units").val();
 		let x_title = $("#xaxistitle").val();
 		let y_title = $("#yaxistitle").val();
 		let main_title = $("#title").val();
 		
-		var URL_list = dates.map(date => returnURL(BMSBaseURL, DateFormatter(date), parameter ));
+		// generate all URLs from the dates variable, using the Sensor Base URL, and replacing -1 with sensor id, and <date> with the date for each date you want.
+		var URL_list = dates.map(date => returnURL(SensorBaseURL, sensor_id, DateFormatter(date) ));
 		console.log(URL_list);
+		
+		// retrieve data from each URL. For each URL, process the data, and push it into the graph.
 		let y_values = [];
 		URL_list.forEach(URL => {
 			$.ajax({
+				dataType: "json",
 				type: "GET",
-				url: URL, 
+				url: URL,
 				success: function(data) {
+					data = JSON.parse(data);
 					console.log(data);
-					y_values.push(data);
+					console.log(data["lux"]);
+					y_values.push(data["lux"]);
 				},
 				error: function() {
 					console.log("Error loading data.");
 				}
 			});
 		})
+		// create a dictionary containing all of our data to plot in ChartIt() later.
 		let data = {};
 		data["title"] = main_title;
 		data["x title"] = x_title;
@@ -186,3 +195,41 @@ https://stackoverflow.com/questions/2276463/how-can-i-get-form-data-with-javascr
 
 https://stackoverflow.com/questions/24356638/converting-to-a-date-object-from-a-datetime-local-element
 */
+
+function ccchartIt() {
+	// sensor data from elements retreival
+	var sensors_owned_element = document.getElementById("{{ form.sensors_owned.id }}");
+	// range data
+	var start_date_element = document.getElementById("{{ form.start_date.id }}");
+	var end_date_element = document.getElementById("{{ form.end_date.id}}");
+	var interval_element = document.getElementById("{{ form.interval.id}}");
+	alert("Hello, " + username);
+	
+	// extract values
+	var username = "{{ current_user.username }}";
+	var start_date = start_date_element.value;
+	var end_date = end_date_element.value;
+	var interval = interval_element.value;
+	var sensors_owned = sensors_owned_element.value;
+	// log them to the console.
+	console.log(start_date);
+	console.log(end_date);
+	console.log(interval);
+	console.log(sensors_owned);
+	var sensor_id = sensors_owned.value;  // database id of the sensor number you want. 
+	var base_URL = "{{ url_for('sensor_nodes.sensor_id_JSON', sensor_id=-1, date='<d>') }}"
+	var promises = [];
+	var dates = [];
+	
+	while(start_date < end_date) {
+		dates.push(start_date);
+		console.log(start_date);
+		start_date = start_date + interval;
+	}
+	console.log(dates);
+		
+	
+	return false;
+}
+
+		

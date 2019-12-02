@@ -165,12 +165,13 @@ def sensor_id_JSON(sensor_id,date):
 	sensor = Sensor.query.filter_by(id=sensor_id).first() # find the sensor in the database by ID number.
 	dataset = sensor.dataset #SensorDataEntry.query.filter_by(author=sensor).order_by(SensorDataEntry.date_posted.desc())
 	
-	date_requested = datetime.strptime(date, "%M-%d-%Y")
+	# date_requested = datetime.strptime(date, "%M-%d-%Y")
+	date_requested = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
 	
 	for data in dataset:
 		if inRange(data.date_posted,date_requested):
 			return data.JSON_content
-	return "{\"lux\": 1234}"
+	return jsonify("{\"lux\": 1234}")
 	
 		
 	

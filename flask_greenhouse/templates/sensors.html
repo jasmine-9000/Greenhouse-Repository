@@ -25,7 +25,7 @@
 		datetimeField2.value = localDatetime;
 	});
 	</script>
-	<form method="POST" onsubmit="return ChartIt()">
+	<form method="POST" id="sensor_form" data-BASE_URL="{{ url_for('sensor_nodes.sensor_id_JSON', sensor_id=-1, date='<date>') }}", onsubmit="return false">
 		{{ form.csrf_token }}
 		<legend class="border-bottom mb-4">Request Sensor data (graph)</legend>
 			<div class="form-group">
@@ -46,56 +46,30 @@
 			{{ form.interval }}
 			<small class="form-text text-muted">Interval must be a multiple of 10 minutes.</small>
 			</div>
+			<div class="form-group">
+			{{ form.x_axis.label }}
+			{{ form.x_axis }}
+			</div>
+			<div class="form-group">
+			{{ form.y_axis.label }}
+			{{ form.y_axis }}
+			</div>
+			<div class="form-group">
+			{{ form.title.label }}
+			{{ form.title }}
+			</div>
 			{{ form.submit }}
 	</form>
-	<div id="display_data">
-		{% if graph %}
-			<img src = "{{ url_for('static', filename='graphs/' + graph) }} " />
-		{% endif %}
+	<div id="chart">
 	</div>
+	<!-- we're keeping a local copy of plotly-latest for faster load speeds.-->
+	<script src="{{ url_for('static', filename='plotly-latest.min.js') }}"> </script>
 	Don't see your sensor listed? <a href="{{ url_for('sensor_nodes.register_sensor') }}">Register a sensor.</a>
 	<br >
 	Don't see anything at all? Please report this page to the webmaster.
 	<a href="{{ url_for('sensor_nodes.user_login') }}">Here's the login form just in case.</a>
 
-	<script>
-		function ChartIt() {
-			// sensor data from elements retreival
-			var sensors_owned_element = document.getElementById("{{ form.sensors_owned.id }}");
-			// range data
-			var start_date_element = document.getElementById("{{ form.start_date.id }}");
-			var end_date_element = document.getElementById("{{ form.end_date.id}}");
-			var interval_element = document.getElementById("{{ form.interval.id}}");
-			alert("Hello, " + username);
-			
-			// extract values
-			var username = "{{ current_user.username }}";
-			var start_date = start_date_element.value;
-			var end_date = end_date_element.value;
-			var interval = interval_element.value;
-			var sensors_owned = sensors_owned_element.value;
-			// log them to the console.
-			console.log(start_date);
-			console.log(end_date);
-			console.log(interval);
-			console.log(sensors_owned);
-			var sensor_id = sensors_owned.value;  // database id of the sensor number you want. 
-			var base_URL = "{{ url_for('sensor_nodes.sensor_id_JSON', sensor_id=-1, date='<d>') }}"
-			var promises = [];
-			var dates = [];
-			
-			while(start_date < end_date) {
-				dates.push(start_date);
-				console.log(start_date);
-				start_date = start_date + interval;
-			}
-			console.log(dates);
-				
-			
-			return false;
-		}
-		
-	</script>
+	<script src="{{ url_for('static', filename='sensor_graph_loader.js') }} "> </script>
 	<div id='chart'>
 	
 	</div>

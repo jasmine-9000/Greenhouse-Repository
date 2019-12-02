@@ -55,6 +55,10 @@ class SensorRequestForm(FlaskForm):
 	start_date = DateTimeLocalField('Start Date', default=datetime.now())
 	end_date = DateTimeLocalField('End Date', default=datetime.now())
 	interval = IntegerField('Time Interval', default=10, validators=[DataRequired(), NumberRange(10,1000)])
+	title = StringField('Title');
+	x_axis = StringField('X axis')
+	y_axis = StringField('Y axis')
+	
 	def validate_interval(form, interval):	# custom validators must be named "validate_<name of variable>".
 		if (interval.data % 10): 
 			raise ValidationError("Values must be a multiple of 10.")

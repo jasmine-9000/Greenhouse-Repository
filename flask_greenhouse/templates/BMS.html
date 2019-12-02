@@ -20,15 +20,15 @@
 						  (month < 10 ? "0" + month.toString() : month) + "-" +
 						  (day < 10 ? "0" + day.toString() : day) + "T" +
 						  (hour < 10 ? "0" + hour.toString() : hour) + ":" +
-						  (minute < 10 ? "0" + minute.toString() : minute) +
-						  utcString.substring(16,19);
+						  (minute < 10 ? "0" + minute.toString() : minute);
+						  //utcString.substring(16,19);
 		var datetimeField = document.getElementById("startdate");
 		datetimeField.value = localDatetime;
 		var datetimeField2 = document.getElementById("enddate");
 		datetimeField2.value = localDatetime;
 	});
 	</script>
-	<form action="#" id="BMS_form">
+	<form action="#" id="BMS_form" data-BASE_URL="{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}">
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<label for="startdate">Start Date</label>
@@ -96,11 +96,11 @@
 					<input type="checkbox" name="logarithmic" id="logarithmic">
 				</div>
 			</div>
-			<!--
-				<input type="submit" value="Request Graph">  
+			
+			<input type="submit" value="Request Graph">  
 				This element will break the webpage.
-			-->
-			<button type="button" onclick="return setup_graph(BMS_URL);">Submit</button>
+			
+			<button type="button" <!-- onclick="return setup_graph(BMS_URL);" -->>Submit</button>
 		</form>
 		
 	</form>
