@@ -83,7 +83,7 @@ marker_options = [(".", "point"),
 class Date_Form(FlaskForm):
 	
 	# type of data to be graphed 
-	y_axis = SelectField('Value', choices = bms_options, default="battery_charge")
+	units = SelectField('Units', choices = bms_options, default="battery_charge")
 	
 	#from what date
 	start_date= DateTimeLocalField('Start Date', format='%Y-%m-%dT%H:%M', default=datetime.today())

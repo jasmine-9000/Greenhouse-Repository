@@ -13,7 +13,8 @@ bms = Blueprint("bms", __name__, static_folder='flask_greenhouse/static')
 
 @bms.route("/BMS", methods=["POST", "GET"])
 def BMS_JS():
-	return render_template("BMS.html", title="JS BMS data loader")
+	form = Date_Form()
+	return render_template("BMS.html", title="JS BMS data loader", form=form)
 
 @bms.route("/BMS/serverside", methods=["POST", "GET"])
 def BMS():

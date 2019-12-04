@@ -23,38 +23,34 @@
 						  (hour < 10 ? "0" + hour.toString() : hour) + ":" +
 						  (minute < 10 ? "0" + minute.toString() : minute);
 						  //utcString.substring(16,19);
-		var datetimeField = document.getElementById("startdate");
+		var datetimeField = document.getElementById("start_date");
 		datetimeField.value = localDatetime;
-		var datetimeField2 = document.getElementById("enddate");
+		var datetimeField2 = document.getElementById("end_date");
 		datetimeField2.value = localDatetime;
 	});
 	</script>
 	<form action="#" id="BMS_form" data-BASE_URL="{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}", data-MULTI_BASE_URL="{{ url_for('bms.BMS_multi_data_retrieval', start_date='<start_date>', end_date='<end_date>', interval=5555, parameter='<parameter>') }}">
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-					<label for="startdate">Start Date</label>
-					<input type="datetime-local" id="startdate" value="Today">
+					{{ form.start_date.label }}
+					{{ form.start_date }}
 					<small class="form-text text-muted">Start date must be before 10/12/2019</small>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-					<label for="enddate">End Date</label>
-					<input type="datetime-local" id="enddate">
+					{{ form.end_date.label }}
+					{{ form.end_date }}
 					<small class="form-text text-muted">Start date must be before end date.</small>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-					<label for="interval">Interval (minutes)</label>
-					<input type="text" id="interval">
+					{{ form.interval.label }}
+					{{ form.interval }}
 					<small class="form-text text-muted">Interval must be a multiple of 10 minutes.</small>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="units">Units</label><br />
-				<select name="units" id="units">
-					<option value="bat_charge">Battery Charge</option>
-					<option value="pv_voltage">PV voltage</option>
-					<option value="pv_current">PV current</option>
-					<option value="bat_voltage">Battery Voltage</option>
-				</select>
+				{{ form.units.label }}
+				{{ form.units }}
+				
 			</div>	
 			<div class="form-group">
 				<label for="title">Title</label><br />

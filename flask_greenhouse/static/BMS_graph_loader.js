@@ -115,8 +115,8 @@ $(function() {
 	$('#BMS_form').on('submit', function() {
 		// retrieve dates
 		console.log($('#startdate').val());
-		let start = parseYMDHM($("#startdate").val());
-		let end = parseYMDHM($("#enddate").val());
+		let start = parseYMDHM($("#start_date").val());
+		let end = parseYMDHM($("#end_date").val());
 		let interval = $("#interval").val();
 		let dates = [];
 		// parameter to graph.
@@ -140,8 +140,10 @@ $(function() {
 		}
 		let x_values = [];
 		let y_values = [];
+		let data = {};
 		
 		// data retrieval.
+		// data retrieval must be successful to chart things.
 		var URL = MultiReturnURL(MultiBMSBaseURL, DateFormatter(start), DateFormatter(end), interval, parameter);
 		$.ajax({
 			type: "GET",
@@ -156,6 +158,17 @@ $(function() {
 						y_values.push(y[key]); // the y_values must have the values (data points)
 					}
 				}
+				data["title"] = main_title;
+				data["x title"] = x_title;
+				data["y title"] = y_title;
+				data["trace name"] = trace_name;
+				data["interval"] = interval;
+				data["start date"] = start;
+				data["end date"] = end;
+				data["x values"] = x_values;
+				data["y values"] = y_values;
+				
+				ChartIt(data, 'chart');
 			},
 			error: function() {
 				console.log("Error retrieving data");
@@ -184,24 +197,15 @@ $(function() {
 		})
 		*/
 		
-		let data = {};
-		data["title"] = main_title;
-		data["x title"] = x_title;
-		data["y title"] = y_title;
-		data["trace name"] = trace_name;
-		data["interval"] = interval;
-		data["start date"] = start;
-		data["end date"] = end;
-		data["x values"] = x_values;
-		data["y values"] = y_values;
-		ChartIt(data, 'chart');
-		ChartIt(data, 'chart');
+		
+		
 		console.log(data);
 		return false;
 	});
 });
 
 function ChartIt(data, div_id) {
+	console.log("Data Passed to ChartIt(): ", data);
 	var trace = {
 		x: data["x values"],
 		y: data["y values"],
