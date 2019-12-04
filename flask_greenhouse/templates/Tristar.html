@@ -2,35 +2,108 @@
 
 
 {% block content %}
-	<form method="POST" action="">
-		{{ form.hidden_tag() }} 
-		<fieldset class="form-group"> 
-			<legend class="border-bottom mb-4">Request Tristar Graph Data</legend>
-				<div class="form-group"> 
-					{{ form.start_date.label(class="form-control-label") }}
-					
-					{% if form.start_date.errors %}
-						{{ form.start_date(class="form-control form-control-lg is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.start_date.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.start_date(class="form-control form-control-lg") }}
-					{% endif %}
+	<script>
+	// logging the BMS URL here. 
+	const BMS_URL = "{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}";
+	console.log("URL TO MAKE REQUESTS TO \(UNFORMATTED\):" + BMS_URL);
+	
+	// make default dates to now.
+	window.addEventListener("load", function() {
+		var now = new Date();
+		var utcString = now.toISOString().substring(0,19);
+		var year = now.getFullYear();
+		var month = now.getMonth() + 1;
+		var day = now.getDate();
+		var hour = now.getHours();
+		var minute = now.getMinutes();
+		var second = now.getSeconds();
+		var localDatetime = year + "-" +
+						  (month < 10 ? "0" + month.toString() : month) + "-" +
+						  (day < 10 ? "0" + day.toString() : day) + "T" +
+						  (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+						  (minute < 10 ? "0" + minute.toString() : minute);
+						  //utcString.substring(16,19);
+		var datetimeField = document.getElementById("start_date");
+		datetimeField.value = localDatetime;
+		var datetimeField2 = document.getElementById("end_date");
+		datetimeField2.value = localDatetime;
+	});
+	</script>
+	<h1>Request Tristar Data</h1>
+	<form action="#" id="BMS_form" data-BASE_URL="{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}", data-MULTI_BASE_URL="{{ url_for('bms.BMS_multi_data_retrieval', start_date='<start_date>', end_date='<end_date>', interval=5555, parameter='<parameter>') }}">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					{{ form.start_date.label }}
+					{{ form.start_date }}
+					<small class="form-text text-muted">Start date must be before 10/12/2019</small>
 				</div>
-		</fieldset>
-		<div class="form-group">
-			{{ form.submit(class="btn btn-outline-info") }}
-		</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					{{ form.end_date.label }}
+					{{ form.end_date }}
+					<small class="form-text text-muted">Start date must be before end date.</small>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					{{ form.interval.label }}
+					{{ form.interval }}
+					<small class="form-text text-muted">Interval must be a multiple of 10 minutes.</small>
+				</div>
+			</div>
+			<div class="form-group">
+				{{ form.units.label }}
+				{{ form.units }}
+				
+			</div>	
+			<div class="form-group">
+				<label for="title">Title</label><br />
+				<input type="text" name="title" id="title" value="Untitled Graph">
+			</div>
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<label for="xaxistitle">X-axis title</label><br />
+					<input type="text" name="xaxistitle" id="xaxistitle">
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<label for="yaxistitle">Y-axis title</label><br />
+					<input type="text" name="yaxistitle" id="yaxistitle">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+					<label for="font_family">Font Family</label><br />
+					<select name="font_family" id="style">
+						<option value="Courier New">Courier New</option>
+						<option value="Serif">Serif</option>
+						<option value="Sans Serif">Sans Serif</option>
+					</select>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+					<label for="marker">Marker</label><br />
+					<select name="marker" id="marker">
+						<option value="fivethirtyeight">No Marker</option>
+						<option value="classic">Star</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="tightlayout">Tight Layout</label>
+					<input type="checkbox" name="tightlayout" id="tightlayout">
+				</div>
+				<div class="col">
+					<label for="logarithmic">Y-axis Logarithmic Scale</label>
+					<input type="checkbox" name="logarithmic" id="logarithmic">
+				</div>
+			</div>
+			
+			<input type="submit" value="Request Graph">  
+		</form>
 		
 	</form>
 	<a href = {{ url_for('tristar.ViewInstantaneous')}}>See Instantaneous Values</a><br />
 	<a href = {{ url_for('tristar.ViewDailyValues')}}>See Yesterday's Daily Logger Values</a><br />
 	<a href = {{ url_for('tristar.ViewChargeSettings')}}>See Charge Settings</a><br />
 	
-	<div id="display_data">
+	<div id="chart">
 	
 	</div>
 {% endblock %}

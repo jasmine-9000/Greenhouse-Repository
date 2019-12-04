@@ -158,28 +158,30 @@ def BMS_data_retrieval(date, parameter):
 		
 	"""
 	global i
-	#####print(date)
+	# parse the input datestring. strptime() should do the trick.
 	datetime_from_JS = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
-	#####print(datetime_from_JS)
-	#####print(parameter)
-	# Search for BMS entries with a buffer of 10 minutes
+	# Search for BMS entries with a buffer of 30 seconds.
 	entry = BMSDataentry.query \
 			.filter( BMSDataentry.date_posted \
 				.between(datetime_from_JS - timedelta(seconds=30), 
 						 datetime_from_JS + timedelta(minutes=30)))\
 				.first_or_404()
+	# extract final entry date, JSON dictionary, and value. 
 	final_entry_date = entry.date_posted
-	j = entry.JSON_content
-	return j
-	
-	#####print(entry)
+	dict = entry.JSON_content
+	value = None
+	try:
+		value = dictionary_translation(dict, parameter)
+	except:
+		parameter = "error"
+		value = None
 	JSON_response = {
 		
 		"date": final_entry_date.strftime("%Y-%m-%d %H:%M:%S"),
 		"parameter": parameter,
-		"value": i
+		"value": value
 	}
-	i += 1
+
 	return jsonify(JSON_response)
 	
 @bms.route("/BMS/api/<string:start_date>/<string:end_date>/<int:interval>/<string:parameter>", methods=["GET"])
@@ -206,8 +208,6 @@ def BMS_multi_data_retrieval(start_date, end_date, interval, parameter):
 				}
 			}
 	"""
-	
-	global i
 	# extrapolate dates from start, end, and interval.
 	s = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
 	e = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
@@ -219,12 +219,67 @@ def BMS_multi_data_retrieval(start_date, end_date, interval, parameter):
 	# retrieve data from database based on date for all dates.
 	data = {}
 	for date in dates:
-		data[date.strftime("%Y-%m-%d %H:%M:%S")] = i
-		i += 1
-	
+		value = None
+		entry = BMSDataentry.query \
+			.filter( BMSDataentry.date_posted \
+				.between(date - timedelta(minutes=10), 
+						 date + timedelta(minutes=10)))\
+				.first()
+		# once the entry is retrieved, (if there's an entry), extract the JSON content, 
+		# try to find the parameter using dictionary translation, then if it's found, add it to the dataset.
+		try:
+			dict = entry.JSON_content
+			value = dictionary_translation(dict, parameter)
+			data[date.strftime("%Y-%m-%d %H:%M:%S")] = value
+		except:
+			pass
 	# construct JSON response. 
 	JSON_response = {
 		"parameter": parameter,
 		"data": data
 	}
 	return jsonify(JSON_response)
+	
+def dictionary_translation(dict, parameter):
+	if parameter == "average_cell_voltage":
+		value = dict["BatteryVoltageSummary"]["average cell voltage"]
+	elif parameter == 'maximum_cell_voltage':
+		value = dict["BatteryVoltageSummary"]["maximum cell voltage"]
+	elif parameter == 'minimum_cell_voltage':
+		value = dict["BatteryVoltageSummary"]["minimum cell voltage"]
+	elif parameter == 'total_voltage':
+		value = dict["CurrentAndVoltage"]["total voltage"]["value"]
+	elif parameter == 'total_current':
+		value = dict["CurrentAndVoltage"]["total current"]["value"]
+	elif parameter == 'a_current':
+		value = dict["CurrentAndVoltage"]["total current"]["value"]
+
+			# Balancing Rate Choices
+	elif parameter == 'a_cell_b_rate':
+		value = dict["Battery Balancing Rate Summary"]['average cell balancing rate']
+			# Temperature Data Choices
+	elif parameter == 'a_cell_temperature':
+		value = dict['Average Cell Temperature']
+	elif parameter == 'max_cell_temperature':
+		value = dict['Maximum Cell Temperature']
+	elif parameter == 'min_cell_temperature':
+		value = dict['Minimum Cell Temperature']
+	elif parameter == 'a_cell_m_temperature':
+		value = dict['Average Cell Module Temperature']
+	elif parameter == 'max_cell_m_temperature':
+		value = dict['Maximum Cell Module Temperature']
+	elif parameter == 'min_cell_m_temperature':
+		value = dict['Minimum Cell Module Temperature']
+			
+			# Battery Charge Data
+	elif parameter == 'battery_capacity':
+		value = dict['Battery Charge']['battery capacity']
+	elif parameter == 'battery_charge':
+		value = dict['Battery Charge']['battery charge']
+	elif parameter == 'state_of_charge':
+		value = dict['Battery Charge']['state of charge']
+			
+			# Miscellaneous
+	elif parameter == 'test':
+		value = dict['Test Option (don\'t pick this one)']
+	return value

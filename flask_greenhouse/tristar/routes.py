@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-from flask_greenhouse.forms import Date_Form
+from flask_greenhouse.forms import Tristar_Form
 
 import json
 tristar = Blueprint("tristar", __name__)
@@ -8,7 +8,7 @@ tristar = Blueprint("tristar", __name__)
 
 @tristar.route("/Tristar", methods=["POST", "GET"])
 def Tristar():
-	form = Date_Form()
+	form = Tristar_Form()
 	return render_template('Tristar.html', title="Tristar Data", form=form)
 
 # navigate to http://<hostname>/Tristar/ChargeSettings to view current charge settings.

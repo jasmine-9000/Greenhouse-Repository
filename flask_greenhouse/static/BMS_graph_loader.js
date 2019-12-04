@@ -120,10 +120,10 @@ $(function() {
 		let interval = $("#interval").val();
 		let dates = [];
 		// parameter to graph.
-		let parameter = $('#units').val()
+		let parameter = $('#units option:selected').val()
 		console.log(parameter);
 		// graph metadata
-		let trace_name = $("#units").val();
+		let trace_name = $("#units option:selected").text();
 		let x_title = $("#xaxistitle").val();
 		let y_title = $("#yaxistitle").val();
 		let main_title = $("#title").val();
@@ -151,6 +151,7 @@ $(function() {
 			success: function(d) {
 				console.log(d);
 				y = d["data"];
+				console.log(y);
 				for (var key in y) {
 					if (y.hasOwnProperty(key)) {
 						// skip any dates that don't have their own properties.
@@ -158,6 +159,7 @@ $(function() {
 						y_values.push(y[key]); // the y_values must have the values (data points)
 					}
 				}
+				console.log(y_values);
 				data["title"] = main_title;
 				data["x title"] = x_title;
 				data["y title"] = y_title;
@@ -174,32 +176,6 @@ $(function() {
 				console.log("Error retrieving data");
 			}
 		});
-		/*
-		while(dateLessThan(start, end)) {
-			dates.push(start);
-			start = addMinutes(start, interval);
-		}
-		var URL_list = dates.map(date => returnURL(BMSBaseURL, DateFormatter(date), parameter ));
-		console.log(URL_list);
-		
-		URL_list.forEach(URL => {
-			$.ajax({
-				type: "GET",
-				url: URL, 
-				success: function(data) {
-					console.log(data);
-					y_values.push(data);
-				},
-				error: function() {
-					console.log("Error loading data.");
-				}
-			});
-		})
-		*/
-		
-		
-		
-		console.log(data);
 		return false;
 	});
 });
