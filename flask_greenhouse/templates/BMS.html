@@ -3,6 +3,7 @@
 {% block content %}
 	<h1>Request BMS Data</h1>
 	<script>
+	// logging the BMS URL here. 
 	const BMS_URL = "{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}";
 	console.log("URL TO MAKE REQUESTS TO \(UNFORMATTED\):" + BMS_URL);
 	
@@ -28,7 +29,7 @@
 		datetimeField2.value = localDatetime;
 	});
 	</script>
-	<form action="#" id="BMS_form" data-BASE_URL="{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}">
+	<form action="#" id="BMS_form" data-BASE_URL="{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}", data-MULTI_BASE_URL="{{ url_for('bms.BMS_multi_data_retrieval', start_date='<start_date>', end_date='<end_date>', interval=5555, parameter='<parameter>') }}">
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<label for="startdate">Start Date</label>
@@ -98,9 +99,6 @@
 			</div>
 			
 			<input type="submit" value="Request Graph">  
-				This element will break the webpage.
-			
-			<button type="button" <!-- onclick="return setup_graph(BMS_URL);" -->>Submit</button>
 		</form>
 		
 	</form>

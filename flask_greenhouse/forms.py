@@ -9,12 +9,36 @@ from wtforms.fields.html5 import DateTimeLocalField
 
 # global variables 
 # our options that our BMS can have.
-bms_options = [ ('b_voltage', 'Battery Voltage'),
-			('a_voltage', 'PV array Voltage'),
-			('b_current', 'Battery Current'),
-			('a_current', 'PV array Current'),
-			('battery_charge', 'Battery Charge'),
-			('test', 'Test Option (don\'t pick this one)')]
+bms_options = [ 
+				# Voltage Data
+				('average_cell_voltage', 'Average Cell Voltage'),
+				('maximum_cell_voltage', 'Maximum Cell Voltage'),
+				('minimum_cell_voltage', 'Minimum Cell Voltage'),
+				('total_voltage', 'Total Voltage'),
+				
+				# Current Data
+				('total_current', 'Total Battery Current'),
+				('a_current', 'PV array Current'),
+
+				# Balancing Rate Choices
+				('a_cell_b_rate', 'Average Cell Balancing Rate'),
+				
+				# Temperature Data Choices
+				('a_cell_temperature', 'Average Cell Temperature'),
+				('max_cell_temperature', 'Maximum Cell Temperature'),
+				('min_cell_temperature', 'Minimum Cell Temperature'),
+				('a_cell_m_temperature', 'Average Cell Module Temperature'),
+				('max_cell_m_temperature', 'Maximum Cell Module Temperature'),
+				('min_cell_m_temperature', 'Minimum Cell Module Temperature'),
+				
+				# Battery Charge Data
+				('battery_capacity', 'Battery Capacity'),
+				('battery_charge', 'Battery Charge'),
+				('state_of_charge', 'State of Charge'),
+				
+				# Miscellaneous
+				('test', 'Test Option (don\'t pick this one)')
+			]
 # the ways we can style our Graph
 style_options = [
 			('bmh', "BMH"),
