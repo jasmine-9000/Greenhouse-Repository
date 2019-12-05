@@ -1,4 +1,6 @@
-# imports
+#############################################################################################################################
+#							IMPORTS																							#
+#############################################################################################################################
 from flask_greenhouse import db, admin
 from datetime import datetime
 import json
@@ -9,8 +11,10 @@ from flask_admin.contrib.sqla import ModelView
 
 
 
-# login required models 
-
+ 
+#############################################################################################################################
+#							INHERITABLE MODELS																				#
+#############################################################################################################################
 
 # this class enables JSON storage.
 # it inherits the TypeDecorator class, so we need to redefine process_bind_param and process_result_value.
@@ -33,10 +37,25 @@ class JsonEncodedDict(db.TypeDecorator):
             return {}
         else:
             return json.loads(value)
-			
-			
-# If it's a faculty sensor, name="Admin"
-# if it's a student sensor, name="<name of student>"
+		
+
+#############################################################################################################################		
+# 						LOGIN REQUIRED MODELS																				#
+#############################################################################################################################
+
+#############################################################################################################################
+# 						USER MODEL																							#
+#############################################################################################################################
+
+# username:
+# 	If it's a faculty sensor, name="Admin"
+# 	if it's a student sensor, name="<name of student>"
+# email:
+# 	used for password resets
+# password:
+# 	encrypted using SHA-256 encryption. the login route hashes it against a secret key defined in config.json.
+# sensorlist:
+#	a list of sensors this user has. We are back-referenced by our sensors as 'master'.
 class User(db.Model, UserMixin):
 	__tablename__ = 'User'
 	id = db.Column(db.Integer, primary_key=True)
@@ -47,11 +66,22 @@ class User(db.Model, UserMixin):
 	
 	def __repr__(self):
 		return f"User('{self.username}, '{self.sensorlist}')"
+		
+#############################################################################################################################
+# 						SENSOR MODEL 																						#
+#############################################################################################################################
 
-# This is a Sensor Class.
-
-# Name is the name of the sensor (e.g. VEML7700, light_sensor_1, etc.)
-# units is the name of the unit it measures.
+# Name:
+# 	Name of the sensor (e.g. VEML7700, light_sensor_1, etc.)
+# Units
+#	What unit it measures (e.g. lux, Degrees C)
+# Type:
+# 	What type of sensor is it (e.g. light sensor, temperature sensor, etc.)
+# user_id:
+# 	Who is the master? (e.g. admin: user_id=2)
+# dataset:
+# 	A list of data that this sensor produced.
+# 	We are back-referenced by each entry as 'author'
 class Sensor(db.Model):
 	__tablename__ = 'Sensor'
 	id = db.Column(db.Integer, primary_key=True)
@@ -67,11 +97,14 @@ class Sensor(db.Model):
 	def __repr__(self): # how we print this out on the console:
 		#return f"{self.name}: {self.type}({self.units}), owned by {self.master.username}, id {self.id}"
 		return self.name
+#############################################################################################################################
+#			SENSOR DATA ENTRY CLASS																							#
+#############################################################################################################################
 
-# this is a Sensor Data Entry Class.
 # Every Sensor Data Entry is attached to a Sensor class (i.e. every piece of data has to be produced by a physical sensor)
 # Each Sensor Data Entry has a date received by server, and the JSON content it received. 
-# we can process it as necessary.
+# Will be processed as necessary by the front-end.
+
 class SensorDataEntry(db.Model):
 	id = db.Column(db.Integer, primary_key=True) #the id number of the entry itself.
 	date_posted = db.Column(db.DateTime(100), nullable=False, default=datetime.utcnow())  # the date when it came.
@@ -83,11 +116,34 @@ class SensorDataEntry(db.Model):
 	def __repr__(self): # how do we print this to the console?
 		return f"{self.author} at {self.date_posted}: {self.JSON_content}"
 
+#############################################################################################################################
+#					ADMIN MODEL VIEWS																						#
+#############################################################################################################################
+
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Sensor, db.session))
 admin.add_view(ModelView(SensorDataEntry, db.session))
 
-#test class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#############################################################################################################################
+#					TESTING AREA																							#
+#############################################################################################################################
+
+
 class City(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	state = db.Column(db.String(2))

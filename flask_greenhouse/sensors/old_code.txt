@@ -1,0 +1,26 @@
+# @sensor_nodes.route("/sensors/users/<string:username>")
+# def sensors_by_username(username):
+	# user = User.query.filter_by(username=username).first()
+# junk code:
+# This route only returns a JSON file containing the sensor id, the name, and the units in which the sensors store information.
+# It retrives data from our SQLite database (automatically grabs it from our Sensor class table).
+# It retrives all sensors owned by a specified owner (e.g. Bob).
+# All sensors owned by Bob are contained in sObj.
+# returns a JSON object with 'sensors': sObj as its content.
+# @sensor_nodes.route("/sensors/users/<owner>", methods=["POST", "GET"])
+# def retrive_sensors(owner):
+	# sensors = Sensor.query.filter_by(owner=owner).all()
+	# sensorArray = []
+	# for sensor in sensors: 
+		# sObj = {}
+		# sObj['id'] = sensor.id;
+		# sObj['name'] = sensor.name;
+		# sObj['units'] = sensor.units;
+		# sensorArray.append(sObj)
+	# return jsonify({'sensors': sensorArray})
+			# if form.validate_on_submit():
+		# flash("Your sensor has been registered", "success")
+		# new_sensor_entry = Sensor(owner=form.owner.data, name=form.sensor_name.data, units=form.units.data)
+		# db.session.add(new_sensor_entry)
+		# db.session.commit()
+		# return redirect(url_for('sensor_nodes.sensors'))

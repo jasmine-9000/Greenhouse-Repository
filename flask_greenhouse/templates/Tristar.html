@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {# this page inherits from layout.html (like everything else.) #}
 {% block content %}
 	<script>
 	// logging the BMS URL here. 
@@ -27,6 +27,40 @@
 		datetimeField2.value = localDatetime;
 	});
 	</script>
+{######################################################################################
+							Tristar Request Form.
+							
+			This form is controlled by Tristar_graph_loader.js, located in the static folder.
+			Please modify that JS file to modify the graphing mechanism.
+			Pass in the single data point API URL by setting data-BASE_URL to it. 
+			Pass in the multi data point API URL by setting data-MULTI_BASE_URL to it. 
+			This only works in HTML5.
+			
+			Currently the API URLs are as follows:
+			
+			To retrieve a single datapoint, make a request to:
+				http://<hostname>/Tristar/api/single_data_point/<date>/<parameter>
+			This will return a JSON file with this format:
+				{
+					"x": 1,
+					"date": <date>,
+					"parameter": <parameter>
+				}
+			Where x is the data point you seek.
+			
+			To retrieve multiple datapoints simultaneously, make a request to:
+				http://<hostname>/Tristar/api/<start_date>/<end_date>/<interval>/<parameter>
+			This will return a JSON file with this format:
+				"parameter": <parameter>,
+				"data": {
+					<start_date>: 1,
+					<start_date> + <interval>: 2,
+					<start_date> + 2*<interval>: 3 ,
+						...
+					<end_date>: n
+				}
+			Where the data points appear from start_date to end_date in intervals of <interval>.
+##############################################################################################}
 	<h1>Request Tristar Data</h1>
 	<form action="#" id="Tristar_form" data-BASE_URL="{{ url_for('tristar.Tristar_data_retrieval', date='<date>', parameter='<parameter>') }}", data-MULTI_BASE_URL="{{ url_for('tristar.Tristar_multi_data_retrieval', start_date='<start_date>', end_date='<end_date>', interval=5555, parameter='<parameter>') }}">
 			<div class="row">
@@ -100,14 +134,21 @@
 	<script src="{{ url_for('static', filename='Tristar_graph_loader.js') }} "></script>
 	<!-- we're keeping a local copy of plotly-latest for faster load speeds.-->
 	<script src="{{ url_for('static', filename='plotly-latest.min.js') }}"> </script>
-	
+{######################################################################################
+							Miscellaneous Links
+		These are miscellaneous links that might be helpful.
+		These links view the last data point sent to the server. 
+		The last Tristar data point is written to an internal server folder as a file AND saved to our database.
+		Opening a file in Python is faster than asking for it from the database, and easier to manage.
+		
+		Because the last data point lists the alarms, faults, and flags currently raised, it should be accessed very often.
+					
+######################################################################################}
 	<a href = {{ url_for('tristar.ViewInstantaneous')}}>See Instantaneous Values</a><br />
 	<a href = {{ url_for('tristar.ViewDailyValues')}}>See Yesterday's Daily Logger Values</a><br />
 	<a href = {{ url_for('tristar.ViewChargeSettings')}}>See Charge Settings</a><br />
 	
-	<div id="chart">
-	
-	</div>
+	<div id="chart"></div>
 {% endblock %}
 
 

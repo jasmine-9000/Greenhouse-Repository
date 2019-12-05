@@ -1,4 +1,6 @@
-# imports
+#############################################################################################################################
+#							IMPORTS																							#
+#############################################################################################################################
 from flask import render_template, request, Blueprint,flash, url_for, jsonify
 from flask_greenhouse.forms import Date_Form
 from flask_greenhouse.models import BMSDataentry
@@ -10,6 +12,10 @@ from datetime import datetime, timedelta
 
 # export this blueprint as "bms". Will be imported at __init__.py in the main folder.
 bms = Blueprint("bms", __name__, static_folder='flask_greenhouse/static')
+
+#############################################################################################################################
+#							MAIN TRISTAR GRAPHING ROUTES																	#
+#############################################################################################################################
 
 @bms.route("/BMS", methods=["POST", "GET"])
 def BMS_JS():
@@ -38,10 +44,7 @@ def BMS():
 		interval = form.interval.data
 		
 		intervaled_data_request = [];
-		
-
-
-# create a unit test.
+		# create a unit test.
 		#if it's the battery charge:
 		if form.y_axis.data == 'test':
 				# fill in the x_data range with dummy values, starting from now to 40 minutes from now in steps of 10.
@@ -91,10 +94,9 @@ def BMS():
 		return render_template('BMS_Server_side.html', form=form, graph=filename)
 	return render_template('BMS_Server_side.html', form=form)
 
-#################################################################################################
-#								Miscellaneous 
-#################################################################################################
-
+#########################################################################################################################
+#							FILE VIEWING ROUTES																			#
+#########################################################################################################################
 @bms.route("/BMS/instantaneous", methods=["GET"])
 @bms.route("/BMS/Instantaneous", methods=["GET"])
 def BMS_Instantaneous():
@@ -121,9 +123,9 @@ def BMS_pins():
 		pins = data["BMS Status"]["Pins Connected"]
 	p = pins.split(',')
 	return render_template("BMS_pins.html", pins=p)
-#################################################################
-#								POST ROUTES						#
-#################################################################
+#############################################################################################################################
+#								POST ROUTES																					#
+#############################################################################################################################
 # post BMS JSON data to this address.
 @bms.route("/BMS/post-json", methods=["POST"]) #get requests will be blocked.
 def BMS_Post():
@@ -141,11 +143,10 @@ def BMS_Post():
 	except:
 		return "error processing data", 500
 	
-#################################################################################################
-#									APIs
-#								Getting BMS Data.
-#################################################################################################
-i = 1
+#############################################################################################################################
+#									APIs																					#
+#								Getting BMS Data.																			#
+#############################################################################################################################
 @bms.route("/BMS/api/single_point/<string:date>/<string:parameter>", methods=["GET"])
 def BMS_data_retrieval(date, parameter):
 	"""
@@ -164,7 +165,6 @@ def BMS_data_retrieval(date, parameter):
 			}
 		
 	"""
-	global i
 	# parse the input datestring. strptime() should do the trick.
 	datetime_from_JS = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
 	# Search for BMS entries with a buffer of 30 seconds.
@@ -246,7 +246,16 @@ def BMS_multi_data_retrieval(start_date, end_date, interval, parameter):
 		"data": data
 	}
 	return jsonify(JSON_response)
-	
+#############################################################################################################################
+#					HELPER FUNCTIONS																						#
+#############################################################################################################################
+
+# dictionary_translation:
+#	Arguments: 
+# 		dict: a dictionary generated from a database retrieval.
+#		parameter: the parameter you want.
+# 	Returns:
+# 		the value of the parameter wanted from the dictionary.
 def dictionary_translation(dict, parameter):
 	if parameter == "average_cell_voltage":
 		value = dict["BatteryVoltageSummary"]["average cell voltage"]

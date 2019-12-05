@@ -1,4 +1,6 @@
-# imports 
+#############################################################################################################################
+#								IMPORTS																						#
+#############################################################################################################################
 from flask import render_template, request, Blueprint,flash, url_for, jsonify, redirect
 
 from flask_greenhouse.forms import Date_Form
@@ -18,16 +20,29 @@ from datetime import datetime, timedelta
 #export our Blueprint as "sensor_nodes".
 sensor_nodes = Blueprint("sensor_nodes", __name__, static_folder='flask_greenhouse/static')
 
+#############################################################################################################################
+# 								LOGIN DECORATORS																			#
+#############################################################################################################################
 #tells the login manager how to load users.
 @login_manager.user_loader
 def load_user(user_id):
 	return User.query.get(int(user_id))
 
-# our route decorators
+
+#############################################################################################################################
+#								ROUTE DECORATORS																			#
+#############################################################################################################################
+
+
+#############################################################################################################################
+#								MAIN GRAPHING ROUTE																			#
+#############################################################################################################################
+
 # main route decorator for sensor data retrieval form.
 # this one's written in JavaScript. see sensors.js for details.
 # only works if the user is logged in.
-#@login_required
+
+@login_required
 @sensor_nodes.route("/sensors/", methods=["POST", "GET"])
 @sensor_nodes.route("/sensors", methods=["POST", "GET"])
 def sensors():
@@ -44,57 +59,37 @@ def sensors():
 	form.sensors_owned.choices = sensor_list
 	if form.validate_on_submit():	
 		flash(f"Your request has been receieved. Scroll down for your graph.")
-		
 	return render_template("sensors.html", title="sensors", form=form)
 
+#############################################################################################################################
+#								SENSOR REGISTRATION FORM																	#
+#############################################################################################################################
 
+# Requires you to be logged in.
+# Automatically ties the sensor to the logged in user.
+# 
 
-# @sensor_nodes.route("/sensors/users/<string:username>")
-# def sensors_by_username(username):
-	# user = User.query.filter_by(username=username).first()
-	
-# junk code:
-# This route only returns a JSON file containing the sensor id, the name, and the units in which the sensors store information.
-# It retrives data from our SQLite database (automatically grabs it from our Sensor class table).
-# It retrives all sensors owned by a specified owner (e.g. Bob).
-# All sensors owned by Bob are contained in sObj.
-# returns a JSON object with 'sensors': sObj as its content.
-# @sensor_nodes.route("/sensors/users/<owner>", methods=["POST", "GET"])
-# def retrive_sensors(owner):
-	# sensors = Sensor.query.filter_by(owner=owner).all()
-	# sensorArray = []
-	# for sensor in sensors: 
-		# sObj = {}
-		# sObj['id'] = sensor.id;
-		# sObj['name'] = sensor.name;
-		# sObj['units'] = sensor.units;
-		# sensorArray.append(sObj)
-	# return jsonify({'sensors': sensorArray})
-
-# Sensor Registration Form.
-# allows you to register a sensor. 
 @sensor_nodes.route("/sensors/register", methods=["POST","GET"])
 @login_required
 def register_sensor():
 	form = SensorRegistrationForm()
-	# I couldn't get the form to validate_on_submit, so I'm just making it take all POST requests, regardless of
-	# whether or not they're valid. It's not secure, but it needs to work NOW. I'M TIRED.
 	if form.validate_on_submit():
 		flash("Your sensor has been registered", "success")
+		# create new sensor, and tie it to the current user.
 		new_sensor_entry = Sensor(user_id = current_user.id,name=form.sensor_name.data, units=form.units.data)
+		# add new sensor to database.
 		db.session.add(new_sensor_entry)
 		db.session.commit()
 		return redirect(url_for('sensor_nodes.sensors'))
-		# if form.validate_on_submit():
-		# flash("Your sensor has been registered", "success")
-		# new_sensor_entry = Sensor(owner=form.owner.data, name=form.sensor_name.data, units=form.units.data)
-		# db.session.add(new_sensor_entry)
-		# db.session.commit()
-		# return redirect(url_for('sensor_nodes.sensors'))
 	return render_template("register.html", title="Register",form=form)
+	
+#############################################################################################################################
+# 								USER REGISTRATION FORM																		#
+#############################################################################################################################
 
-# registers a user into the database.
+# Registers a new user.
 # hashes a password from our password field. 
+
 @sensor_nodes.route("/sensors/users/register", methods=["POST", "GET"])
 def register_user():
 	if current_user.is_authenticated: 
@@ -109,8 +104,13 @@ def register_user():
 		return redirect(url_for('sensor_nodes.user_login'))
 	return render_template('user_register.html', form=form)
 
+#############################################################################################################################
+#								USER LOGIN FORM																				#
+#############################################################################################################################
+
 # logs in a user
 # checks password using bcrypt.check_password_hash()
+
 @sensor_nodes.route("/sensors/users/login", methods=["POST", "GET"])
 def user_login():
 	form = UserLoginForm();
@@ -123,14 +123,20 @@ def user_login():
 		flash('Login attempt unsuccessful. Check username or password.', 'danger')
 	return render_template('user_login.html', title="Login", form=form)
 
-# logs out a user.
+#############################################################################################################################
+#									USER LOGOUT ROUTE																			#
+#############################################################################################################################
+
+# Navigating to this URL logs out a user.
+
 @sensor_nodes.route("/logout")
 def user_logout():
 	logout_user()
 	return redirect(url_for('main.home'))
 	
-	
-
+#############################################################################################################################	
+#									POST ROUTE																				#
+#############################################################################################################################
 # this is the route where you post JSON data to from your Sensor.
 @sensor_nodes.route("/sensors/post-json/<string:username>/<string:sensor_name>", methods=["POST"])
 def sensor_json(username, sensor_name):
@@ -150,31 +156,93 @@ def sensor_json(username, sensor_name):
 	db.session.add(new_sensor_data_entry) # post it to the database
 	db.session.commit()
 	return "your data has been received."
+	
+#############################################################################################################################
+#									DATA RETRIEVAL API																		#
+#############################################################################################################################
 
-# get all data by sensor ID number.
+
+#############################################################################################################################
+#									RETRIEVE ALL DATAPOINTS BY SENSOR_ID ROUTE												#
+#############################################################################################################################
+
+# get ALL data by sensor ID number in JSON format.
+# mostly for debugging.
+
 @sensor_nodes.route("/sensors/get-data-by-sensor-id/<int:sensor_id>")
 def get_all_sensor_data(sensor_id):
 	sensor = Sensor.query.filter_by(id=sensor_id).first() # find the sensor in the database by ID number.
-	dataset = sensor.dataset #SensorDataEntry.query.filter_by(author=sensor).order_by(SensorDataEntry.date_posted.desc())
-	print(dataset)
-	#HTML_template = query.toHTML()
+	dataset = sensor.dataset # SensorDataEntry.query.filter_by(author=sensor).order_by(SensorDataEntry.date_posted.desc())
+	print(dataset) # debugging statement.
 	return render_template("get_all.html", sensor=sensor, dataset=dataset)
-	
+
+#############################################################################################################################
+#									RETRIEVE DATAPOINT BY SENSOR_ID AND DATE ROUTE											#
+#############################################################################################################################
+
+# get data point by date and sensor_id
+
 @sensor_nodes.route("/sensors/get-sensor-json-data-by-id/<int:sensor_id>/<string:date>")
 def sensor_id_JSON(sensor_id,date):
 	sensor = Sensor.query.filter_by(id=sensor_id).first() # find the sensor in the database by ID number.
 	dataset = sensor.dataset #SensorDataEntry.query.filter_by(author=sensor).order_by(SensorDataEntry.date_posted.desc())
-	
-	# date_requested = datetime.strptime(date, "%M-%d-%Y")
+	# extrapolate a Datetime object from the string.
 	date_requested = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
-	
 	for data in dataset:
 		if inRange(data.date_posted,date_requested):
 			return data.JSON_content
 	return jsonify("{\"lux\": 1234}")
+
+#############################################################################################################################
+#									RETRIEVE DATAPOINTS BY SENSOR_ID BETWEEN START_DATE AND END_DATE ROUTE					#
+#############################################################################################################################
+@sensor_nodes.route("/sensors/get-sensor-json-data-range/<int:sensor_id>/<string:start_date>/<string:end_date>/<int:interval>", methods=["GET"])
+def sensor_id_JSON_range(sensor_id, start_date, end_date, interval):
+	# extrapolate dates requested.
+	s = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+	e = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
+	dates = []
+	while(s < e):
+		dates.append(s)
+		s = s + timedelta(minutes=interval)
 	
-		
+	# start querying the database.
+	Table = SensorDataEntry
+	buffer = timedelta(minutes=interval)
+	data = {}
+	# iterate throughout all dates.
+	for date in dates:
+		value = None
+		entry = Table.query \
+			.filter( 
+				sensor_id = sensor_id,
+				Table.date_posted \
+				.between(date - buffer, 
+						 date + buffer))\
+				.first()
+		# only add a new entry into the data dict() if there's an entry.
+		try:
+			dict = entry.JSON_content
+			data[entry.date_posted.strftime("%Y-%m-%d %H:%M:%S")] = dict
+		except:
+			pass
+	return data
 	
+	
+#############################################################################################################################
+#									HELPER FUNCTIONS																		#		
+#############################################################################################################################	
+
+# inRange:
+# determines whether or not a date requested is in range of the date posted.
+# 	Arguments:
+#		date_posted: what date was the data point actually posted?
+#		date_requested: what date are you requesting from?
+# 		interval: what interval do you want? 
+#			Type: timedelta class
+#	Returns:
+# 		True if in Range
+#		False otherwise
 def inRange(date_posted, date_requested, interval=timedelta(minutes=10)):
 	if date_requested > (date_posted + interval):
 		return True
@@ -193,7 +261,9 @@ def inRange(date_posted, date_requested, interval=timedelta(minutes=10)):
 	
 	
 	
-	
+#############################################################################################################################
+#												TESTING AREA																#
+#############################################################################################################################	
 	
 #test 
 @sensor_nodes.route("/sensors/cities", methods=["POST", "GET"])

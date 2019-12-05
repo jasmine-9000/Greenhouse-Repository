@@ -6,6 +6,9 @@ from flask_admin.contrib.sqla import ModelView
 from datetime import datetime
 import json
 
+#########################################################################################################################
+#							CLASS TEMPLATES																				#
+#########################################################################################################################
 
 # this class enables JSON storage.
 # it inherits the TypeDecorator class, so we need to redefine process_bind_param and process_result_value.
@@ -35,7 +38,10 @@ class JSONDataEntry(db.Model):
 	JSON_content = db.Column(JsonEncodedDict)
 	def __repr__(self):
 		return f"JSONDataEntry('Data Entry #{self.id}', '{self.JSON_content}', 'Date Posted: {self.date_posted}')"
-	
+
+#########################################################################################################################
+#							ACTUAL ENTRIES																				#
+#########################################################################################################################
 # same as JSONDataEntry, but tablename is different for every one.
 class BMSDataentry(JSONDataEntry):
 	__tablename__ = 'BMS Data'
