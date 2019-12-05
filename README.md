@@ -10,14 +10,8 @@ pip install -r requirements.txt
 
 Once you have all the requirements installed, run the application by calling:
 
-```python
-python run.py
 ```
-
-```javascript
-if (isAwesome){
-  return true
-}
+python run.py
 ```
 
 The application will run on port 80.
