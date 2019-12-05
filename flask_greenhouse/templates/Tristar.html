@@ -1,11 +1,9 @@
 {% extends "layout.html" %}
-
-
 {% block content %}
 	<script>
 	// logging the BMS URL here. 
-	const BMS_URL = "{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}";
-	console.log("URL TO MAKE REQUESTS TO \(UNFORMATTED\):" + BMS_URL);
+	const Tristar_URL = "{{ url_for('tristar.Tristar_data_retrieval', date='<date>', parameter='<parameter>') }}";
+	console.log("URL TO MAKE REQUESTS TO \(UNFORMATTED\):" + Tristar_URL);
 	
 	// make default dates to now.
 	window.addEventListener("load", function() {
@@ -30,7 +28,7 @@
 	});
 	</script>
 	<h1>Request Tristar Data</h1>
-	<form action="#" id="BMS_form" data-BASE_URL="{{ url_for('bms.BMS_data_retrieval', date='<date>', parameter='<parameter>') }}", data-MULTI_BASE_URL="{{ url_for('bms.BMS_multi_data_retrieval', start_date='<start_date>', end_date='<end_date>', interval=5555, parameter='<parameter>') }}">
+	<form action="#" id="Tristar_form" data-BASE_URL="{{ url_for('tristar.Tristar_data_retrieval', date='<date>', parameter='<parameter>') }}", data-MULTI_BASE_URL="{{ url_for('tristar.Tristar_multi_data_retrieval', start_date='<start_date>', end_date='<end_date>', interval=5555, parameter='<parameter>') }}">
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					{{ form.start_date.label }}
@@ -99,6 +97,10 @@
 		</form>
 		
 	</form>
+	<script src="{{ url_for('static', filename='Tristar_graph_loader.js') }} "></script>
+	<!-- we're keeping a local copy of plotly-latest for faster load speeds.-->
+	<script src="{{ url_for('static', filename='plotly-latest.min.js') }}"> </script>
+	
 	<a href = {{ url_for('tristar.ViewInstantaneous')}}>See Instantaneous Values</a><br />
 	<a href = {{ url_for('tristar.ViewDailyValues')}}>See Yesterday's Daily Logger Values</a><br />
 	<a href = {{ url_for('tristar.ViewChargeSettings')}}>See Charge Settings</a><br />

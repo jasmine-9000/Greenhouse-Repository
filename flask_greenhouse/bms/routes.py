@@ -121,18 +121,25 @@ def BMS_pins():
 		pins = data["BMS Status"]["Pins Connected"]
 	p = pins.split(',')
 	return render_template("BMS_pins.html", pins=p)
-
+#################################################################
+#								POST ROUTES						#
+#################################################################
 # post BMS JSON data to this address.
 @bms.route("/BMS/post-json", methods=["POST"]) #get requests will be blocked.
 def BMS_Post():
 	"""
 		The route for which BMS JSON data is posted. Will be sent by the Raspberry Pi we have on site.
 	"""
-	req_data = request.get_json() #extract JSON data from your request
-	new_BMS_entry = BMSDataentry(JSON_content=req_data) # create new instance of 
-	db.session.add(new_BMS_entry)
-	db.session.commit()
-	return "your data has been received."
+	try:
+		req_data = request.get_json() #extract JSON data from your request
+		new_BMS_entry = BMSDataentry(JSON_content=req_data) # create new instance of 
+		with open("flask_greenhouse/BMS_file.json", "w") as fp:
+			json.dump(req_data, fp)
+		db.session.add(new_BMS_entry)
+		db.session.commit()
+		return "your data has been received."
+	except:
+		return "error processing data", 500
 	
 #################################################################################################
 #									APIs

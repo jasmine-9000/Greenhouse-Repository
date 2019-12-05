@@ -13,8 +13,8 @@ main = Blueprint("main", __name__, static_folder="flask_greenhouse/static")
 @main.route("/")# this is our main route decorator.
 @main.route("/home")
 def home():	
-	ts_filepath = "flask_greenhouse/Tristar_instantaneous_test_file.json"
-	bms_filepath = "flask_greenhouse/BMS_test_file.json"
+	ts_filepath = "flask_greenhouse/Tristar_instantaneous_file.json"
+	bms_filepath = "flask_greenhouse/BMS_file.json"
 	flash_ts_warnings(ts_filepath)
 	flash_bms_warnings(bms_filepath)
 	return render_template('home.html', title="Home")

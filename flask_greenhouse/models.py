@@ -1,8 +1,11 @@
-# imports
+#########################################################################################################################
+#							IMPORTS																						#
+#########################################################################################################################
 from flask_greenhouse import db, admin
 from flask_admin.contrib.sqla import ModelView
 from datetime import datetime
 import json
+
 
 # this class enables JSON storage.
 # it inherits the TypeDecorator class, so we need to redefine process_bind_param and process_result_value.
@@ -40,5 +43,9 @@ class BMSDataentry(JSONDataEntry):
 class TristarDataEntry(JSONDataEntry):
 	__tablename__ = 'Tristar Data'
 
+class TristarDailyDataEntry(JSONDataEntry):
+	__tablename__ = 'Tristar Daily Data'
+
 admin.add_view(ModelView(BMSDataentry, db.session))
 admin.add_view(ModelView(TristarDataEntry, db.session))
+admin.add_view(ModelView(TristarDailyDataEntry, db.session))
