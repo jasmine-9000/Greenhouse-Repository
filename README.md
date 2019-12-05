@@ -36,10 +36,12 @@ In your application object, specify your database path in your 'SQLALCHEMY_DATAB
 ```python
 app.config['SQLALCHEMY_DATABASE_URI'] = ''# your path.
 ```
+
 Then, in your __init__.py file, initialize your database, like this:
 ```python
 db = SQLAlchemy(app) # app the name of your application that you created in your __init__.py file, and db is the name of the database object you want to create.
-```python
+```
+
 now, in the python terminal, while located in the website directory:
 
 Call this series of commands:
