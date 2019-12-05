@@ -4,13 +4,22 @@ https://python.org/
 
 Be sure to install all requirements by calling the command
 
+```
 pip install -r requirements.txt
+```
 
+Once you have all the requirements installed, run the application by calling:
 
-Once you have all the requirements installed, run the application by calling
+```python
+python run.py
+```
 
->python run.py
+```javascript
+if (isAwesome){
+  return true
+}
+```
 
 The application will run on port 80.
 
-Go to http://localhost to see the website.
+Go to http://arboretum-backend.soe.ucsc.edu to see the website.
