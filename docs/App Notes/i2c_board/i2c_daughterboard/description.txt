@@ -1,0 +1,6 @@
+In our opinion, the only thing the Raspberry Pi 3 and Pi2 is truly lacking is an I2C port. (Of course you may have guessed by looking at our product offerings that we are admittedly a little biased. No worries.)
+
+The TOUTPI2 is a non-invasive I2C adapter complete with level shifter providing you with a 5V I2C port for use with any of our I2C devices.
+
+The I2C port points outward toward the outside edge of the board, and terminates directly above the HDMI port. The TOUTPI2 does not consume the 40-pin expansion port, as it is equipped with a pass-through connector, freeing the 40-pin connector for other purposes, making it a truly non-invasive design.
+

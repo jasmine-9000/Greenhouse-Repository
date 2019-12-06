@@ -1,0 +1,24 @@
+The Si7020 I2C Humidity and Temperature Sensor is a monolithic CMOS IC integrating:
+
+humidity and temperature sensor elements,
+an analog-to-digital converter,
+signal processing,
+calibration data, and
+an I2C Interface.
+The Si7020 offers an accurate, low-power, factory-calibrated digital solution ideal for measuring humidity, dew-point, and temperature, in a number of industrial and consumer applications.
+
+Applications of Si7020 include:
+
+respiratory therapy,
+defogging,
+mobile phones and tablets,
+white goods,
+indoor weather stations,
+asset/goods tracking, and
+micro-environments/data center monitoring.
+All I2C Mini Modules are designed to operate at 5VDC. This Mini Module includes on-board power regulation and PCA9306 I2C level-shifting circuitry to adapt to our 5V I2C standard. Using a convenient 4-Pin plug, devices can be daisy-chained onto the I2C Bus, eliminating the need for soldering. Plug together all the pieces you need for your next automation application.
+
+Pull-up resistors are included with all NCD master devices. If you are wiring in your own I2C port, on-board 4.7K jumper-selectable pull-up resistors are available for convenience purposes.
+
+All I2C Mini Modules include a I2C Cable.
+

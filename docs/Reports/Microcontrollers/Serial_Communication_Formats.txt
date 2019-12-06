@@ -1,0 +1,18 @@
+Most Popular Serial Communication Formats:
+
+Certainly:
+
+I2C
+One-Wire
+UART
+RS-232
+SPI
+
+Maybe:
+
+SDI-12
+
+I2C Protocol:
+
+Requires 
+

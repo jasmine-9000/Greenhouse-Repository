@@ -1,0 +1,52 @@
+#https://www.youtube.com/watch?v=xH_y05pIDTo
+
+
+
+#you need these libraries:
+
+import time
+import usb.core
+import usb.util
+
+#from your USB vendor: (example: USB to UART bridge)
+#to find these: use the lsusb command.
+#example: 
+
+#ID 10c4:ea60
+
+VID = 0x10c4 # vendor ID
+PID = 0xea60 # product ID
+
+
+#to find our USB: 
+
+dev = usb.core.find(idVendor=VID, idProduct=PID)
+if not dev:
+	print("Could not find CP2104 :(")
+	exit(1)
+print("Yeeha! Found a CP2104 device!")
+
+
+#to send a control transfer:
+reqType = 0x41
+bReq = 0xFF
+wValue = 0x37E1
+#GPIO2 is 0x04
+wIndex = 0x04 | 0x04 << 8 
+data = [] #don't send anything yet. 
+
+
+dev.ctrl_transfer(reqType, bReq, wVal, wIndex, data)
+time.sleep(0.1) # need a break
+wIndex = 0x04 
+dev.ctrl_transfer(reqType, bReq, wVal, wIndex, data)
+
+#what's a control transfer?
+#use bmRequestType: 01000001b = 0x41
+#bRequest: vendor specific
+#wval
+
+
+
+
+

@@ -1,0 +1,1211 @@
+EESchema Schematic File Version 4
+LIBS:Solar_Panels_and_Charge_Controller-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 5
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:Solar_Cell SC13
+U 1 1 5D2561C0
+P 1050 1050
+F 0 "SC13" H 1158 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 1158 1055 50  0000 L CNN
+F 2 "" V 1050 1110 50  0001 C CNN
+F 3 "~" V 1050 1110 50  0001 C CNN
+	1    1050 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC14
+U 1 1 5D2561C6
+P 1350 1050
+F 0 "SC14" H 1458 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 1458 1055 50  0000 L CNN
+F 2 "" V 1350 1110 50  0001 C CNN
+F 3 "~" V 1350 1110 50  0001 C CNN
+	1    1350 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC15
+U 1 1 5D2561CC
+P 1650 1050
+F 0 "SC15" H 1758 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 1758 1055 50  0000 L CNN
+F 2 "" V 1650 1110 50  0001 C CNN
+F 3 "~" V 1650 1110 50  0001 C CNN
+	1    1650 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC16
+U 1 1 5D2561D2
+P 1950 1050
+F 0 "SC16" H 2058 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 2058 1055 50  0000 L CNN
+F 2 "" V 1950 1110 50  0001 C CNN
+F 3 "~" V 1950 1110 50  0001 C CNN
+	1    1950 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC17
+U 1 1 5D2561D8
+P 2250 1050
+F 0 "SC17" H 2358 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 2358 1055 50  0000 L CNN
+F 2 "" V 2250 1110 50  0001 C CNN
+F 3 "~" V 2250 1110 50  0001 C CNN
+	1    2250 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC18
+U 1 1 5D2561DE
+P 2550 1050
+F 0 "SC18" H 2658 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 2658 1055 50  0000 L CNN
+F 2 "" V 2550 1110 50  0001 C CNN
+F 3 "~" V 2550 1110 50  0001 C CNN
+	1    2550 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC19
+U 1 1 5D2561E4
+P 2850 1050
+F 0 "SC19" H 2958 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 1055 50  0000 L CNN
+F 2 "" V 2850 1110 50  0001 C CNN
+F 3 "~" V 2850 1110 50  0001 C CNN
+	1    2850 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC20
+U 1 1 5D2561F0
+P 3150 1050
+F 0 "SC20" H 3258 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 3258 1055 50  0000 L CNN
+F 2 "" V 3150 1110 50  0001 C CNN
+F 3 "~" V 3150 1110 50  0001 C CNN
+	1    3150 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC21
+U 1 1 5D2561F6
+P 3450 1050
+F 0 "SC21" H 3558 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 3558 1055 50  0000 L CNN
+F 2 "" V 3450 1110 50  0001 C CNN
+F 3 "~" V 3450 1110 50  0001 C CNN
+	1    3450 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC22
+U 1 1 5D2561FC
+P 3750 1050
+F 0 "SC22" H 3858 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 3858 1055 50  0000 L CNN
+F 2 "" V 3750 1110 50  0001 C CNN
+F 3 "~" V 3750 1110 50  0001 C CNN
+	1    3750 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC23
+U 1 1 5D256202
+P 4050 1050
+F 0 "SC23" H 4158 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 4158 1055 50  0000 L CNN
+F 2 "" V 4050 1110 50  0001 C CNN
+F 3 "~" V 4050 1110 50  0001 C CNN
+	1    4050 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC24
+U 1 1 5D2609D1
+P 4350 1050
+F 0 "SC24" H 4458 1146 50  0000 L CNN
+F 1 "Solar_Cell" H 4458 1055 50  0000 L CNN
+F 2 "" V 4350 1110 50  0001 C CNN
+F 3 "~" V 4350 1110 50  0001 C CNN
+	1    4350 1050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L tsmppt:TSMPPT MPPT2
+U 1 1 5D273F5A
+P 3250 2300
+F 0 "MPPT2" H 3200 3100 50  0000 L CNN
+F 1 "TSMPPT" H 3200 3200 50  0000 L CNN
+F 2 "" H 3600 2500 50  0001 C CNN
+F 3 "" H 3600 2500 50  0001 C CNN
+	1    3250 2300
+	1    0    0    -1  
+$EndComp
+$Sheet
+S 0    9250 11750 8150
+U 5D2D791C
+F0 "BMS Layout" 50
+F1 "BMS_Layout.sch" 50
+$EndSheet
+$Comp
+L tsmppt:RTS U1
+U 1 1 5D38C69D
+P 1250 2500
+F 0 "U1" V 1050 2450 50  0000 L CNN
+F 1 "RTS" V 950 2450 50  0000 L CNN
+F 2 "" H 1250 2450 50  0001 C CNN
+F 3 "" H 1250 2450 50  0001 C CNN
+	1    1250 2500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4450 1050 4450 1200
+$Sheet
+S 12000 9250 12550 8150
+U 5DBA61E3
+F0 "Raspberry_Pi" 50
+F1 "Master_Microcontroller.sch" 50
+$EndSheet
+$Sheet
+S 12250 -200 10850 8400
+U 5D32EBED
+F0 "12V to 5V converter" 50
+F1 "12V_to_5V_converter.sch" 50
+$EndSheet
+$Comp
+L tsmppt:TSMPPT MPPT1
+U 1 1 5D273267
+P 3150 4850
+F 0 "MPPT1" H 3100 5650 50  0000 L CNN
+F 1 "TSMPPT" H 3050 5750 50  0000 L CNN
+F 2 "" H 3500 5050 50  0001 C CNN
+F 3 "" H 3500 5050 50  0001 C CNN
+	1    3150 4850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC12
+U 1 1 5D24034D
+P 4400 3500
+F 0 "SC12" H 4508 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 4508 3505 50  0000 L CNN
+F 2 "" V 4400 3560 50  0001 C CNN
+F 3 "~" V 4400 3560 50  0001 C CNN
+	1    4400 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC11
+U 1 1 5D240347
+P 4100 3500
+F 0 "SC11" H 4208 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 4208 3505 50  0000 L CNN
+F 2 "" V 4100 3560 50  0001 C CNN
+F 3 "~" V 4100 3560 50  0001 C CNN
+	1    4100 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC10
+U 1 1 5D240341
+P 3800 3500
+F 0 "SC10" H 3908 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 3908 3505 50  0000 L CNN
+F 2 "" V 3800 3560 50  0001 C CNN
+F 3 "~" V 3800 3560 50  0001 C CNN
+	1    3800 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC9
+U 1 1 5D24033B
+P 3500 3500
+F 0 "SC9" H 3608 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 3608 3505 50  0000 L CNN
+F 2 "" V 3500 3560 50  0001 C CNN
+F 3 "~" V 3500 3560 50  0001 C CNN
+	1    3500 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC8
+U 1 1 5D23DFBD
+P 3200 3500
+F 0 "SC8" H 3308 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 3308 3505 50  0000 L CNN
+F 2 "" V 3200 3560 50  0001 C CNN
+F 3 "~" V 3200 3560 50  0001 C CNN
+	1    3200 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC7
+U 1 1 5D23DFB7
+P 2900 3500
+F 0 "SC7" H 3008 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 3008 3505 50  0000 L CNN
+F 2 "" V 2900 3560 50  0001 C CNN
+F 3 "~" V 2900 3560 50  0001 C CNN
+	1    2900 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC6
+U 1 1 5D23DFB1
+P 2600 3500
+F 0 "SC6" H 2708 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 2708 3505 50  0000 L CNN
+F 2 "" V 2600 3560 50  0001 C CNN
+F 3 "~" V 2600 3560 50  0001 C CNN
+	1    2600 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC5
+U 1 1 5D23DFAB
+P 2300 3500
+F 0 "SC5" H 2408 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 2408 3505 50  0000 L CNN
+F 2 "" V 2300 3560 50  0001 C CNN
+F 3 "~" V 2300 3560 50  0001 C CNN
+	1    2300 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC4
+U 1 1 5D23B182
+P 2000 3500
+F 0 "SC4" H 2108 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 2108 3505 50  0000 L CNN
+F 2 "" V 2000 3560 50  0001 C CNN
+F 3 "~" V 2000 3560 50  0001 C CNN
+	1    2000 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC3
+U 1 1 5D23A9B6
+P 1700 3500
+F 0 "SC3" H 1808 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 1808 3505 50  0000 L CNN
+F 2 "" V 1700 3560 50  0001 C CNN
+F 3 "~" V 1700 3560 50  0001 C CNN
+	1    1700 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC2
+U 1 1 5D239F08
+P 1400 3500
+F 0 "SC2" H 1508 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 1508 3505 50  0000 L CNN
+F 2 "" V 1400 3560 50  0001 C CNN
+F 3 "~" V 1400 3560 50  0001 C CNN
+	1    1400 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Solar_Cell SC1
+U 1 1 5D239A32
+P 1100 3500
+F 0 "SC1" H 1208 3596 50  0000 L CNN
+F 1 "Solar_Cell" H 1208 3505 50  0000 L CNN
+F 2 "" V 1100 3560 50  0001 C CNN
+F 3 "~" V 1100 3560 50  0001 C CNN
+	1    1100 3500
+	0    -1   -1   0   
+$EndComp
+Text GLabel 2550 4600 0    50   Input ~ 0
+LOAD_POSITIVE_TERMINAl
+Text GLabel 2300 4500 0    50   Input ~ 0
+TRISTAR_MPPT_LOAD_POSITIVE
+Text GLabel 2300 4400 0    50   Input ~ 0
+Tristar_MPPT_Common_Ground
+$Sheet
+S 24950 9250 10850 7900
+U 5D3DD233
+F0 "Sheet5D3DD232" 50
+F1 "Student_Sensors.sch" 50
+$EndSheet
+Wire Wire Line
+	1850 6450 1700 6450
+Wire Wire Line
+	2300 6600 2150 6600
+Text GLabel 1700 6450 0    50   Input ~ 0
+LOAD_POSITIVE_TERMINAL
+Text GLabel 2150 6600 0    50   Input ~ 0
+LOAD_GROUND
+Wire Wire Line
+	2300 6300 2200 6300
+$Comp
+L Device:Fuse F2
+U 1 1 5D3FA560
+P 2000 6450
+F 0 "F2" V 1803 6450 50  0000 C CNN
+F 1 "100A" V 1894 6450 50  0000 C CNN
+F 2 "" V 1930 6450 50  0001 C CNN
+F 3 "~" H 2000 6450 50  0001 C CNN
+	1    2000 6450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2150 6450 2300 6450
+$Comp
+L power:Earth_Protective #PWR?
+U 1 1 5D41128D
+P 3900 7500
+F 0 "#PWR?" H 4150 7250 50  0001 C CNN
+F 1 "Earth_Protective" H 4350 7350 50  0001 C CNN
+F 2 "" H 3900 7400 50  0001 C CNN
+F 3 "~" H 3900 7400 50  0001 C CNN
+	1    3900 7500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth_Protective #PWR?
+U 1 1 5D413CFA
+P 2000 5900
+F 0 "#PWR?" H 2250 5650 50  0001 C CNN
+F 1 "Earth_Protective" H 2450 5750 50  0001 C CNN
+F 2 "" H 2000 5800 50  0001 C CNN
+F 3 "~" H 2000 5800 50  0001 C CNN
+	1    2000 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2200 5900 2000 5900
+Wire Wire Line
+	2200 5900 2200 6300
+Wire Wire Line
+	1900 6800 1900 6850
+Wire Wire Line
+	1900 7250 1900 7300
+$Comp
+L Switch:SW_Push SW3
+U 1 1 5D41E774
+P 1900 7050
+F 0 "SW3" H 1900 7335 50  0000 C CNN
+F 1 "SW_Push" H 1900 7244 50  0000 C CNN
+F 2 "" H 1900 7250 50  0001 C CNN
+F 3 "~" H 1900 7250 50  0001 C CNN
+	1    1900 7050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2300 7300 1900 7300
+Wire Wire Line
+	2300 6800 1900 6800
+$Comp
+L Device:Fuse F1
+U 1 1 5D4292FA
+P 3750 7100
+F 0 "F1" V 3850 7100 50  0000 C CNN
+F 1 "3A" V 3644 7100 50  0000 C CNN
+F 2 "" V 3680 7100 50  0001 C CNN
+F 3 "~" H 3750 7100 50  0001 C CNN
+	1    3750 7100
+	0    -1   -1   0   
+$EndComp
+Text Notes 9150 7500 2    50   ~ 0
+Solar Panels, Charge Controller, and AC outlet
+Text Notes 10700 7650 2    50   ~ 0
+1.3
+Wire Wire Line
+	4550 3500 4500 3500
+Text GLabel 2400 1850 0    50   Input ~ 0
+Tristar_MPPT_Common_Ground
+Text GLabel 2400 1950 0    50   Input ~ 0
+TRISTAR_MPPT_LOAD_POSITIVE
+Text GLabel 2650 2050 0    50   Input ~ 0
+LOAD_POSITIVE_TERMINAl
+$Comp
+L tsmppt:RTS U2
+U 1 1 5D2E0048
+P 1300 5100
+F 0 "U2" V 1100 4950 50  0000 L CNN
+F 1 "RTS" V 1000 4950 50  0000 L CNN
+F 2 "" H 1300 5050 50  0001 C CNN
+F 3 "" H 1300 5050 50  0001 C CNN
+	1    1300 5100
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x02_Odd_Even J2
+U 1 1 5D4A0FED
+P 1950 5000
+F 0 "J2" H 2000 5217 50  0000 C CNN
+F 1 "Small_Screw_Terminal_02x02" H 2000 5126 50  0000 C CNN
+F 2 "" H 1950 5000 50  0001 C CNN
+F 3 "~" H 1950 5000 50  0001 C CNN
+	1    1950 5000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 5000 2450 5000
+Wire Wire Line
+	2450 5000 2450 4700
+Wire Wire Line
+	2450 4700 2550 4700
+Wire Wire Line
+	2250 5100 2500 5100
+Wire Wire Line
+	2500 5100 2500 4800
+Wire Wire Line
+	2500 4800 2550 4800
+Wire Wire Line
+	1600 5000 1750 5000
+Wire Wire Line
+	1600 5200 1650 5200
+Wire Wire Line
+	1650 5200 1650 5100
+Wire Wire Line
+	1650 5100 1750 5100
+$Comp
+L Connector:DB9_Female J3
+U 1 1 5D4B372C
+P 4150 4550
+F 0 "J3" H 4050 5300 50  0000 L CNN
+F 1 "DB9_Female" H 3950 5200 50  0000 L CNN
+F 2 "" H 4150 4550 50  0001 C CNN
+F 3 " ~" H 4150 4550 50  0001 C CNN
+	1    4150 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L tsmppt:rj11toUSB U?
+U 1 1 5D4D8C7C
+P 6250 6600
+AR Path="/5D2E25F2/5D4D8C7C" Ref="U?"  Part="1" 
+AR Path="/5D4D8C7C" Ref="U1"  Part="1" 
+F 0 "U1" V 6750 6500 50  0000 L CNN
+F 1 "rj11toUSB" V 6650 6300 50  0000 L CNN
+F 2 "" H 6250 6600 50  0001 C CNN
+F 3 "" H 6250 6600 50  0001 C CNN
+	1    6250 6600
+	0    -1   -1   0   
+$EndComp
+Entry Wire Line
+	6850 6200 6750 6300
+Entry Wire Line
+	6850 6300 6750 6400
+Entry Wire Line
+	6850 6400 6750 6500
+Entry Wire Line
+	6850 6500 6750 6600
+Text GLabel 6850 6100 2    50   Input ~ 0
+SURESINE_INVERTER_USB_BUS
+$Comp
+L Connector:RJ11_Shielded J10
+U 1 1 5D5086E2
+P 5450 6650
+F 0 "J10" H 5507 7217 50  0000 C CNN
+F 1 "RJ11_Shielded" H 5507 7126 50  0000 C CNN
+F 2 "" V 5450 6675 50  0001 C CNN
+F 3 "~" V 5450 6675 50  0001 C CNN
+	1    5450 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 6650 5850 6750
+Wire Wire Line
+	5850 6750 6000 6750
+Wire Wire Line
+	5850 6550 6000 6550
+Wire Wire Line
+	6000 6650 5900 6650
+Wire Wire Line
+	5900 6650 5900 7100
+Wire Wire Line
+	5900 7100 5450 7100
+Wire Wire Line
+	5450 7100 5450 7050
+$Comp
+L Connector:RJ11_Shielded J9
+U 1 1 5D5100D9
+P 4250 6500
+F 0 "J9" H 3920 6447 50  0000 R CNN
+F 1 "RJ11_Shielded" H 3920 6538 50  0000 R CNN
+F 2 "" V 4250 6525 50  0001 C CNN
+F 3 "~" V 4250 6525 50  0001 C CNN
+	1    4250 6500
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3450 6600 3850 6600
+Wire Wire Line
+	4250 6100 4250 6050
+Wire Wire Line
+	4250 6050 3700 6050
+Wire Wire Line
+	3700 6050 3700 6700
+Wire Wire Line
+	3700 6700 3450 6700
+$Comp
+L Connector:Screw_Terminal_01x04 J1
+U 1 1 5D4846E2
+P 2350 4400
+F 0 "J1" H 2268 3975 50  0000 C CNN
+F 1 "Screw_Terminal_01x04" H 2268 4066 50  0000 C CNN
+F 2 "" H 2350 4400 50  0001 C CNN
+F 3 "~" H 2350 4400 50  0001 C CNN
+	1    2350 4400
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2000 4300 2350 4300
+Wire Wire Line
+	2300 4400 2350 4400
+Wire Wire Line
+	2300 4500 2350 4500
+Wire Wire Line
+	3450 6500 3850 6500
+$Comp
+L tsmppt:suresine_inverter U11
+U 1 1 5D3F3856
+P 3800 5500
+F 0 "U11" V 5800 4450 50  0000 L CNN
+F 1 "suresine_inverter" V 4350 4300 50  0000 L CNN
+F 2 "" H 5050 4450 50  0001 C CNN
+F 3 "" H 5050 4450 50  0001 C CNN
+	1    3800 5500
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:Conn_WallSocket_Earth J11
+U 1 1 5D53B917
+P 4100 7300
+F 0 "J11" H 4354 7311 50  0000 L CNN
+F 1 "Conn_WallSocket_Earth" H 4354 7220 50  0000 L CNN
+F 2 "" H 3800 7400 50  0001 C CNN
+F 3 "~" H 3800 7400 50  0001 C CNN
+	1    4100 7300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 7100 3600 7100
+Wire Wire Line
+	3450 7300 3900 7300
+Wire Wire Line
+	2300 7300 2300 6900
+Wire Wire Line
+	7750 5400 6350 5400
+Connection ~ 6350 5400
+Connection ~ 6150 5400
+Wire Wire Line
+	6350 5400 6150 5400
+Wire Wire Line
+	9250 4700 9250 4900
+Wire Wire Line
+	7050 4700 9250 4700
+Wire Wire Line
+	9350 4900 9350 4600
+Wire Wire Line
+	9350 4600 7050 4600
+Connection ~ 9000 4900
+Wire Wire Line
+	9100 4900 9000 4900
+Wire Wire Line
+	9000 4900 8500 4900
+Wire Wire Line
+	9500 4900 9500 3150
+Connection ~ 9500 3150
+Text GLabel 9650 5000 2    50   Input ~ 0
+TSMPPT_1_USB_BUS
+Entry Wire Line
+	9200 5000 9100 4900
+Entry Wire Line
+	9600 5000 9500 4900
+Entry Wire Line
+	9350 5000 9250 4900
+Entry Wire Line
+	9450 5000 9350 4900
+$Comp
+L power:GNDREF #PWR?
+U 1 1 5D5CA360
+P 9500 3150
+AR Path="/5D2E25F2/5D5CA360" Ref="#PWR?"  Part="1" 
+AR Path="/5D5CA360" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 9500 2900 50  0001 C CNN
+F 1 "GNDREF" H 9505 2977 50  0000 C CNN
+F 2 "" H 9500 3150 50  0001 C CNN
+F 3 "" H 9500 3150 50  0001 C CNN
+	1    9500 3150
+	-1   0    0    1   
+$EndComp
+Connection ~ 8000 4900
+Wire Wire Line
+	7750 4900 8000 4900
+Wire Wire Line
+	8500 4900 8000 4900
+Connection ~ 9000 3150
+Wire Wire Line
+	9500 3150 9000 3150
+Wire Wire Line
+	9000 3150 8500 3150
+Connection ~ 8000 3150
+Wire Wire Line
+	8500 3150 8000 3150
+Wire Wire Line
+	8000 3150 7550 3150
+Connection ~ 7550 3150
+Wire Wire Line
+	7550 3150 7050 3150
+Connection ~ 8500 3150
+Wire Wire Line
+	6150 3150 6050 3150
+Connection ~ 6150 3150
+Connection ~ 6050 3150
+Wire Wire Line
+	6450 3150 6250 3150
+Connection ~ 6450 3150
+Connection ~ 6250 3150
+Wire Wire Line
+	7050 3150 6450 3150
+Connection ~ 7050 3150
+Wire Wire Line
+	6250 3150 6150 3150
+Wire Wire Line
+	6050 3300 6050 3150
+Wire Wire Line
+	6150 3300 6150 3150
+Wire Wire Line
+	6250 3300 6250 3150
+Wire Wire Line
+	6450 3300 6450 3150
+Wire Wire Line
+	6350 5300 6350 5400
+Wire Wire Line
+	6150 5300 6150 5400
+Wire Wire Line
+	7550 5000 7050 5000
+NoConn ~ 7050 4300
+NoConn ~ 7050 4100
+NoConn ~ 7050 3900
+NoConn ~ 5450 3600
+NoConn ~ 5450 3700
+NoConn ~ 5450 3800
+NoConn ~ 5450 3900
+$Comp
+L Interface_USB:FT232RL U?
+U 1 1 5D5CA31B
+P 6250 4300
+AR Path="/5D2E25F2/5D5CA31B" Ref="U?"  Part="1" 
+AR Path="/5D5CA31B" Ref="U1"  Part="1" 
+F 0 "U1" H 5950 5250 50  0000 C CNN
+F 1 "FT232RL" H 6700 5250 50  0000 C CNN
+F 2 "Package_SO:SSOP-28_5.3x10.2mm_P0.65mm" H 6250 4300 50  0001 C CNN
+F 3 "http://www.ftdichip.com/Products/ICs/FT232RL.htm" H 6250 4300 50  0001 C CNN
+	1    6250 4300
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7050 3600 7050 3150
+Wire Wire Line
+	7550 3450 7550 3150
+Wire Wire Line
+	9000 3400 9000 3150
+Wire Wire Line
+	8500 3450 8500 3150
+Wire Wire Line
+	8000 3450 8000 3150
+Wire Wire Line
+	8000 3650 8000 4900
+Wire Wire Line
+	7550 5000 7550 3650
+Wire Wire Line
+	8500 3650 8500 4900
+Connection ~ 8500 4900
+Wire Wire Line
+	9000 3700 9000 4900
+$Comp
+L Device:C_Small C?
+U 1 1 5D5CA30B
+P 7550 3550
+AR Path="/5D2E25F2/5D5CA30B" Ref="C?"  Part="1" 
+AR Path="/5D5CA30B" Ref="C1"  Part="1" 
+F 0 "C1" H 7642 3596 50  0000 L CNN
+F 1 "0.1uF" H 7642 3505 50  0000 L CNN
+F 2 "" H 7550 3550 50  0001 C CNN
+F 3 "~" H 7550 3550 50  0001 C CNN
+	1    7550 3550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D5CA305
+P 8000 3550
+AR Path="/5D2E25F2/5D5CA305" Ref="C?"  Part="1" 
+AR Path="/5D5CA305" Ref="C2"  Part="1" 
+F 0 "C2" H 8092 3596 50  0000 L CNN
+F 1 "0.01uF" H 8092 3505 50  0000 L CNN
+F 2 "" H 8000 3550 50  0001 C CNN
+F 3 "~" H 8000 3550 50  0001 C CNN
+	1    8000 3550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D5CA2FF
+P 8500 3550
+AR Path="/5D2E25F2/5D5CA2FF" Ref="C?"  Part="1" 
+AR Path="/5D5CA2FF" Ref="C3"  Part="1" 
+F 0 "C3" H 8592 3596 50  0000 L CNN
+F 1 "0.1uF" H 8592 3505 50  0000 L CNN
+F 2 "" H 8500 3550 50  0001 C CNN
+F 3 "~" H 8500 3550 50  0001 C CNN
+	1    8500 3550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:CP1 C?
+U 1 1 5D5CA2F9
+P 9000 3550
+AR Path="/5D2E25F2/5D5CA2F9" Ref="C?"  Part="1" 
+AR Path="/5D5CA2F9" Ref="C4"  Part="1" 
+F 0 "C4" H 9115 3596 50  0000 L CNN
+F 1 "4.7uF" H 9115 3505 50  0000 L CNN
+F 2 "" H 9000 3550 50  0001 C CNN
+F 3 "~" H 9000 3550 50  0001 C CNN
+	1    9000 3550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4700 5200 4700 5400
+$Comp
+L Device:LED D?
+U 1 1 5D5CA2F0
+P 4700 4700
+AR Path="/5D2E25F2/5D5CA2F0" Ref="D?"  Part="1" 
+AR Path="/5D5CA2F0" Ref="D1"  Part="1" 
+F 0 "D1" V 4739 4583 50  0000 R CNN
+F 1 "LED" V 4648 4583 50  0000 R CNN
+F 2 "" H 4700 4700 50  0001 C CNN
+F 3 "~" H 4700 4700 50  0001 C CNN
+	1    4700 4700
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 5D5CA2EA
+P 4700 5100
+AR Path="/5D2E25F2/5D5CA2EA" Ref="R?"  Part="1" 
+AR Path="/5D5CA2EA" Ref="Rsc"  Part="1" 
+F 0 "Rsc" H 4768 5146 50  0000 L CNN
+F 1 "33" H 4768 5055 50  0000 L CNN
+F 2 "" H 4700 5100 50  0001 C CNN
+F 3 "~" H 4700 5100 50  0001 C CNN
+	1    4700 5100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7750 4900 7750 5400
+Wire Wire Line
+	9450 2250 9450 500 
+Wire Wire Line
+	9350 1950 7000 1950
+Wire Wire Line
+	9350 1950 9350 2250
+Wire Wire Line
+	9250 2050 7000 2050
+Wire Wire Line
+	9250 2050 9250 2250
+Entry Wire Line
+	9550 2350 9450 2250
+Entry Wire Line
+	9450 2350 9350 2250
+Entry Wire Line
+	9350 2350 9250 2250
+Entry Wire Line
+	9250 2350 9150 2250
+Text GLabel 9650 2350 2    50   Input ~ 0
+TSMPPT_2_USB_BUS
+Connection ~ 9450 500 
+$Comp
+L power:GNDREF #PWR?
+U 1 1 5D647075
+P 9450 500
+AR Path="/5D2E25F2/5D647075" Ref="#PWR?"  Part="1" 
+AR Path="/5D647075" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 9450 250 50  0001 C CNN
+F 1 "GNDREF" H 9455 327 50  0000 C CNN
+F 2 "" H 9450 500 50  0001 C CNN
+F 3 "" H 9450 500 50  0001 C CNN
+	1    9450 500 
+	0    -1   -1   0   
+$EndComp
+Connection ~ 7950 2250
+Wire Wire Line
+	7850 2750 6300 2750
+Wire Wire Line
+	7850 2250 7950 2250
+Wire Wire Line
+	7850 2750 7850 2250
+$Comp
+L Device:CP1 C?
+U 1 1 5D64707F
+P 8950 900
+AR Path="/5D2E25F2/5D64707F" Ref="C?"  Part="1" 
+AR Path="/5D64707F" Ref="C8"  Part="1" 
+F 0 "C8" H 9065 946 50  0000 L CNN
+F 1 "4.7uF" H 9065 855 50  0000 L CNN
+F 2 "" H 8950 900 50  0001 C CNN
+F 3 "~" H 8950 900 50  0001 C CNN
+	1    8950 900 
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D647085
+P 8450 900
+AR Path="/5D2E25F2/5D647085" Ref="C?"  Part="1" 
+AR Path="/5D647085" Ref="C7"  Part="1" 
+F 0 "C7" H 8542 946 50  0000 L CNN
+F 1 "0.1uF" H 8542 855 50  0000 L CNN
+F 2 "" H 8450 900 50  0001 C CNN
+F 3 "~" H 8450 900 50  0001 C CNN
+	1    8450 900 
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D64708B
+P 7950 900
+AR Path="/5D2E25F2/5D64708B" Ref="C?"  Part="1" 
+AR Path="/5D64708B" Ref="C6"  Part="1" 
+F 0 "C6" H 8042 946 50  0000 L CNN
+F 1 "0.01uF" H 8042 855 50  0000 L CNN
+F 2 "" H 7950 900 50  0001 C CNN
+F 3 "~" H 7950 900 50  0001 C CNN
+	1    7950 900 
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D647091
+P 7500 900
+AR Path="/5D2E25F2/5D647091" Ref="C?"  Part="1" 
+AR Path="/5D647091" Ref="C5"  Part="1" 
+F 0 "C5" H 7592 946 50  0000 L CNN
+F 1 "0.1uF" H 7592 855 50  0000 L CNN
+F 2 "" H 7500 900 50  0001 C CNN
+F 3 "~" H 7500 900 50  0001 C CNN
+	1    7500 900 
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8950 1050 8950 2250
+Connection ~ 8950 2250
+Wire Wire Line
+	9150 2250 8950 2250
+Wire Wire Line
+	8950 2250 8450 2250
+Wire Wire Line
+	8450 1000 8450 2250
+Connection ~ 8450 2250
+Wire Wire Line
+	8450 2250 7950 2250
+Wire Wire Line
+	7500 2350 7500 1000
+Wire Wire Line
+	7950 1000 7950 2250
+Wire Wire Line
+	7950 800  7950 500 
+Connection ~ 7950 500 
+Wire Wire Line
+	7950 500  7500 500 
+Wire Wire Line
+	8450 500  7950 500 
+Wire Wire Line
+	8450 800  8450 500 
+Connection ~ 8450 500 
+Wire Wire Line
+	8950 500  8450 500 
+Wire Wire Line
+	8950 750  8950 500 
+Connection ~ 8950 500 
+Wire Wire Line
+	9450 500  8950 500 
+Wire Wire Line
+	7500 800  7500 500 
+Connection ~ 7500 500 
+Wire Wire Line
+	7500 500  7000 500 
+Text Label 5150 2750 2    50   ~ 0
+Vbus_+5V
+Text Label 5550 500  2    50   ~ 0
+GND
+Wire Wire Line
+	6100 500  6000 500 
+Wire Wire Line
+	6400 500  6200 500 
+Wire Wire Line
+	7000 500  6400 500 
+Wire Wire Line
+	6200 500  6100 500 
+Connection ~ 6000 500 
+Connection ~ 6100 500 
+Connection ~ 6200 500 
+Connection ~ 6400 500 
+Wire Wire Line
+	6000 650  6000 500 
+Wire Wire Line
+	6100 650  6100 500 
+Wire Wire Line
+	6200 650  6200 500 
+Wire Wire Line
+	6400 650  6400 500 
+Wire Wire Line
+	6100 2750 4750 2750
+Connection ~ 6100 2750
+Wire Wire Line
+	6300 2750 6100 2750
+Connection ~ 6300 2750
+Connection ~ 7000 500 
+Wire Wire Line
+	6300 2650 6300 2750
+Wire Wire Line
+	6100 2650 6100 2750
+Wire Wire Line
+	7500 2350 7000 2350
+NoConn ~ 7000 1650
+NoConn ~ 7000 1450
+NoConn ~ 7000 1250
+NoConn ~ 5400 950 
+NoConn ~ 5400 1050
+NoConn ~ 5400 1150
+NoConn ~ 5400 1250
+$Comp
+L Interface_USB:FT232RL U?
+U 1 1 5D6470DE
+P 6200 1650
+AR Path="/5D2E25F2/5D6470DE" Ref="U?"  Part="1" 
+AR Path="/5D6470DE" Ref="U?"  Part="1" 
+F 0 "U?" H 6400 2600 50  0000 C CNN
+F 1 "FT232RL" H 6650 2600 50  0000 C CNN
+F 2 "Package_SO:SSOP-28_5.3x10.2mm_P0.65mm" H 6200 1650 50  0001 C CNN
+F 3 "http://www.ftdichip.com/Products/ICs/FT232RL.htm" H 6200 1650 50  0001 C CNN
+	1    6200 1650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7000 950  7000 500 
+Wire Wire Line
+	4750 2550 4750 2750
+$Comp
+L Device:R_Small_US R?
+U 1 1 5D6470EE
+P 4750 2450
+AR Path="/5D2E25F2/5D6470EE" Ref="R?"  Part="1" 
+AR Path="/5D6470EE" Ref="Rsc"  Part="1" 
+F 0 "Rsc" H 4818 2496 50  0000 L CNN
+F 1 "33" H 4818 2405 50  0000 L CNN
+F 2 "" H 4750 2450 50  0001 C CNN
+F 3 "~" H 4750 2450 50  0001 C CNN
+	1    4750 2450
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:LED D?
+U 1 1 5D6470E8
+P 4750 1500
+AR Path="/5D2E25F2/5D6470E8" Ref="D?"  Part="1" 
+AR Path="/5D6470E8" Ref="D2"  Part="1" 
+F 0 "D2" V 4789 1383 50  0000 R CNN
+F 1 "LED" V 4698 1383 50  0000 R CNN
+F 2 "" H 4750 1500 50  0001 C CNN
+F 3 "~" H 4750 1500 50  0001 C CNN
+	1    4750 1500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4750 1650 4750 2350
+$Comp
+L Connector:DB9_Female J5
+U 1 1 5D883B41
+P 4250 2000
+F 0 "J5" H 4200 2550 50  0000 L CNN
+F 1 "DB9_Female" H 4050 2650 50  0000 L CNN
+F 2 "" H 4250 2000 50  0001 C CNN
+F 3 " ~" H 4250 2000 50  0001 C CNN
+	1    4250 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:DB9_Male J6
+U 1 1 5D883B47
+P 5000 1950
+F 0 "J6" H 4918 1258 50  0000 C CNN
+F 1 "DB9_Male" H 4918 1349 50  0000 C CNN
+F 2 "" H 5000 1950 50  0001 C CNN
+F 3 " ~" H 5000 1950 50  0001 C CNN
+	1    5000 1950
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5300 1350 5400 1350
+Wire Wire Line
+	5300 1350 5300 1200
+Wire Wire Line
+	5300 1200 4750 1200
+Wire Wire Line
+	4750 1200 4750 1350
+Wire Wire Line
+	5300 1650 5400 1650
+Wire Wire Line
+	5300 1750 5400 1750
+Wire Wire Line
+	5300 1550 5350 1550
+Wire Wire Line
+	5350 500  5350 1550
+Wire Wire Line
+	5350 500  6000 500 
+Wire Wire Line
+	5300 1850 5400 1850
+Wire Wire Line
+	5300 1950 5400 1950
+Wire Wire Line
+	5300 2050 5400 2050
+Wire Wire Line
+	5300 2150 5400 2150
+Wire Wire Line
+	5300 2250 5400 2250
+Wire Wire Line
+	5300 2350 5400 2350
+$Comp
+L Connector:Screw_Terminal_01x04 J7
+U 1 1 5D93D826
+P 2450 1850
+F 0 "J7" H 2368 1425 50  0000 C CNN
+F 1 "Screw_Terminal_01x04" H 2368 1516 50  0000 C CNN
+F 2 "" H 2450 1850 50  0001 C CNN
+F 3 "~" H 2450 1850 50  0001 C CNN
+	1    2450 1850
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2000 1750 2000 1200
+Wire Wire Line
+	2000 1200 4450 1200
+Wire Wire Line
+	2000 1750 2450 1750
+Wire Wire Line
+	2400 1950 2450 1950
+Wire Wire Line
+	2400 1850 2450 1850
+$Comp
+L Connector_Generic:Conn_02x02_Odd_Even J8
+U 1 1 5D9840BE
+P 2150 2450
+F 0 "J8" H 2200 2667 50  0000 C CNN
+F 1 "Small_Screw_Terminal_02x02" H 2200 2576 50  0000 C CNN
+F 2 "" H 2150 2450 50  0001 C CNN
+F 3 "~" H 2150 2450 50  0001 C CNN
+	1    2150 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1550 2400 1700 2400
+Wire Wire Line
+	1700 2400 1700 2450
+Wire Wire Line
+	1700 2450 1950 2450
+Wire Wire Line
+	1550 2600 1700 2600
+Wire Wire Line
+	1700 2600 1700 2550
+Wire Wire Line
+	1700 2550 1950 2550
+Wire Wire Line
+	2450 2450 2450 2150
+Wire Wire Line
+	2450 2150 2650 2150
+Wire Wire Line
+	2450 2550 2600 2550
+Wire Wire Line
+	2600 2550 2600 2250
+Wire Wire Line
+	2600 2250 2650 2250
+Wire Wire Line
+	850  1050 850  1650
+Wire Wire Line
+	850  1650 2450 1650
+$Comp
+L Connector:DB9_Male J4
+U 1 1 5D4C0D50
+P 5000 4600
+F 0 "J4" H 4918 3908 50  0000 C CNN
+F 1 "DB9_Male" H 4918 3999 50  0000 C CNN
+F 2 "" H 5000 4600 50  0001 C CNN
+F 3 " ~" H 5000 4600 50  0001 C CNN
+	1    5000 4600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5300 4300 5450 4300
+Wire Wire Line
+	5300 4400 5450 4400
+Wire Wire Line
+	5300 4500 5450 4500
+Wire Wire Line
+	5300 4600 5450 4600
+Wire Wire Line
+	5300 4200 5350 4200
+Wire Wire Line
+	5350 4200 5350 3150
+Wire Wire Line
+	5350 3150 6050 3150
+Wire Wire Line
+	5300 4700 5450 4700
+Wire Wire Line
+	5300 4800 5450 4800
+Wire Wire Line
+	5300 4900 5450 4900
+Wire Wire Line
+	5300 5000 5450 5000
+Wire Wire Line
+	5300 3850 5300 4000
+Wire Wire Line
+	5300 4000 5450 4000
+Wire Wire Line
+	4700 3850 4700 4550
+Wire Wire Line
+	4700 4850 4700 5000
+Wire Wire Line
+	4700 3850 5300 3850
+Wire Wire Line
+	4700 5400 6150 5400
+Wire Wire Line
+	900  4200 900  3500
+Wire Wire Line
+	900  4200 2350 4200
+Wire Wire Line
+	2000 3700 4550 3700
+Wire Wire Line
+	4550 3700 4550 3500
+Wire Wire Line
+	2000 3700 2000 4300
+Text Notes 8100 7650 0    50   ~ 0
+7/31/2019
+Wire Bus Line
+	9250 2350 9650 2350
+Wire Bus Line
+	9200 5000 9650 5000
+Wire Bus Line
+	6850 6100 6850 6500
+$EndSCHEMATC

@@ -1,0 +1,23 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# Tristar_MPPT
+#
+DEF Tristar_MPPT U 0 40 Y Y 1 F N
+F0 "U" 350 350 50 H V C CNN
+F1 "Tristar_MPPT" 0 200 50 H V C CNN
+F2 "" 350 350 50 H I C CNN
+F3 "" 350 350 50 H I C CNN
+DRAW
+S -350 400 300 -250 0 1 0 N
+X Array_Terminal 1 -300 -250 100 D 50 50 1 1 I
+X Common_Ground 2 -200 -250 100 D 50 50 1 1 I
+X Common_Ground 3 -100 -250 100 D 50 50 1 1 I
+X Battery_Terminal 4 0 -250 100 D 50 50 1 1 I
+X Battery_Remote_Sense 5 100 -250 100 D 50 50 1 1 I
+X Battery_Temperature_Sense 6 200 -250 100 D 50 50 1 1 I
+X Serial_RS-232 7 300 100 100 R 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+#End Library

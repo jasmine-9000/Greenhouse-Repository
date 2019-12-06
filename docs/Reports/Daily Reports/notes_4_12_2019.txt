@@ -1,0 +1,8 @@
+Action Items:
+
+use the TxD pin to figure out the baudrate.
+sniff the bus to see what it looks like.
+
+
+
+

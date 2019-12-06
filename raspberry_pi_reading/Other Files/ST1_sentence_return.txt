@@ -1,0 +1,23 @@
+Charging flags:
+
+charging stage, last charging error, last charging error parameter (for debugging purposes), stage duration, 
+ 
+ 
+Status Flags:
+
+ Valid cell voltages, Valid balancing rates, valid number of live cells, battery charging finished, valid cell temperatures
+ 
+ 
+Protection Flags:
+
+ undervoltage, overvoltage, discharge overcurrent, charge overcurrent, cell module overheat, leakage, no_cell_comm, cell_overheat
+
+
+Power Flags:
+ 
+  warning: power reduction: low voltage, warning: power reduction: high current, warning: power reduction: high cell module temperature,  warning: power reduction: high cell temperature
+ 
+
+Pin Flags:
+ 
+  no_function, speed_sensor, fast_charge_switch, ign_key, charger_mains_AC_sense, heater_enable, sound_buzzer, battery_low, charging_indication, charger_enable_output, state_of_charge, battery_contactor, battery_fan, current_sensor, leakage_sensor, power_reduction, charging_interlock, analog_charger_control, ZVU_boost_charge, ZVU_slow_charge, ZVU_buffer_mode, BMS_failure, equalization_enable, DCDC_control, ESM_rectifier_current_limit, contactor_precharge

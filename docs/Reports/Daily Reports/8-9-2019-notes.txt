@@ -1,0 +1,131 @@
+notes:
+
+
+In the components document:
+
+add a summary
+how 
+how will it be used?
+who is the audience? Who will benefit from this document?
+
+thesis has to be a literate college-level discussion
+
+
+Master schematic:
+
+Have a summary of the schematics.
+This document contains a complete description of ....
+
+discuss the significance of each of these schematics.
+
+What's existing, what's not existing?
+
+Put stuff in the title block
+Put a brief statement in the title block describing what's in the schematic.
+
+Started 
+
+Begin writing a Pro's document.
+
+turn this into a report.
+
+When you think it's complete, turn it into a report style document.
+
+In the introduction, introduce what's in the schematics?
+
+Discuss each page in turn. What's in there, why is it important, and how does it relate to the design a 
+
+We can turn it
+
+***
+Make it very clear on the schematic what's existing and what's proposed.
+***
+
+Don't necessarily 
+
+Proposed vs existing?
+
+In my written summary of this page, 
+
+These are figures.
+
+Single page figures.
+
+Example;
+
+Page 3: all of these represent existing stuff 
+
+On thi
+
+
+
+Get this into a professional summary form.
+
+
+***
+When can we meet next so we can document what's existing, and what's proposed. 
+***
+
+
+Make it so
+
+
+Components left:
+
+The mechanical box that contains all the parts.
+	Have a set of pictures that document where things are located.
+
+The yellow and black switches.
+
+	Use GIMP to annotate pictures of the greenhouse.
+
+	Corrolate them to my schematic.
+
+	Correlate these into my schematic.
+
+The heater and coolers required for the battery box.
+
+Student microcontrollers
+
+Use some way to identify components. Arrows, maybe?
+
+I could try doing it in MS word.
+
+Produce relevant details. Use it as a working document of what's actually there.
+
+Then make recommendations.
+
+Older notes:
+
+	Take physical measurements.
+	Confirm wiring.
+	Identify mystery box.
+
+
+********************
+
+Action items:
+
+get my documents completed.
+	- Items: components doc, and schematics doc.
+	- written introductions and discussions about how to use them!
+	- kind of a report! turn them into working documents.
+	- pictures can go into the components document.
+complete the component list!
+future: review with Tela. As soon as she gets back from vacation!
+get pictures that we can review.
+get documents that we can read.
+identify what I plan to add to the greenhouse. (specify additions to the greenhouse)
+put some of the additions 
+in my components document, list out existing vs proposed components separately.
+
+have an existing vs proposed schematic. 
+
+take the same document, and add proposed additions separately.
+
+If it fits in the same document, we could put them both in there. 
+
+
+
+***********
+

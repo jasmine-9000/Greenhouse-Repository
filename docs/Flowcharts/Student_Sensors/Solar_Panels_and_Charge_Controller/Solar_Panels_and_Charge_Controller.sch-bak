@@ -1,0 +1,427 @@
+EESchema Schematic File Version 4
+LIBS:Solar_Panels_and_Charge_Controller-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 2
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:Solar_Cell SC1
+U 1 1 5D239A32
+P 1000 1200
+F 0 "SC1" H 1108 1296 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 1205 50  0000 L CNN
+F 2 "" V 1000 1260 50  0001 C CNN
+F 3 "~" V 1000 1260 50  0001 C CNN
+	1    1000 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC2
+U 1 1 5D239F08
+P 1000 1500
+F 0 "SC2" H 1108 1596 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 1505 50  0000 L CNN
+F 2 "" V 1000 1560 50  0001 C CNN
+F 3 "~" V 1000 1560 50  0001 C CNN
+	1    1000 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC3
+U 1 1 5D23A9B6
+P 1000 1800
+F 0 "SC3" H 1108 1896 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 1805 50  0000 L CNN
+F 2 "" V 1000 1860 50  0001 C CNN
+F 3 "~" V 1000 1860 50  0001 C CNN
+	1    1000 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC4
+U 1 1 5D23B182
+P 1000 2100
+F 0 "SC4" H 1108 2196 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 2105 50  0000 L CNN
+F 2 "" V 1000 2160 50  0001 C CNN
+F 3 "~" V 1000 2160 50  0001 C CNN
+	1    1000 2100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC5
+U 1 1 5D23DFAB
+P 1000 2400
+F 0 "SC5" H 1108 2496 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 2405 50  0000 L CNN
+F 2 "" V 1000 2460 50  0001 C CNN
+F 3 "~" V 1000 2460 50  0001 C CNN
+	1    1000 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC6
+U 1 1 5D23DFB1
+P 1000 2700
+F 0 "SC6" H 1108 2796 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 2705 50  0000 L CNN
+F 2 "" V 1000 2760 50  0001 C CNN
+F 3 "~" V 1000 2760 50  0001 C CNN
+	1    1000 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC7
+U 1 1 5D23DFB7
+P 1000 3000
+F 0 "SC7" H 1108 3096 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 3005 50  0000 L CNN
+F 2 "" V 1000 3060 50  0001 C CNN
+F 3 "~" V 1000 3060 50  0001 C CNN
+	1    1000 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC8
+U 1 1 5D23DFBD
+P 1000 3300
+F 0 "SC8" H 1108 3396 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 3305 50  0000 L CNN
+F 2 "" V 1000 3360 50  0001 C CNN
+F 3 "~" V 1000 3360 50  0001 C CNN
+	1    1000 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC9
+U 1 1 5D24033B
+P 1000 3600
+F 0 "SC9" H 1108 3696 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 3605 50  0000 L CNN
+F 2 "" V 1000 3660 50  0001 C CNN
+F 3 "~" V 1000 3660 50  0001 C CNN
+	1    1000 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC10
+U 1 1 5D240341
+P 1000 3900
+F 0 "SC10" H 1108 3996 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 3905 50  0000 L CNN
+F 2 "" V 1000 3960 50  0001 C CNN
+F 3 "~" V 1000 3960 50  0001 C CNN
+	1    1000 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC11
+U 1 1 5D240347
+P 1000 4200
+F 0 "SC11" H 1108 4296 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 4205 50  0000 L CNN
+F 2 "" V 1000 4260 50  0001 C CNN
+F 3 "~" V 1000 4260 50  0001 C CNN
+	1    1000 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC12
+U 1 1 5D24034D
+P 1000 4500
+F 0 "SC12" H 1108 4596 50  0000 L CNN
+F 1 "Solar_Cell" H 1108 4505 50  0000 L CNN
+F 2 "" V 1000 4560 50  0001 C CNN
+F 3 "~" V 1000 4560 50  0001 C CNN
+	1    1000 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC13
+U 1 1 5D2561C0
+P 2850 1150
+F 0 "SC13" H 2958 1246 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 1155 50  0000 L CNN
+F 2 "" V 2850 1210 50  0001 C CNN
+F 3 "~" V 2850 1210 50  0001 C CNN
+	1    2850 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC14
+U 1 1 5D2561C6
+P 2850 1450
+F 0 "SC14" H 2958 1546 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 1455 50  0000 L CNN
+F 2 "" V 2850 1510 50  0001 C CNN
+F 3 "~" V 2850 1510 50  0001 C CNN
+	1    2850 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC15
+U 1 1 5D2561CC
+P 2850 1750
+F 0 "SC15" H 2958 1846 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 1755 50  0000 L CNN
+F 2 "" V 2850 1810 50  0001 C CNN
+F 3 "~" V 2850 1810 50  0001 C CNN
+	1    2850 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC16
+U 1 1 5D2561D2
+P 2850 2050
+F 0 "SC16" H 2958 2146 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 2055 50  0000 L CNN
+F 2 "" V 2850 2110 50  0001 C CNN
+F 3 "~" V 2850 2110 50  0001 C CNN
+	1    2850 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC17
+U 1 1 5D2561D8
+P 2850 2350
+F 0 "SC17" H 2958 2446 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 2355 50  0000 L CNN
+F 2 "" V 2850 2410 50  0001 C CNN
+F 3 "~" V 2850 2410 50  0001 C CNN
+	1    2850 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC18
+U 1 1 5D2561DE
+P 2850 2650
+F 0 "SC18" H 2958 2746 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 2655 50  0000 L CNN
+F 2 "" V 2850 2710 50  0001 C CNN
+F 3 "~" V 2850 2710 50  0001 C CNN
+	1    2850 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC19
+U 1 1 5D2561E4
+P 2850 2950
+F 0 "SC19" H 2958 3046 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 2955 50  0000 L CNN
+F 2 "" V 2850 3010 50  0001 C CNN
+F 3 "~" V 2850 3010 50  0001 C CNN
+	1    2850 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC20
+U 1 1 5D2561F0
+P 2850 3250
+F 0 "SC20" H 2958 3346 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 3255 50  0000 L CNN
+F 2 "" V 2850 3310 50  0001 C CNN
+F 3 "~" V 2850 3310 50  0001 C CNN
+	1    2850 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC21
+U 1 1 5D2561F6
+P 2850 3550
+F 0 "SC21" H 2958 3646 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 3555 50  0000 L CNN
+F 2 "" V 2850 3610 50  0001 C CNN
+F 3 "~" V 2850 3610 50  0001 C CNN
+	1    2850 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC22
+U 1 1 5D2561FC
+P 2850 3850
+F 0 "SC22" H 2958 3946 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 3855 50  0000 L CNN
+F 2 "" V 2850 3910 50  0001 C CNN
+F 3 "~" V 2850 3910 50  0001 C CNN
+	1    2850 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC23
+U 1 1 5D256202
+P 2850 4150
+F 0 "SC23" H 2958 4246 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 4155 50  0000 L CNN
+F 2 "" V 2850 4210 50  0001 C CNN
+F 3 "~" V 2850 4210 50  0001 C CNN
+	1    2850 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Solar_Cell SC24
+U 1 1 5D2609D1
+P 2850 4450
+F 0 "SC24" H 2958 4546 50  0000 L CNN
+F 1 "Solar_Cell" H 2958 4455 50  0000 L CNN
+F 2 "" V 2850 4510 50  0001 C CNN
+F 3 "~" V 2850 4510 50  0001 C CNN
+	1    2850 4450
+	1    0    0    -1  
+$EndComp
+Text Label 7350 7500 0    50   ~ 0
+SolarPanels
+Text Label 10600 7650 0    50   ~ 0
+1.0
+Wire Wire Line
+	1000 850  1000 1000
+Wire Wire Line
+	2850 800  2850 950 
+Wire Wire Line
+	2850 800  2500 800 
+Wire Wire Line
+	700  5750 700  5850
+Wire Wire Line
+	700  5850 550  5850
+Wire Wire Line
+	550  5850 550  850 
+Wire Wire Line
+	550  850  1000 850 
+Wire Wire Line
+	1000 4600 600  4600
+Wire Wire Line
+	600  4600 600  5950
+Wire Wire Line
+	600  5950 850  5950
+Wire Wire Line
+	850  5950 850  5750
+Wire Wire Line
+	2500 5700 3050 5700
+Wire Wire Line
+	3050 5700 3050 5550
+Wire Wire Line
+	2500 800  2500 5700
+$Comp
+L tsmppt:TSMPPT U1
+U 1 1 5D273267
+P 1150 5500
+F 0 "U1" H 1450 6100 50  0000 L CNN
+F 1 "TSMPPT" H 1000 6100 50  0000 L CNN
+F 2 "" H 1500 5700 50  0001 C CNN
+F 3 "" H 1500 5700 50  0001 C CNN
+	1    1150 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1750 4800 2050 4800
+Wire Wire Line
+	1750 4900 2050 4900
+Wire Wire Line
+	1750 5000 2050 5000
+Wire Wire Line
+	1750 5100 2050 5100
+Wire Wire Line
+	1750 5200 2050 5200
+Wire Wire Line
+	1750 5300 2050 5300
+Wire Wire Line
+	1750 5400 2050 5400
+Wire Wire Line
+	1750 5500 2050 5500
+Entry Wire Line
+	2050 5600 2150 5700
+Entry Wire Line
+	2050 5500 2150 5600
+Entry Wire Line
+	2050 5400 2150 5500
+Entry Wire Line
+	2050 5300 2150 5400
+Entry Wire Line
+	2050 5200 2150 5300
+Entry Wire Line
+	2050 5100 2150 5200
+Entry Wire Line
+	2050 5000 2150 5100
+Entry Wire Line
+	2050 4900 2150 5000
+Entry Wire Line
+	2050 4800 2150 4900
+Wire Wire Line
+	1750 5600 2050 5600
+Wire Wire Line
+	2850 4550 2850 5850
+Wire Wire Line
+	2850 5850 3200 5850
+Wire Wire Line
+	3200 5850 3200 5550
+Entry Wire Line
+	4450 5400 4550 5500
+Entry Wire Line
+	4450 5300 4550 5400
+Entry Wire Line
+	4450 5200 4550 5300
+Entry Wire Line
+	4450 5100 4550 5200
+Entry Wire Line
+	4450 5000 4550 5100
+Entry Wire Line
+	4450 4900 4550 5000
+Entry Wire Line
+	4450 4800 4550 4900
+Entry Wire Line
+	4450 4700 4550 4800
+Entry Wire Line
+	4450 4600 4550 4700
+Wire Wire Line
+	4100 4600 4450 4600
+Wire Wire Line
+	4450 4700 4100 4700
+Wire Wire Line
+	4100 4800 4450 4800
+Wire Wire Line
+	4450 4900 4100 4900
+Wire Wire Line
+	4100 5000 4450 5000
+Wire Wire Line
+	4450 5100 4100 5100
+Wire Wire Line
+	4100 5200 4450 5200
+Wire Wire Line
+	4450 5300 4100 5300
+Wire Wire Line
+	4450 5400 4100 5400
+Text GLabel 4550 5750 3    50   Input ~ 0
+TSMPPT_2_RS232_BUS
+Text GLabel 2150 5800 3    50   Input ~ 0
+TSMPPT_1_RS232_BUS
+$Comp
+L tsmppt:TSMPPT U2
+U 1 1 5D273F5A
+P 3500 5300
+F 0 "U2" H 3800 5950 50  0000 L CNN
+F 1 "TSMPPT" H 3350 5950 50  0000 L CNN
+F 2 "" H 3850 5500 50  0001 C CNN
+F 3 "" H 3850 5500 50  0001 C CNN
+	1    3500 5300
+	1    0    0    -1  
+$EndComp
+$Sheet
+S 12000 0    12600 8250
+U 5D2E25F2
+F0 "Sheet_2" 50
+F1 "RS232_to_USB_to_Raspberry_Pi.sch" 50
+$EndSheet
+Wire Bus Line
+	2150 4900 2150 5800
+Wire Bus Line
+	4550 4700 4550 5750
+$EndSCHEMATC

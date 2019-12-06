@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes" ?>
+<morningstar>
+  <tristarmppt>
+    <settings version="2">
+      <mode>1</mode>
+      <variable id="1">
+        <value addr="57344">2549</value>
+      </variable>
+      <variable id="2">
+        <value addr="57346">256</value>
+      </variable>
+      <variable id="3">
+        <value addr="57348">2276</value>
+      </variable>
+      <variable id="4">
+        <value addr="57347">0</value>
+      </variable>
+      <variable id="5">
+        <value addr="57357">11</value>
+      </variable>
+      <variable id="6">
+        <value addr="57362">65506</value>
+      </variable>
+      <variable id="7">
+        <value addr="57361">80</value>
+      </variable>
+      <variable id="8">
+        <value addr="57360">0</value>
+      </variable>
+      <variable id="9">
+        <value addr="57355">0</value>
+      </variable>
+      <variable id="20">
+        <value addr="57345">2458</value>
+      </variable>
+      <variable id="21">
+        <value addr="57350">3600</value>
+      </variable>
+      <variable id="22">
+        <value addr="57349">2239</value>
+      </variable>
+      <variable id="30">
+        <value addr="57351">0</value>
+      </variable>
+      <variable id="31">
+        <value addr="57354">0</value>
+      </variable>
+      <variable id="32">
+        <value addr="57352">0</value>
+      </variable>
+      <variable id="33">
+        <value addr="57353">0</value>
+      </variable>
+      <variable id="34">
+        <value addr="57358">2640</value>
+      </variable>
+      <variable id="35">
+        <value addr="57359">2512</value>
+      </variable>
+      <variable id="40">
+        <value addr="57365">2421</value>
+      </variable>
+      <variable id="41">
+        <value addr="57366">2367</value>
+      </variable>
+      <variable id="42">
+        <value addr="57367">2303</value>
+      </variable>
+      <variable id="43">
+        <value addr="57368">2185</value>
+      </variable>
+      <variable id="50">
+        <value addr="57369">1</value>
+      </variable>
+      <variable id="51">
+        <value addr="57370">1</value>
+      </variable>
+      <variable id="52">
+        <value addr="5399">16384</value>
+      </variable>
+      <variable id="53">
+        <value addr="5377">43200</value>
+        <value addr="5378">64769</value>
+      </variable>
+      <variable id="54">
+        <value addr="5379">65535</value>
+        <value addr="5380">255</value>
+      </variable>
+      <variable id="55">
+        <value addr="5381">43200</value>
+        <value addr="5382">257</value>
+      </variable>
+      <variable id="56">
+        <value addr="5383">43200</value>
+        <value addr="5384">257</value>
+      </variable>
+      <variable id="57">
+        <value addr="5385">0</value>
+        <value addr="5386">0</value>
+      </variable>
+      <variable id="58">
+        <value addr="5403">80</value>
+      </variable>
+      <variable id="59">
+        <value addr="5404">502</value>
+      </variable>
+      <variable id="60">
+        <value addr="5405">0</value>
+      </variable>
+      <variable id="61">
+        <value addr="5391">21332</value>
+        <value addr="5392">20557</value>
+        <value addr="5393">21584</value>
+        <value addr="5394">8224</value>
+        <value addr="5395">8224</value>
+        <value addr="5396">32</value>
+        <value addr="5397">0</value>
+        <value addr="5398">0</value>
+      </variable>
+      <variable id="62">
+        <value addr="5407">0</value>
+      </variable>
+      <variable id="70">
+        <value addr="5417">0</value>
+        <value addr="5418">0</value>
+      </variable>
+      <variable id="71">
+        <value addr="5808">0</value>
+        <value addr="5809">0</value>
+        <value addr="5810">0</value>
+        <value addr="5811">0</value>
+        <value addr="5812">0</value>
+        <value addr="5813">0</value>
+        <value addr="5814">0</value>
+        <value addr="5815">0</value>
+        <value addr="5816">0</value>
+        <value addr="5817">0</value>
+        <value addr="5818">0</value>
+        <value addr="5819">0</value>
+        <value addr="5820">0</value>
+        <value addr="5821">0</value>
+        <value addr="5822">0</value>
+        <value addr="5823">0</value>
+      </variable>
+      <variable id="72">
+        <value addr="5824">0</value>
+        <value addr="5825">0</value>
+        <value addr="5826">0</value>
+        <value addr="5827">0</value>
+        <value addr="5828">0</value>
+        <value addr="5829">0</value>
+        <value addr="5830">0</value>
+        <value addr="5831">0</value>
+        <value addr="5832">0</value>
+        <value addr="5833">0</value>
+        <value addr="5834">0</value>
+        <value addr="5835">0</value>
+        <value addr="5836">0</value>
+        <value addr="5837">0</value>
+        <value addr="5838">0</value>
+        <value addr="5839">0</value>
+      </variable>
+      <variable id="74">
+        <value addr="5840">0</value>
+        <value addr="5841">0</value>
+        <value addr="5842">0</value>
+        <value addr="5843">0</value>
+        <value addr="5844">0</value>
+        <value addr="5845">0</value>
+        <value addr="5846">0</value>
+        <value addr="5847">0</value>
+        <value addr="5848">0</value>
+        <value addr="5849">0</value>
+        <value addr="5850">0</value>
+        <value addr="5851">0</value>
+        <value addr="5852">0</value>
+        <value addr="5853">0</value>
+        <value addr="5854">0</value>
+        <value addr="5855">0</value>
+        <value addr="5856">0</value>
+        <value addr="5857">0</value>
+        <value addr="5858">0</value>
+        <value addr="5859">0</value>
+        <value addr="5860">0</value>
+        <value addr="5861">0</value>
+        <value addr="5862">0</value>
+        <value addr="5863">0</value>
+        <value addr="5864">0</value>
+        <value addr="5865">0</value>
+        <value addr="5866">0</value>
+        <value addr="5867">0</value>
+        <value addr="5868">0</value>
+        <value addr="5869">0</value>
+        <value addr="5870">0</value>
+        <value addr="5871">0</value>
+      </variable>
+      <variable id="75">
+        <value addr="5406">162</value>
+      </variable>
+      <variable id="76">
+        <value addr="5807">0</value>
+      </variable>
+      <variable id="77">
+        <value addr="5419">0</value>
+        <value addr="5420">0</value>
+        <value addr="5421">0</value>
+        <value addr="5422">0</value>
+        <value addr="5423">0</value>
+        <value addr="5424">0</value>
+        <value addr="5425">0</value>
+        <value addr="5426">0</value>
+      </variable>
+      <variable id="80">
+        <value addr="5429">0</value>
+      </variable>
+      <variable id="81">
+        <value addr="5430">0</value>
+      </variable>
+      <variable id="82">
+        <value addr="5431">0</value>
+      </variable>
+      <variable id="83">
+        <value addr="5432">0</value>
+      </variable>
+      <variable id="84">
+        <value addr="5433">0</value>
+      </variable>
+      <variable id="85">
+        <value addr="5434">0</value>
+      </variable>
+      <variable id="86">
+        <value addr="5435">0</value>
+      </variable>
+      <variable id="87">
+        <value addr="5436">0</value>
+        <value addr="5437">0</value>
+        <value addr="5438">0</value>
+        <value addr="5439">0</value>
+        <value addr="5440">0</value>
+        <value addr="5441">0</value>
+        <value addr="5442">0</value>
+        <value addr="5443">0</value>
+      </variable>
+      <variable id="88">
+        <value addr="5429">0</value>
+      </variable>
+      <variable id="89">
+        <value addr="5429">0</value>
+      </variable>
+      <variable id="100">
+        <value addr="5444">0</value>
+      </variable>
+      <variable id="101">
+        <value addr="5445">0</value>
+      </variable>
+      <variable id="102">
+        <value addr="5446">0</value>
+      </variable>
+      <variable id="103">
+        <value addr="5447">0</value>
+      </variable>
+      <variable id="104">
+        <value addr="5448">0</value>
+      </variable>
+      <variable id="105">
+        <value addr="5449">0</value>
+      </variable>
+      <variable id="106">
+        <value addr="5450">0</value>
+      </variable>
+      <variable id="107">
+        <value addr="5451">0</value>
+        <value addr="5452">0</value>
+        <value addr="5453">0</value>
+        <value addr="5454">0</value>
+        <value addr="5455">0</value>
+        <value addr="5456">0</value>
+        <value addr="5457">0</value>
+        <value addr="5458">0</value>
+      </variable>
+      <variable id="108">
+        <value addr="5444">0</value>
+      </variable>
+      <variable id="109">
+        <value addr="5444">0</value>
+      </variable>
+      <variable id="120">
+        <value addr="5459">0</value>
+      </variable>
+      <variable id="121">
+        <value addr="5460">0</value>
+      </variable>
+      <variable id="122">
+        <value addr="5461">0</value>
+      </variable>
+      <variable id="123">
+        <value addr="5462">0</value>
+      </variable>
+      <variable id="124">
+        <value addr="5463">0</value>
+      </variable>
+      <variable id="125">
+        <value addr="5464">0</value>
+      </variable>
+      <variable id="126">
+        <value addr="5465">0</value>
+      </variable>
+      <variable id="127">
+        <value addr="5466">0</value>
+        <value addr="5467">0</value>
+        <value addr="5468">0</value>
+        <value addr="5469">0</value>
+        <value addr="5470">0</value>
+        <value addr="5471">0</value>
+        <value addr="5472">0</value>
+        <value addr="5473">0</value>
+      </variable>
+      <variable id="128">
+        <value addr="5459">0</value>
+      </variable>
+      <variable id="129">
+        <value addr="5459">0</value>
+      </variable>
+      <variable id="140">
+        <value addr="5474">0</value>
+      </variable>
+      <variable id="141">
+        <value addr="5475">0</value>
+      </variable>
+      <variable id="142">
+        <value addr="5476">0</value>
+      </variable>
+      <variable id="143">
+        <value addr="5477">0</value>
+      </variable>
+      <variable id="144">
+        <value addr="5478">0</value>
+      </variable>
+      <variable id="145">
+        <value addr="5479">0</value>
+      </variable>
+      <variable id="146">
+        <value addr="5480">0</value>
+      </variable>
+      <variable id="147">
+        <value addr="5481">0</value>
+        <value addr="5482">0</value>
+        <value addr="5483">0</value>
+        <value addr="5484">0</value>
+        <value addr="5485">0</value>
+        <value addr="5486">0</value>
+        <value addr="5487">0</value>
+        <value addr="5488">0</value>
+      </variable>
+      <variable id="148">
+        <value addr="5474">0</value>
+      </variable>
+      <variable id="149">
+        <value addr="5474">0</value>
+      </variable>
+      <variable id="200">
+        <value addr="57378">0</value>
+      </variable>
+      <variable id="201">
+        <value addr="57378">0</value>
+      </variable>
+      <variable id="202">
+        <value addr="57378">0</value>
+      </variable>
+      <variable id="203">
+        <value addr="57378">0</value>
+      </variable>
+      <variable id="204">
+        <value addr="57378">0</value>
+      </variable>
+      <variable id="205">
+        <value addr="57378">0</value>
+      </variable>
+      <variable id="208">
+        <value addr="57373">8450</value>
+      </variable>
+      <variable id="209">
+        <value addr="57376">15619</value>
+      </variable>
+      <variable id="210">
+        <value addr="57377">10</value>
+      </variable>
+      <variable id="220">
+        <value addr="57395">65535</value>
+      </variable>
+      <variable id="221">
+        <value addr="57396">65535</value>
+      </variable>
+      <variable id="222">
+        <value addr="57397">65535</value>
+      </variable>
+      <variable id="223">
+        <value addr="57398">65535</value>
+      </variable>
+      <variable id="224">
+        <value addr="57399">65535</value>
+      </variable>
+      <variable id="225">
+        <value addr="57400">65535</value>
+      </variable>
+      <variable id="226">
+        <value addr="57401">65535</value>
+      </variable>
+      <variable id="227">
+        <value addr="57402">65535</value>
+      </variable>
+      <variable id="228">
+        <value addr="57403">65535</value>
+      </variable>
+      <variable id="229">
+        <value addr="57404">65535</value>
+      </variable>
+      <variable id="230">
+        <value addr="57405">65535</value>
+      </variable>
+      <variable id="231">
+        <value addr="57406">65535</value>
+      </variable>
+      <variable id="232">
+        <value addr="57407">65535</value>
+      </variable>
+      <variable id="233">
+        <value addr="57408">65535</value>
+      </variable>
+      <variable id="234">
+        <value addr="57409">65535</value>
+      </variable>
+      <variable id="235">
+        <value addr="57410">65535</value>
+      </variable>
+      <variable id="240">
+        <value addr="57379">0</value>
+      </variable>
+      <variable id="241">
+        <value addr="57380">0</value>
+      </variable>
+      <variable id="242">
+        <value addr="57381">39168</value>
+      </variable>
+      <variable id="243">
+        <value addr="57382">9</value>
+      </variable>
+      <variable id="244">
+        <value addr="57383">0</value>
+      </variable>
+      <variable id="245">
+        <value addr="57384">0</value>
+      </variable>
+      <variable id="246">
+        <value addr="57385">0</value>
+      </variable>
+      <variable id="247">
+        <value addr="57386">0</value>
+      </variable>
+      <variable id="248">
+        <value addr="57387">768</value>
+      </variable>
+      <variable id="249">
+        <value addr="57388">0</value>
+      </variable>
+      <variable id="250">
+        <value addr="57389">65535</value>
+      </variable>
+      <variable id="251">
+        <value addr="57390">65535</value>
+      </variable>
+      <variable id="252">
+        <value addr="57391">65535</value>
+      </variable>
+      <variable id="253">
+        <value addr="57392">65535</value>
+      </variable>
+      <variable id="254">
+        <value addr="57393">65535</value>
+      </variable>
+      <variable id="255">
+        <value addr="57394">65535</value>
+      </variable>
+    </settings>
+  </tristarmppt>
+</morningstar>

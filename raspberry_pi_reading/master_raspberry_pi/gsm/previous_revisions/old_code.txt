@@ -1,0 +1,10 @@
+while True:
+			new_char = ser.read(1)
+			byte_flow += new_char
+			if len(byte_flow) >= 4 and byte_flow[-4:] == b'\r\nOK':
+				break
+			elif len(byte_flow) >= 7 and byte_flow[-7:] == b'\r\nERROR':
+				break
+		byte_flow += ser.read(2)
+
+		return byteflow 

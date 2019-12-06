@@ -1,0 +1,8 @@
+Most Popular Serial Protocols Available:
+
+1.) UART
+2.) I2C
+3.) SPI
+4.) SDI-12
+5.) 1-wire
+6.) Microwire

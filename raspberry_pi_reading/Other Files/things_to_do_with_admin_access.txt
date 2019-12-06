@@ -1,0 +1,20 @@
+Things I want to do with admin access:
+
+add myself as a user
+
+sudo adduser wrkerr9
+
+install pip and a virtual environment
+
+sudo apt install python-pip
+sudo python3 -m pip install --user --upgrade pip
+sudo python3 -m pip install --user virtualenv
+sudo python3 -m venv /home/slabuser/greenhouse_website/venv
+source /home/slabuser/greenhouse_website/venv/bin/activate
+
+install a supervisor so my website works without me being there.
+sudo python3 -m pip install --user supervisor
+
+edit the supervisor configuration file to add my application.
+
+sudo nano /etc/supervisord.conf 

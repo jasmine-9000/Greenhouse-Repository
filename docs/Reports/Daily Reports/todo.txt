@@ -1,0 +1,8 @@
+Things I have to do for the project:
+
+BMS reading (50% done)
+Tristar reading (100% done)
+Develop Faculty Sensor Node Shield (0% done)
+Develop Student Sensor Node Shield (0% done)
+BMS wiring diagram (0% done)
+Whole wiring diagram (0% done)

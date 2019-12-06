@@ -1,0 +1,20 @@
+{
+	"light_sensor": {
+		"lux": {
+			"value": 0.1,
+			"unit": "W/m^2"
+		},
+		"slave address": "0x11",
+	},
+	"temperature and humidity sensor": {
+		"temperature": {
+			"value": 20,
+			"unit": "C"
+		},
+		"humidity": {
+			"value": 1.4,
+			"unit": "ppm"
+		}
+		"slave address": "0x12"
+	}
+}

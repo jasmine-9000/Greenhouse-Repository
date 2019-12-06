@@ -1,0 +1,34 @@
+class SI7020_A20_rev1:
+	""" 
+	this is a temperature and humidity sensor. 
+	Methods:
+	
+	def read_data().
+		Arguments: None
+		Returns: (Temperature in Celsius, Relative Humidity)
+	"""
+	def __init__(self):
+		slave_address = 0x40
+		return
+	def read_data(self):
+		# SI7020_A20 address, 0x40(64)
+		# 0xF5(245)	Select Relative Humidity NO HOLD MASTER mode
+		bus.write_byte(0x40, 0xF5) 
+		time.sleep(0.5)
+		# SI7020_A20 address, 0x40(64)
+		# Read data back, 2 bytes, Humidity MSB first
+		data0 = bus.read_byte(0x40)
+		data1 = bus.read_byte(0x40)
+		# convert the data
+		humidity = (125.0 * (data0 * 256.0 + data1) / 65536.0) - 6.0
+		# SI7020_A20 address, 0x40(64) 
+		# 0xF3(243)	Select temperature NO HOLD MASTER mode
+		bus.write_byte(0x40, 0xF3)
+		time.sleep(0.5)
+		# SI7020_A20 address, 0x40(64)
+		# Read data back, 2 bytes, Temperature MSB first
+		data0 = bus.read_byte(0x40)
+		data1 = bus.read_byte(0x40)
+		# Convert the data
+		cTemp = (175.72 * (data0 * 256.0 + data1) / 65536.0) - 46.85
+		return (cTemp, humidity)

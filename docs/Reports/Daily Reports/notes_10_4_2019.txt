@@ -1,0 +1,9 @@
+start working on immediately after hardware gets into the shop:
+
+test whether or not the BMS code works. 
+
+I haven't tested it yet. If the serial protocol works, then everything else works. 
+
+Add: 
+	- Block diagrams and schematics as references. Add that as revision 1.5.
+	- Refer to those in your plan and/or outline document.

@@ -1,0 +1,823 @@
+EESchema Schematic File Version 4
+LIBS:Solar_Panels_and_Charge_Controller-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 5
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:Battery_Cell BT8
+U 1 1 5D30DE7B
+P 700 5850
+F 0 "BT8" H 818 5946 50  0000 L CNN
+F 1 "Battery_Cell" H 818 5855 50  0000 L CNN
+F 2 "" V 700 5910 50  0001 C CNN
+F 3 "~" V 700 5910 50  0001 C CNN
+	1    700  5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Cell_Module CELL8
+U 1 1 5D30DE81
+P 2050 5850
+F 0 "CELL8" H 2100 6050 50  0000 C CNN
+F 1 "Cell_Module" H 2050 6150 50  0000 C CNN
+F 2 "" H 2050 5950 50  0001 C CNN
+F 3 "" H 2050 5950 50  0001 C CNN
+	1    2050 5850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	700  5650 700  5500
+Wire Wire Line
+	700  6050 700  5950
+$Comp
+L Device:Battery_Cell BT7
+U 1 1 5D30DE8F
+P 700 5200
+F 0 "BT7" H 818 5296 50  0000 L CNN
+F 1 "Battery_Cell" H 818 5205 50  0000 L CNN
+F 2 "" V 700 5260 50  0001 C CNN
+F 3 "~" V 700 5260 50  0001 C CNN
+	1    700  5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Cell_Module CELL7
+U 1 1 5D30DE95
+P 2050 5200
+F 0 "CELL7" H 2100 5400 50  0000 C CNN
+F 1 "Cell_Module" H 2050 5500 50  0000 C CNN
+F 2 "" H 2050 5300 50  0001 C CNN
+F 3 "" H 2050 5300 50  0001 C CNN
+	1    2050 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	700  5000 700  4850
+Wire Wire Line
+	700  5400 700  5300
+$Comp
+L Device:Battery_Cell BT6
+U 1 1 5D30DEA3
+P 700 4500
+F 0 "BT6" H 818 4596 50  0000 L CNN
+F 1 "Battery_Cell" H 818 4505 50  0000 L CNN
+F 2 "" V 700 4560 50  0001 C CNN
+F 3 "~" V 700 4560 50  0001 C CNN
+	1    700  4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Cell_Module CELL6
+U 1 1 5D30DEA9
+P 2050 4500
+F 0 "CELL6" H 2050 4700 50  0000 C CNN
+F 1 "Cell_Module" H 2050 4800 50  0000 C CNN
+F 2 "" H 2050 4600 50  0001 C CNN
+F 3 "" H 2050 4600 50  0001 C CNN
+	1    2050 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	700  4300 700  4150
+Wire Wire Line
+	700  4700 700  4600
+$Comp
+L Device:Battery_Cell BT5
+U 1 1 5D30DEB7
+P 700 3850
+F 0 "BT5" H 818 3946 50  0000 L CNN
+F 1 "Battery_Cell" H 818 3855 50  0000 L CNN
+F 2 "" V 700 3910 50  0001 C CNN
+F 3 "~" V 700 3910 50  0001 C CNN
+	1    700  3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Cell_Module CELL5
+U 1 1 5D30DEBD
+P 2050 3850
+F 0 "CELL5" H 2050 4050 50  0000 C CNN
+F 1 "Cell_Module" H 2050 4150 50  0000 C CNN
+F 2 "" H 2050 3950 50  0001 C CNN
+F 3 "" H 2050 3950 50  0001 C CNN
+	1    2050 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	700  3650 700  3500
+Wire Wire Line
+	700  4050 700  3950
+Wire Wire Line
+	700  4050 700  4150
+Connection ~ 700  4050
+Connection ~ 700  4150
+Wire Wire Line
+	2450 4400 2450 3850
+Wire Wire Line
+	2450 5750 2450 5200
+Wire Wire Line
+	700  5500 700  5400
+Connection ~ 700  5500
+Connection ~ 700  5400
+Wire Wire Line
+	700  4850 700  4700
+Connection ~ 700  4850
+Connection ~ 700  4700
+Wire Wire Line
+	3300 4750 3750 4750
+Wire Wire Line
+	2750 4050 2750 4950
+Wire Wire Line
+	2750 4950 3750 4950
+$Comp
+L bms:CAN_Cell_Group_Module M1
+U 1 1 5D30DEE1
+P 4400 4900
+F 0 "M1" H 4075 5315 50  0000 C CNN
+F 1 "CAN_Cell_Group_Module" H 4075 5224 50  0000 C CNN
+F 2 "" H 4150 5050 50  0001 C CNN
+F 3 "" H 4150 5050 50  0001 C CNN
+	1    4400 4900
+	1    0    0    -1  
+$EndComp
+Entry Wire Line
+	4950 5200 5050 5100
+Entry Wire Line
+	4950 5100 5050 5000
+Entry Wire Line
+	4950 4700 5050 4600
+Entry Wire Line
+	4950 4800 5050 4700
+Text Label 5050 4450 0    50   ~ 0
+CAN_bus
+Entry Wire Line
+	7400 3650 7500 3750
+Entry Wire Line
+	7250 3650 7350 3750
+Entry Wire Line
+	9700 3650 9800 3750
+Entry Wire Line
+	9800 3650 9900 3750
+Wire Wire Line
+	3100 3700 3100 4850
+Wire Wire Line
+	3100 3700 2450 3700
+Wire Wire Line
+	2450 3700 2450 3750
+Wire Wire Line
+	2450 3750 2350 3750
+Wire Wire Line
+	2450 3850 2350 3850
+Wire Wire Line
+	2450 4500 2450 5100
+Wire Wire Line
+	700  6050 1700 6050
+Wire Wire Line
+	1700 6050 1700 5850
+Wire Wire Line
+	1700 5750 1700 5500
+Wire Wire Line
+	700  5500 1700 5500
+Wire Wire Line
+	1700 5400 1700 5200
+Wire Wire Line
+	700  5400 1700 5400
+Wire Wire Line
+	1700 4850 1700 5100
+Wire Wire Line
+	700  4850 1700 4850
+Wire Wire Line
+	700  4700 1700 4700
+Wire Wire Line
+	1700 4700 1700 4500
+Wire Wire Line
+	1700 4150 1700 4400
+Wire Wire Line
+	700  4150 1700 4150
+Wire Wire Line
+	700  4050 1700 4050
+Wire Wire Line
+	1700 4050 1700 3850
+Wire Wire Line
+	1700 3850 1800 3850
+Connection ~ 1700 4050
+Wire Wire Line
+	1700 4050 2750 4050
+Wire Wire Line
+	700  3500 1700 3500
+Wire Wire Line
+	1700 3500 1700 3750
+Wire Wire Line
+	1700 3750 1800 3750
+Connection ~ 1700 3500
+Wire Wire Line
+	1700 3500 3300 3500
+$Comp
+L Device:Battery_Cell BT4
+U 1 1 5D63222D
+P 700 3000
+F 0 "BT4" H 818 3096 50  0000 L CNN
+F 1 "Battery_Cell" H 818 3005 50  0000 L CNN
+F 2 "" V 700 3060 50  0001 C CNN
+F 3 "~" V 700 3060 50  0001 C CNN
+	1    700  3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Cell_Module CELL4
+U 1 1 5D632233
+P 2050 3000
+F 0 "CELL4" H 2100 3200 50  0000 C CNN
+F 1 "Cell_Module" H 2050 3300 50  0000 C CNN
+F 2 "" H 2050 3100 50  0001 C CNN
+F 3 "" H 2050 3100 50  0001 C CNN
+	1    2050 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	700  2800 700  2650
+Wire Wire Line
+	700  3200 700  3100
+$Comp
+L Device:Battery_Cell BT3
+U 1 1 5D63223B
+P 700 2350
+F 0 "BT3" H 818 2446 50  0000 L CNN
+F 1 "Battery_Cell" H 818 2355 50  0000 L CNN
+F 2 "" V 700 2410 50  0001 C CNN
+F 3 "~" V 700 2410 50  0001 C CNN
+	1    700  2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Cell_Module CELL3
+U 1 1 5D632241
+P 2050 2350
+F 0 "CELL3" H 2100 2550 50  0000 C CNN
+F 1 "Cell_Module" H 2100 2650 50  0000 C CNN
+F 2 "" H 2050 2450 50  0001 C CNN
+F 3 "" H 2050 2450 50  0001 C CNN
+	1    2050 2350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	700  2150 700  2000
+Wire Wire Line
+	700  2550 700  2450
+$Comp
+L Device:Battery_Cell BT2
+U 1 1 5D632249
+P 700 1650
+F 0 "BT2" H 818 1746 50  0000 L CNN
+F 1 "Battery_Cell" H 818 1655 50  0000 L CNN
+F 2 "" V 700 1710 50  0001 C CNN
+F 3 "~" V 700 1710 50  0001 C CNN
+	1    700  1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Cell_Module CELL2
+U 1 1 5D63224F
+P 2050 1650
+F 0 "CELL2" H 2050 1850 50  0000 C CNN
+F 1 "Cell_Module" H 2050 1950 50  0000 C CNN
+F 2 "" H 2050 1750 50  0001 C CNN
+F 3 "" H 2050 1750 50  0001 C CNN
+	1    2050 1650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	700  1450 700  1300
+Wire Wire Line
+	700  1850 700  1750
+$Comp
+L Device:Battery_Cell BT1
+U 1 1 5D632257
+P 700 1000
+F 0 "BT1" H 818 1096 50  0000 L CNN
+F 1 "Battery_Cell" H 818 1005 50  0000 L CNN
+F 2 "" V 700 1060 50  0001 C CNN
+F 3 "~" V 700 1060 50  0001 C CNN
+	1    700  1000
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Cell_Module CELL1
+U 1 1 5D63225D
+P 2050 1000
+F 0 "CELL1" H 2050 1200 50  0000 C CNN
+F 1 "Cell_Module" H 2050 1300 50  0000 C CNN
+F 2 "" H 2050 1100 50  0001 C CNN
+F 3 "" H 2050 1100 50  0001 C CNN
+	1    2050 1000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	700  800  700  650 
+Wire Wire Line
+	700  1200 700  1100
+Wire Wire Line
+	700  1200 700  1300
+Connection ~ 700  1200
+Connection ~ 700  1300
+Wire Wire Line
+	2450 1550 2450 1000
+Wire Wire Line
+	2450 2900 2450 2350
+Wire Wire Line
+	700  2650 700  2550
+Connection ~ 700  2650
+Connection ~ 700  2550
+Wire Wire Line
+	700  2000 700  1850
+Connection ~ 700  2000
+Connection ~ 700  1850
+Wire Wire Line
+	2750 1200 2750 2100
+Wire Wire Line
+	2750 2100 3750 2100
+$Comp
+L bms:CAN_Cell_Group_Module M2
+U 1 1 5D632280
+P 4400 2050
+F 0 "M2" H 4075 2465 50  0000 C CNN
+F 1 "CAN_Cell_Group_Module" H 4075 2374 50  0000 C CNN
+F 2 "" H 4150 2200 50  0001 C CNN
+F 3 "" H 4150 2200 50  0001 C CNN
+	1    4400 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 1650 2450 2250
+Wire Wire Line
+	700  3200 1700 3200
+Wire Wire Line
+	1700 3200 1700 3000
+Wire Wire Line
+	1700 2900 1700 2650
+Wire Wire Line
+	700  2650 1700 2650
+Wire Wire Line
+	1700 2550 1700 2350
+Wire Wire Line
+	700  2550 1700 2550
+Wire Wire Line
+	1700 2000 1700 2250
+Wire Wire Line
+	700  2000 1700 2000
+Wire Wire Line
+	700  1850 1700 1850
+Wire Wire Line
+	1700 1850 1700 1650
+Wire Wire Line
+	1700 1300 1700 1550
+Wire Wire Line
+	700  1300 1700 1300
+Wire Wire Line
+	700  1200 1700 1200
+Wire Wire Line
+	1700 1200 1700 1000
+Connection ~ 1700 1200
+Wire Wire Line
+	1700 1200 2750 1200
+Wire Wire Line
+	700  650  1700 650 
+Wire Wire Line
+	1700 650  1700 900 
+Connection ~ 5050 3650
+Entry Wire Line
+	4950 1850 5050 1950
+Entry Wire Line
+	4950 1950 5050 2050
+Entry Wire Line
+	4950 2250 5050 2350
+Entry Wire Line
+	4950 2350 5050 2450
+$Comp
+L bms:emus_bms_g1 BMS1
+U 1 1 5D2BE3F8
+P 8900 4950
+F 0 "BMS1" H 8950 4850 50  0000 R CNN
+F 1 "emus_bms_g1" H 9150 4950 50  0000 R CNN
+F 2 "" H 9100 5000 50  0001 C CNN
+F 3 "" H 9100 5000 50  0001 C CNN
+	1    8900 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 900  3100 900 
+Wire Wire Line
+	3100 900  3100 2000
+Wire Wire Line
+	3750 2000 3100 2000
+Wire Wire Line
+	3750 1900 3300 1900
+Connection ~ 1700 3200
+Wire Wire Line
+	4650 1850 4950 1850
+Wire Wire Line
+	4650 1950 4950 1950
+Wire Wire Line
+	4650 2250 4950 2250
+Wire Wire Line
+	4650 2350 4950 2350
+Wire Wire Line
+	4650 4700 4950 4700
+Wire Wire Line
+	4650 4800 4950 4800
+Wire Wire Line
+	4650 5100 4950 5100
+Wire Wire Line
+	4650 5200 4950 5200
+Wire Wire Line
+	3100 4850 3750 4850
+Wire Wire Line
+	3300 3500 3300 4750
+Connection ~ 1700 6050
+Wire Wire Line
+	8050 4200 8000 4200
+Wire Wire Line
+	7500 3750 7500 4200
+Wire Wire Line
+	7350 4300 8050 4300
+Wire Wire Line
+	7350 4300 7350 3750
+Wire Wire Line
+	9800 3750 9800 4500
+Wire Wire Line
+	9900 3750 9900 4600
+Wire Wire Line
+	9800 4600 9900 4600
+Wire Wire Line
+	6150 1350 6450 1350
+Text GLabel 6450 1150 2    50   Input ~ 0
+Tristar_MPPT_Battery_Terminal
+Text GLabel 6450 1350 2    50   Input ~ 0
+Tristar_MPPT_Common_Ground
+Wire Wire Line
+	3300 650  3500 650 
+Entry Wire Line
+	7950 4950 8050 4850
+Entry Wire Line
+	7950 5050 8050 4950
+Entry Wire Line
+	7950 5150 8050 5050
+Entry Wire Line
+	7950 5250 8050 5150
+Text GLabel 7950 5400 3    50   Input ~ 0
+BMS_USB_connection
+$Comp
+L Device:Fuse F1
+U 1 1 5D936E56
+P 2800 650
+F 0 "F1" V 2900 650 50  0000 C CNN
+F 1 "Fuse" V 2694 650 50  0000 C CNN
+F 2 "" V 2730 650 50  0001 C CNN
+F 3 "~" H 2800 650 50  0001 C CNN
+	1    2800 650 
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1700 650  2650 650 
+Connection ~ 1700 650 
+Wire Wire Line
+	2950 650  3300 650 
+Connection ~ 3300 650 
+Wire Wire Line
+	3300 650  3300 1900
+Wire Wire Line
+	6450 1150 5100 1150
+Wire Wire Line
+	3500 650  4050 650 
+Connection ~ 3500 650 
+Wire Wire Line
+	4350 650  4700 650 
+$Comp
+L power:VCC #PWR0103
+U 1 1 5D999DEF
+P 4050 900
+F 0 "#PWR0103" H 4050 750 50  0001 C CNN
+F 1 "VCC" H 3900 1000 50  0000 C CNN
+F 2 "" H 4050 900 50  0001 C CNN
+F 3 "" H 4050 900 50  0001 C CNN
+	1    4050 900 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8750 5800 8750 5850
+Text GLabel 8750 5850 3    50   Input ~ 0
+BAT_LOW
+Text GLabel 4350 1050 2    50   Input ~ 0
+BAT_LOW
+Wire Wire Line
+	3500 650  3500 1150
+$Comp
+L bms:Contactor U4
+U 1 1 5D990859
+P 4200 800
+F 0 "U4" H 4200 1215 50  0000 C CNN
+F 1 "Contactor" H 4000 1050 50  0000 C CNN
+F 2 "" H 3900 500 50  0001 C CNN
+F 3 "" H 3900 500 50  0001 C CNN
+	1    4200 800 
+	1    0    0    -1  
+$EndComp
+$Comp
+L bms:Contactor U1
+U 1 1 5D9B96B6
+P 6000 1500
+F 0 "U1" H 6000 1915 50  0000 C CNN
+F 1 "Contactor" H 6000 1824 50  0000 C CNN
+F 2 "" H 5700 1200 50  0001 C CNN
+F 3 "" H 5700 1200 50  0001 C CNN
+	1    6000 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0104
+U 1 1 5D9BA6DB
+P 5850 1600
+F 0 "#PWR0104" H 5850 1450 50  0001 C CNN
+F 1 "VCC" H 5867 1773 50  0000 C CNN
+F 2 "" H 5850 1600 50  0001 C CNN
+F 3 "" H 5850 1600 50  0001 C CNN
+	1    5850 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0105
+U 1 1 5D9BAD5E
+P 8000 4200
+F 0 "#PWR0105" H 8000 4050 50  0001 C CNN
+F 1 "VCC" H 8017 4373 50  0000 C CNN
+F 2 "" H 8000 4200 50  0001 C CNN
+F 3 "" H 8000 4200 50  0001 C CNN
+	1    8000 4200
+	1    0    0    -1  
+$EndComp
+Connection ~ 8000 4200
+Wire Wire Line
+	8000 4200 7500 4200
+Text GLabel 6150 1750 2    50   Input ~ 0
+CHARGER
+Text GLabel 9250 5800 3    50   Input ~ 0
+CHARGER
+Text GLabel 4700 650  2    50   Input ~ 0
+LOAD_POSITIVE_TERMINAL
+Wire Wire Line
+	5850 1350 5750 1350
+Wire Wire Line
+	5750 1350 5750 2500
+Wire Wire Line
+	5750 6050 6150 6050
+Connection ~ 5750 6050
+Text GLabel 6150 6050 2    50   Input ~ 0
+LOAD_GROUND
+$Comp
+L power:VCC #PWR0106
+U 1 1 5D9D55CD
+P 10400 5250
+F 0 "#PWR0106" H 10400 5100 50  0001 C CNN
+F 1 "VCC" H 10417 5423 50  0000 C CNN
+F 2 "" H 10400 5250 50  0001 C CNN
+F 3 "" H 10400 5250 50  0001 C CNN
+	1    10400 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_DIP_x01 SW1
+U 1 1 5D9D7D47
+P 10100 5250
+F 0 "SW1" H 10100 5517 50  0000 C CNN
+F 1 "SW_DIP_x01" H 10100 5426 50  0000 C CNN
+F 2 "" H 10100 5250 50  0001 C CNN
+F 3 "~" H 10100 5250 50  0001 C CNN
+	1    10100 5250
+	1    0    0    -1  
+$EndComp
+NoConn ~ 9800 5150
+$Comp
+L bms:Current_Sensor SENSOR4
+U 1 1 5DA26470
+P 8750 3300
+F 0 "SENSOR4" H 9050 3300 50  0000 L CNN
+F 1 "Current_Sensor" H 9050 3200 50  0000 L CNN
+F 2 "" H 8750 3300 50  0001 C CNN
+F 3 "" H 8750 3300 50  0001 C CNN
+	1    8750 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8950 3550 8950 4050
+Wire Wire Line
+	8850 3550 8850 4050
+Wire Wire Line
+	8750 3550 8750 4050
+Wire Wire Line
+	8650 3550 8650 3850
+Wire Wire Line
+	8650 3850 9400 3850
+Wire Wire Line
+	9400 3850 9400 4050
+Wire Wire Line
+	9300 4050 9300 3900
+Wire Wire Line
+	9300 3900 8550 3900
+Wire Wire Line
+	8550 3900 8550 3550
+$Comp
+L bms:cooler U2
+U 1 1 5DA42A72
+P 7900 1250
+F 0 "U2" H 8128 1346 50  0000 L CNN
+F 1 "cooler" H 8128 1255 50  0000 L CNN
+F 2 "" H 8150 1500 50  0001 C CNN
+F 3 "" H 8150 1500 50  0001 C CNN
+	1    7900 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Relay:DIPxx-1Axx-12x K1
+U 1 1 5DA6041D
+P 8100 1800
+F 0 "K1" H 8430 1846 50  0000 L CNN
+F 1 "RELAY" H 8430 1755 50  0000 L CNN
+F 2 "Relay_THT:Relay_StandexMeder_DIP_LowProfile" H 8450 1750 50  0001 L CNN
+F 3 "https://standexelectronics.com/wp-content/uploads/datasheet_reed_relay_DIP.pdf" H 8100 1800 50  0001 C CNN
+	1    8100 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0107
+U 1 1 5DA7831E
+P 7900 700
+F 0 "#PWR0107" H 7900 550 50  0001 C CNN
+F 1 "VCC" H 7917 873 50  0000 C CNN
+F 2 "" H 7900 700 50  0001 C CNN
+F 3 "" H 7900 700 50  0001 C CNN
+	1    7900 700 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0108
+U 1 1 5DA7DC6F
+P 8300 1500
+F 0 "#PWR0108" H 8300 1350 50  0001 C CNN
+F 1 "VCC" H 8317 1673 50  0000 C CNN
+F 2 "" H 8300 1500 50  0001 C CNN
+F 3 "" H 8300 1500 50  0001 C CNN
+	1    8300 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDREF #PWR0109
+U 1 1 5DA86BC2
+P 7350 4300
+F 0 "#PWR0109" H 7350 4050 50  0001 C CNN
+F 1 "GNDREF" H 7355 4127 50  0000 C CNN
+F 2 "" H 7350 4300 50  0001 C CNN
+F 3 "" H 7350 4300 50  0001 C CNN
+	1    7350 4300
+	1    0    0    -1  
+$EndComp
+Connection ~ 7350 4300
+$Comp
+L power:GNDREF #PWR0110
+U 1 1 5DA873B8
+P 7900 2100
+F 0 "#PWR0110" H 7900 1850 50  0001 C CNN
+F 1 "GNDREF" H 7905 1927 50  0000 C CNN
+F 2 "" H 7900 2100 50  0001 C CNN
+F 3 "" H 7900 2100 50  0001 C CNN
+	1    7900 2100
+	1    0    0    -1  
+$EndComp
+Text GLabel 8300 2100 3    50   Input ~ 0
+CHG_IND
+Text GLabel 9350 5800 3    50   Input ~ 0
+CHG_IND
+NoConn ~ 9150 5800
+$Comp
+L bms:Contactor U3
+U 1 1 5DA93750
+P 9600 1550
+F 0 "U3" V 9646 1252 50  0000 R CNN
+F 1 "Contactor" V 9555 1252 50  0000 R CNN
+F 2 "" H 9300 1250 50  0001 C CNN
+F 3 "" H 9300 1250 50  0001 C CNN
+	1    9600 1550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_US H1
+U 1 1 5DA94D76
+P 9450 1150
+F 0 "H1" H 9518 1196 50  0000 L CNN
+F 1 "HEATER" H 9518 1105 50  0000 L CNN
+F 2 "" V 9490 1140 50  0001 C CNN
+F 3 "~" H 9450 1150 50  0001 C CNN
+	1    9450 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9450 1400 9450 1300
+$Comp
+L power:VCC #PWR0111
+U 1 1 5DA9A157
+P 9850 1400
+F 0 "#PWR0111" H 9850 1250 50  0001 C CNN
+F 1 "VCC" H 9867 1573 50  0000 C CNN
+F 2 "" H 9850 1400 50  0001 C CNN
+F 3 "" H 9850 1400 50  0001 C CNN
+	1    9850 1400
+	1    0    0    -1  
+$EndComp
+Text GLabel 9700 1700 3    50   Input ~ 0
+HEATER
+Text GLabel 8850 5800 3    50   Input ~ 0
+HEATER
+Connection ~ 5100 1150
+Wire Wire Line
+	5100 1150 3500 1150
+Wire Wire Line
+	5750 2500 9450 2500
+Wire Wire Line
+	9450 1700 9450 2500
+Connection ~ 5750 2500
+Wire Wire Line
+	5750 2500 5750 6050
+Wire Wire Line
+	1700 6050 3600 6050
+Wire Wire Line
+	3750 5300 3600 5300
+Wire Wire Line
+	3600 5300 3600 6050
+Connection ~ 3600 6050
+Wire Wire Line
+	3600 6050 5750 6050
+Wire Wire Line
+	3750 5200 3500 5200
+Wire Wire Line
+	3500 5200 3500 5850
+Wire Wire Line
+	3500 5850 2450 5850
+Wire Wire Line
+	3700 3200 3700 2450
+Wire Wire Line
+	3700 2450 3750 2450
+Wire Wire Line
+	1700 3200 3700 3200
+Wire Wire Line
+	2450 3000 3500 3000
+Wire Wire Line
+	3500 3000 3500 2350
+Wire Wire Line
+	3500 2350 3750 2350
+NoConn ~ 8650 5800
+NoConn ~ 8650 4050
+NoConn ~ 9100 4050
+NoConn ~ 9200 4050
+Wire Wire Line
+	5100 850  9450 850 
+Wire Wire Line
+	5100 850  5100 1150
+Wire Wire Line
+	9450 850  9450 1000
+Wire Wire Line
+	7900 900  7900 700 
+Text Notes 9800 5550 0    50   ~ 0
+This is a Push button.\nPush it to activate the charger.
+Text Notes 8550 7500 2    50   ~ 0
+BMS Layout, heater, and cooler
+Text Notes 10700 7650 2    50   ~ 0
+1.3
+Text Notes 8550 7650 2    50   ~ 0
+7/31/2019
+NoConn ~ 8250 5800
+NoConn ~ 8350 5800
+Text Notes 7050 6650 0    50   ~ 0
+Cell Modules use the CAN Bus protocol to communicate with one another
+NoConn ~ 8050 4400
+NoConn ~ 8050 4500
+NoConn ~ 8050 4600
+NoConn ~ 8050 4700
+Wire Bus Line
+	7950 4950 7950 5400
+Wire Bus Line
+	5050 1950 5050 3650
+Wire Bus Line
+	5050 3650 9800 3650
+Wire Bus Line
+	5050 3650 5050 5100
+$EndSCHEMATC
