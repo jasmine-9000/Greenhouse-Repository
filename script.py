@@ -14,7 +14,7 @@ tomorrow = today + timedelta(days = 1)
 charge = 0.0
 step = 0.05
 while current_time < tomorrow:
-	file = open("flask_greenhouse/BMS_test_file.json")
+	file = open("flask_greenhouse/BMS_file.json")
 	# json_received = file.readlines()
 	bms = json.load(file)
 	#dumped = json.dumps(json_received)
