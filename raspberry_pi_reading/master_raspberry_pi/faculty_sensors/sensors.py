@@ -162,7 +162,7 @@ class VEML7700:
 		#val = round(val,1)
 		#valIR = round(valIR,1)
 
-		#Reference www.vishay.com/docs/84367/designingveml6030.pdf
+		# Reference www.vishay.com/docs/84367/designingveml6030.pdf
 		# 'Calculating the LUX Level'
 
 		valcorr = (6.0135E-13*val**4)-(9.392E-9*val**3)+(8.1488E-5*val**2)+(1.0023E0*val)

@@ -389,7 +389,7 @@ If a user by the name username exists and they have a sensor called sensor_name,
 
 # Data Retrieval Routes 
 
-##Multiple Data Point Route:
+## Multiple Data Point Route:
 Link:
 
 http://arboretum-backend.soe.ucsc.edu/sensors/get-sensor-json-data-range/sensor_id/start_date/end_date/interval
@@ -399,7 +399,7 @@ It's easier to search by sensor_id instead of sensor_name, and since the browser
 Returns a JSON file with all data points from start_date to end_date in interval minutes.
 
 
-##Single data point route
+## Single data point route
 Link:
 
 http://arboretum-backend.soe.ucsc.edu/sensors/get-sensor-json-data-by-id/sensor_id/date
@@ -413,11 +413,11 @@ If there's no data point: returns this:
 	}
 
 
-#BMS and Tristar Forms & Models
+# BMS and Tristar Forms & Models
 
-##Forms
+## Forms
 
-###Date_Form
+### Date_Form
 
 A front-end form used to request BMS data. 
 
@@ -436,7 +436,7 @@ Options:
 - logarithmic scale
 - marker
 
-###Tristar Form
+### Tristar Form
 A front-end form used to request Tristar data.
 
 Options:
@@ -454,8 +454,8 @@ Options:
 - logarithmic scale
 - marker
 
-##Models
-###JSONDataEntry
+## Models
+### JSONDataEntry
 An inheritable class.
 
 Properties
@@ -547,7 +547,7 @@ Finally, this method is called:
 
 It takes a data dictionary containing x values (in our case, dates), y values (data points corresponding to those x_values), a graph title, x-axis title, y-axis title, etc., and plots it in the div id provided.
 
-#Error Handling
+# Error Handling
 
 This application handles errors using the functions in the errors/handlers.py file. This file is exported as a Flask blueprint, and applied to the main function by registering the blueprint in the __init__.py file.
 
@@ -556,19 +556,19 @@ It can handle these HTTP error codes:
 
 When an error is thrown by the web server, the software will return an HTML template with information regarding the error.
 
-##Example:
+## Example:
 
 Not Found (404): The page you are looking for is not here.
 Server Malfunction (500): Our server is experiencing technical difficulties.
 
-#Deployment:
+# Deployment:
 
 To deploy this website to a Linux Ubuntu web server properly, follow these steps:
 
 ## Update Linux
 Call: 
 	apt update && apt upgrade
-##Set Hostname.
+## Set Hostname.
 Call:
  
 	hostnamectl set-hostname flask-greenhouse
@@ -582,20 +582,20 @@ While in the nano editor, add a new line, and add this data:
 
 ```<tab>``` is a tab indent.
 
-##Add limited user
+## Add limited user
 Add a new user that can execute privileged commands. It’s safer than doing everything at root. Let’s not have hackers here.
 Call: 
 
 	adduser <username> #Then fill in all the information necessary.
 	adduser <username> sudo
-	#This gives <username> admin privileges.
+	# This gives <username> admin privileges.
 
 If you’re going to do a GitHub transfer, skip the next two steps.
-##Make a .ssh directory
+## Make a .ssh directory
 
 Call 
 	mkdir .ssh
-##Upload your public key
+## Upload your public key
 On your local machine (on either Cygwin or on a Linux machine):
 Call: 
 	ssh-keygen -b 4096
@@ -619,7 +619,7 @@ Modify these parameters in the sshd_config file as necessary so these parameters
 
 For safety reasons, we cannot permit a root login, nor can we allow hackers to brute-force any user’s password. Since we have an SSH public key in our server now, we can disable password authentication, and disable root login.
 
-##Setup firewall:
+## Setup firewall:
 
 Call:
 
@@ -634,7 +634,7 @@ This allows our port number to go through. For our test server, it will be 5000.
 	sudo ufw enable # activae our firewall.
 	sudo ufw status # see what we have allowed, and not allowed.
 	
-##Transfer Files.
+## Transfer Files.
 You must get the source code of our website onto your server. You have several options to do this:
 
 a.	git clone https://github.com/<repository_url>
@@ -655,7 +655,7 @@ This creates our virtual environment. if you accidentally created the venv folde
 	source flask_greenhouse/venv/bin/activate # activates our virtual environment
 	pip install -r requirements.txt
 
-##Set Global Variables:
+## Set Global Variables:
 Instead of using environment variables, you should use a secure config.json file.
 	
 Call:
@@ -675,7 +675,7 @@ In your flask_greenhouse folder, there should be a config.py file.
 
 Have our config.py file load config.json instead of use environment variables.
 
-##Running a Debug Server
+## Running a Debug Server
 
 To run a debug server, call:
 
@@ -684,7 +684,7 @@ To run a debug server, call:
 
 Your website should be running in debug mode.  When you navigate to your website, it should load properly. If there’s an error when loading your website, the console will display what type of error occurred. If you have set up error handling on your website (like I did), it should also work, too. My website should serve error templates back to the client in case of an error.
 
-##Install nginx and gunicorn
+## Install nginx and gunicorn
 
 These will be the two main engines that will serve our website for us while we are away. They are high performance engines, dedicated to serving websites.
 Call these commands:
@@ -696,7 +696,7 @@ Call these commands:
 Nginx will handle static files (CSS, JavaScript, Pictures).
 Gunicorn will run the Python code.
 
-##Update Nginx configuration files
+## Update Nginx configuration files
 Nginx does not come with our website enabled by default. To rectify that,
 Call:
 
@@ -724,7 +724,7 @@ Call:
 	sudo ufw allow http/tcp
 	sudo ufw delete allow <port number> # where port number is your test port
 
-##Create supervisor
+## Create supervisor
 Create your supervisor that handles traffic without your presence
 Your website will run while you’re in an SSH session, but without a supervisor, once you close your SSH session, your website will shut down. To have your website be served while you’re not in an SSH session, install a supervisor to run your server without you.
 
@@ -758,9 +758,79 @@ Finally, call:
 Your website should be up and running now.
 
 
+# Raspberry Pi
+
+## Introduction
+This is the main Raspberry Pi code.
+
+## run.py
+This is the main loop of the Raspberry Pi. It initializes all of our stuff, and then does a forever loop, constantly reading data once per day, and once every chance it gets.
+
+It wastes 2G data, but we've got plenty of that.
+
+### Global Variables:
+
+1. Private Server IP address: the IP address we want to send things to. Will be changed to arboretum-backend.soe.ucsc.edu later.
+2. Destinations: what directories within the server do we want to send our files?
+	1. BMS
+	2. Tristar daily
+	3. Tristar instantaneous 
+	4. Faculty Sensors
+	5. Student Sensors (n/a)
+3. Bluetooth Addresses (TODO)
+
+### Port Finding
+Detect the operating system used.
+
+If Linux, port numbers start with dev/ttyUSB*.
+
+If Windows, port numbers start with COM*.
+
+Create an array of ports.
+
+Scan every port that the Raspberry Pi has connected. If it can find one that can connect to TSMPPT_1, TSMPPT_2 and BMS it will assign those ports to the respective reader classes created earlier.
+
+The SixFab GSM/GPRS shield will always connect to dev/ttyS0, so there's no confusion on what port it will be connected to.
+
+The initialization code will create TSMPPT, BMS, Faculty, and Sensor (light, water, and tempearture) reader classes. It will also create a sender class for the GSM shield.
+
+At the start, the initialization code will also send a series of necessary initialization commands to the QualComm processor.
+
+
+### Main Loop:
+The code will then go into a forever looping code, executing these steps until shutdown:
+
+1. Retrieve local time.
+2. Construct local filenames for JSON files.
+3. Create new files based on filenames.
+4. If the local time is 23:58 PST: 
+	1. Construct local filenames for daily Tristar Data
+	2. Create new files
+	3. Dump JSON data for daily monitoring data.
+	4. Send JSON data to server at the post-json/daily address.
+5. Dump JSON data for instantaneous monitoring data, BMS data, and Sensor data.
+6. Close file pointesr.
+7. Send all JSON data to their respective folders.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Summary
 This website, as it pertains to my Senior thesis, is complete. I will add this README.md file to my Senior Thesis.
+
 
 #Sources
 https://docs.nginx.com/nginx/admin-guide/basic-functionality/runtime-control/
@@ -770,5 +840,3 @@ https://gunicorn.org/
 https://ubuntu.com/download/server
 
 https://www.youtube.com/watch?v=MwZwr5Tvyxo&list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
-
-

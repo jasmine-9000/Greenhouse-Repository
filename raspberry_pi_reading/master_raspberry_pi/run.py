@@ -1,7 +1,10 @@
 #main loop for master raspberry pi:
 #parts of code from from https://github.com/sixfab/Sixfab_RPi_CellularIoT_App_Shield/blob/master/sample/basicUDP.py
 
-#imports
+#################################################################################################################################
+#								IMPORTS																							#
+#################################################################################################################################
+
 from morningstar.morningstar import Morningstar 
 from bms.bms import BMS
 from gsm.cellulariot import CellularIoT
@@ -9,34 +12,78 @@ from gsm.FONA import FONA
 from faculty_sensors.sensors import SI7020_A20, BH1745NUC, VEML7700
 
 import time,sys
-
 import json
-
-#methods
-
-def sendJSONdata(phone, file_name,URL=""):
+#################################################################################################################################
+# 								HELPER METHODS																					#
+#################################################################################################################################
+def sendJSONdata(phone, file_name, server_name = "", directory=""):
 	"""
-		phone is a CellularIoT app class.
-		
-		file name passed in cannot be used by another program. close it first.
-		
-		server_location is a folder name (where in the server do you want it to go?)
+	sendJSONdata(): 
+	
+	sends a JSON file with filename <file_name> to <server_name> in <directory>. Uses the SixFab GSM/GPRS board <phone>.
+	
+		Arguments:
+			phone: a CellularIoT app class.
+			file_name: a filename string. 
+					The string passed in cannot be used by another program. You must close it first.
+			server_location: the destination URL.
+		Returns:
+			True if data was sent successfullly.
+			False if a data transmission error occurred.
 	"""
 	#open the file.
 	fp = open(file_name, "r")
+	
 	#read the only line there. json.dump() only writes 1 line.
 	data = fp.readline()
+	
+	success = phone.connectToServerTCP()
+	if not success: return False
+	
+	# on GSM shield: 
+	
+	# set context id=1 on GSM shield.
+	compose = "AT+QHTTPCFG=\"contextid\",1"
+	phone.sendATComm(compose,"OK")
+	
+	# set the request_header=1
+	compose = "AT+QHTTPCFG=\"requestheader\",1"
+	phone.sendATComm(compose,"OK")
+	
+	# set the destination URL
+	url = str("http://" + server_name + directory)
+	compose = "AT+QHTTPURL="
+	compose += str(len(url))
+	compose += ",80"
+	phone.setTimeout(20)
+	phone.sendATComm(compose,"CONNECT")
+	phone.sendDataComm(url,"OK")
+	
+	#construct the message that needs to be sent.
+	payload = "POST " + directory + " HTTP/1.1\r\nHost: "+server_name+"\r\nContent-Type: application/json\r\nContent-Length: "+str(len(data))+"\r\n\r\n"
+	payload += data
+	
+	# debugging statements
+	print("POSTED DATA")
+	print(payload)
+	print("----------------")
+	
 	#try to send it.
-	#it needs 1/2 a second to send the data.
-	success = phone.sendDataUDP(URL, data)
-	time.sleep(0.5)
+	compose = "AT+QHTTPPOST="
+	compose += str(len(payload))
+	compose += ",60,60"
+	phone.sendATComm(phone.compose,"CONNECT")
+	success = phone.sendDataComm(payload,"OK")
+	
 	return success
 	
-
-#global variables
+#################################################################################################################################
+#								GLOBAL VARIABLES																				#
+#################################################################################################################################
 ip_address = '2600:1700:ccd0:37d0:9d6a:dd43:7fd5:d946'
 port = 80
 
+# bluetooth address variables (TODO)
 slave_rpi_1_address = 'xx:xx:xx:xx:xx'
 slave_rpi_2_address = 'xx:xx:xx:xx:xx'
 
@@ -44,18 +91,23 @@ slave_rpi_2_address = 'xx:xx:xx:xx:xx'
 private_server_IP_address = "arboretum-backend.soe.ucsc.edu"
 private_URL = "http://" + private_server_IP_address
 
-# locations to send data to
-BMS_destination = private_URL + "/BMS/post-json"
-Tristar_destination = private_URL + "/Tristar/post-json"
-Tristar_daily_destination = private_URL + "/Tristar/post-json/daily"
-Faculty_destination = private_URL + "/sensors/post-json/admin/<sensor_name>"
-Student_destination = private_URL + "/sensors/post-json/<username>/<sensor_name>"
+# directories to send data to
+BMS_destination = "/BMS/post-json"
+Tristar_destination = "/Tristar/post-json"
+Tristar_daily_destination = "/Tristar/post-json/daily"
+Faculty_destination = "/sensors/post-json/admin/<sensor_name>"
+Student_destination = "/sensors/post-json/<username>/<sensor_name>"
 
-#folders to send JSON falues
+#folders to send JSON values
 ts_daily_values = "tristar_daily_values"
 ts_instantaneous_values = "tristar_inst_values"
 bms_values = "bms_values"
 
+
+
+#################################################################################################################################
+#								System Initialization																			#
+#################################################################################################################################
 # this is the init() in an Arduino.
 # find the ports on the system your system.
 # windows uses virtual COM ports.
@@ -167,6 +219,7 @@ water = SI7020_A20()
 light = VEML7700()
 temperature = BH1745NUC()
 
+# ignore bluetooth for now.
 # import bluetooth
 
 # bluetooth_port = 1
@@ -228,8 +281,8 @@ while 1:
 		s2_fp.close()
 		
 		#send the data.
-		sendJSONdata(fona, string_1_name, Tristar_daily_destination)
-		sendJSONdata(fona, string_2_name, Tristar_daily_destination)
+		sendJSONdata(fona, string_1_name, private_server_IP_address, Tristar_daily_destination)
+		sendJSONdata(fona, string_2_name, private_server_IP_address, Tristar_daily_destination)
 		
 	#dump all the instantaneous data to an external file.
 	string_1.DumpInstantenousDataToJSONFile(string_1_JSON_fp)
@@ -249,11 +302,11 @@ while 1:
 	temp_JSON_fp.close()
 	
 	#send JSON files to database.
-	sendJSONdata(fona, string_1_JSON_name, Tristar_destination)
-	sendJSONdata(fona, string_2_JSON_name, Tristar_destination)
-	sendJSONdata(fona, BMS_JSON_name, BMS_destination)
-	sendJSONdata(fona, water_JSON_name, water_destination)
-	sendJSONdata(fona, light_JSON_name, light_destination)
-	sendJSONdata(fona, temp_JSON_name, temp_destination)
+	sendJSONdata(fona, string_1_JSON_name, private_server_IP_address, Tristar_destination)
+	sendJSONdata(fona, string_2_JSON_name, private_server_IP_address, Tristar_destination)
+	sendJSONdata(fona, BMS_JSON_name, private_server_IP_address, BMS_destination)
+	sendJSONdata(fona, water_JSON_name, private_server_IP_address, water_destination)
+	sendJSONdata(fona, light_JSON_name, private_server_IP_address, light_destination)
+	sendJSONdata(fona, temp_JSON_name, private_server_IP_address, temp_destination)
 	
 	#end of while loop. repeat again.
