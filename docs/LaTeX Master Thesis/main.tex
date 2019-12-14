@@ -31,19 +31,20 @@
 \makeindex
 
 
+% bibliography statements
+
+\usepackage[backend=bibtex, style=verbose-trad2]{biblatex}
+\addbibresource{references.bib}
+
+
 % this is the actual environment.
 \begin{document}
 %title, author, and date specifications
 
-\title{\Large{\textbf{Senior Thesis}}}
+\title{\Large{\textbf{UCSC Senior Thesis}}}
 \author{By William Kerr}
-\iffalse
-\date{\date{\parbox{\linewidth}{\centering%
-  \today\endgraf\bigskip
-  Coordinator 1 \hspace*{3cm} Coordinator 2\endgraf\medskip
-  Dept.\ of Physics \endgraf
-  ABC College}}}
-\fi
+\date{\today}
+
 \maketitle % Automatically generates the title page.
 \tableofcontents %Automatically generates a table of contents page.
 
@@ -61,7 +62,8 @@
 %\fancyfoot[LE,RO]{\thepage} % just show the page number. 
 
 \chapter{Abstract}
-Lorem Ipsum 
+GitHub Link:
+
 \chapter{Introduction}% start a new chapter.
 \input{./introduction.tex}
 
@@ -86,7 +88,12 @@ Lorem Ipsum
 \chapter{Troubleshooting}
 \input{./troubleshooting.tex}
 
+\chapter{Wiring}
+\input{./wiring.tex}
+
 \chapter{Datasheets}
 \input{./datasheets.tex}
 
+
+\printbibliography
 \end{document}

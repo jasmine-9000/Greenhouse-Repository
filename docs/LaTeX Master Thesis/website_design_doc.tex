@@ -1,1 +1,1039 @@
-shit
+Be sure you have python and pip installed. Download it from their
+website at:
+
+https://python.org/
+
+Be sure to install all requirements by calling this command
+
+\begin{verbatim}
+pip install -r requirements.txt
+\end{verbatim}
+
+Once you have all the requirements installed, run the application by
+calling:
+
+\begin{verbatim}
+python run.py
+\end{verbatim}
+
+The application will run on port 80.
+
+Go to http://arboretum-backend.soe.ucsc.edu to see the website.
+
+\section{Database Creation}\label{database-creation}
+
+Use a SQLlite database for testing.
+
+First, install SQLAlchemy.
+
+\begin{verbatim}
+pip install flask-sqlalchemy
+\end{verbatim}
+
+In your python application, you need to import this:
+
+\begin{verbatim}
+from flask_sqlalchemy import SQLAlchemy
+\end{verbatim}
+
+In your application object, specify your database path in your
+`SQLALCHEMY\_DATABASE\_URI' variable in your config class.
+
+\begin{verbatim}
+app.config['SQLALCHEMY_DATABASE_URI'] = ''# your path.
+\end{verbatim}
+
+Then, in your \_\_init\_\_.py file, initialize your database.
+
+\begin{verbatim}
+db = SQLAlchemy(app) 
+# app the name of your application that you created in your \_\_init\_\_.py file, and db is the name of the database object you want to create.
+\end{verbatim}
+
+now, in the python terminal, while located in the website directory:
+
+Call this series of commands:
+
+\begin{verbatim}
+from flask_greenhouse import db # flask_greenhouse is the name of your application.  
+db.create_all() # this creates your database if you haven't done so yet.
+\end{verbatim}
+
+This creates all your databases.
+
+Testing Python database commands:
+
+\begin{verbatim}
+>>> from flask_greenhouse.models import BMSDataentry # or whatever model you're using.
+>>> json_received = {"language": "python", "framework": "flask"}
+>>> entry_1 = BMSDataentry(json_content = json_received)
+>>> db.session.add(entry_1)
+>>> db.session.commit()
+\end{verbatim}
+
+To query the database from a fresh python terminal, run these commands:
+
+\begin{verbatim}
+>>> from flask_greenhouse import db
+>>> from flask_greenhouse import BMSDataentry
+>>> BMSDataentry.query.all() # or whatever query you want. read the flask docs for more information.
+\end{verbatim}
+
+\section{Using Github}\label{using-github}
+
+\subparagraph{(skip if you already know how to use
+git)}\label{skip-if-you-already-know-how-to-use-git}
+
+Git is a Distriuted Version Control System (VCS). When utilizing Git as
+the version control system, every developer has a backup of the code.
+
+Steps:
+
+\subsection{Install git.}\label{install-git.}
+
+\begin{verbatim}
+pip install git
+\end{verbatim}
+
+\subsection{Set config values.}\label{set-config-values.}
+
+\begin{verbatim}
+git config --global user.name "William Kerr"
+git config --global user.email "wkerr@ucsc.edu"
+\end{verbatim}
+
+to see the configuration settings again, call:
+
+\begin{verbatim}
+git config --list
+\end{verbatim}
+
+you can get help with any git verb by calling:
+
+\begin{verbatim}
+git config --help # config is the verb here. any verb will have the --help argument.
+\end{verbatim}
+
+\subsection{If there's an existing repository (with no .git
+file):}\label{if-theres-an-existing-repository-with-no-.git-file}
+
+\subsubsection{Initialize your git
+repository.}\label{initialize-your-git-repository.}
+
+\begin{verbatim}
+git init
+\end{verbatim}
+
+To stop tracking a project with git, remove the .git directory.
+
+\subsection{If there's not an existing
+repository:}\label{if-theres-not-an-existing-repository}
+
+create a folder, and then initialize your git repo. git init
+
+\subsection{Before your first commit:}\label{before-your-first-commit}
+
+\subsubsection{Add your files.}\label{add-your-files.}
+
+see files added with git status. git status
+
+\subsubsection{To ignore files, create a .gitignore
+file.}\label{to-ignore-files-create-a-.gitignore-file.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Linux Commands:
+
+  \texttt{touch .gitignore}
+\item
+  Windows Commands:
+
+  \texttt{type nul \textgreater{} .gitignore}
+\item
+  Things you may want to add in your .gitignore file in a Python
+  project:
+
+  \texttt{.DS\_Store .project, *.pyc}
+\end{enumerate}
+
+You do want to commit the .gitignore file, though.
+
+\subsection{Add files to staging
+area.}\label{add-files-to-staging-area.}
+
+\paragraph{Background:}\label{background}
+
+There are 3 states: the working directory, the staging area, and the
+.git directory (repository).
+
+Untracked files will stay in your working directory.
+
+Staging area is where we will organize what we want to be committed. We
+can pick and choose what we want committed.
+
+.git directory is the place we actually store our repository.
+
+To add files, use the git add command.
+
+\texttt{git add -A \# this adds EVERYTHING that's not in the .gitignore file.   git status \# this will tell you that now everything is in the staging area.}
+To remove something from the staging area, you can use git reset.
+
+\begin{verbatim}
+git reset <filename>
+\end{verbatim}
+
+\subsection{To Make a commit:}\label{to-make-a-commit}
+
+Use git commit.
+
+\begin{verbatim}
+git commit -m "Our first commit"
+\end{verbatim}
+
+the -m argument passes in a message. If you don't do that, git will open
+your text editor and prompt you for a message.
+
+\subsection{To Look at the commit log:}\label{to-look-at-the-commit-log}
+
+Use git log
+
+\begin{verbatim}
+git log 
+\end{verbatim}
+
+\subsection{Cloning a remote repo}\label{cloning-a-remote-repo}
+
+Cloning means to copy a repository from another location.
+
+\begin{verbatim}
+git clone <url> <where to clone>
+\end{verbatim}
+
+\subsection{Viewing information about a remote
+repository:}\label{viewing-information-about-a-remote-repository}
+
+To list information about the repository:
+
+\begin{verbatim}
+git remote -v
+\end{verbatim}
+
+to list all branches in your repository, remotely and locally.
+
+\begin{verbatim}
+git branch -a
+\end{verbatim}
+
+To list the differences between the local files and the staging are
+files and the remote files:
+
+\begin{verbatim}
+git diff
+\end{verbatim}
+
+Displays this result on the terminal:
+
+\begin{verbatim}
+-   removed lines
++   added lines
+\end{verbatim}
+
+\subsection{Adding a remote origin}\label{adding-a-remote-origin}
+
+\begin{verbatim}
+git remote add origin
+\end{verbatim}
+
+\subsection{Pulling changes}\label{pulling-changes}
+
+Use git pull.
+
+\begin{verbatim}
+git pull
+\end{verbatim}
+
+What it does: Pulls any changes that have been made by other developers
+since the last pull.
+
+\subsubsection{To do a git push:}\label{to-do-a-git-push}
+
+\begin{verbatim}
+git push origin <branch> 
+# usually pushing to master branch in single-developer situation.
+\end{verbatim}
+
+what it does:
+
+pushes your changes to the master.
+
+\subsection{To change branches:}\label{to-change-branches}
+
+To one that exists:
+
+\begin{verbatim}
+git checkout <branch> 
+\end{verbatim}
+
+To create one:
+
+\begin{verbatim}
+git branch <new branch name>
+\end{verbatim}
+
+\subsection{To push a branch to our remote
+repository:}\label{to-push-a-branch-to-our-remote-repository}
+
+\begin{verbatim}
+git push -u origin <branch> # we have pushed our new branch to our repository.
+git branch -a # see all branches.   
+\end{verbatim}
+
+\subsection{To merge a branch to the master
+branch:}\label{to-merge-a-branch-to-the-master-branch}
+
+\begin{verbatim}
+git checkout master # switch to master branch. 
+git pull origin master # update the local copy of the master branch.
+git branch --merged # lists all the branches that have been merged with the current brangh. 
+git merge <branch> # merge the changes in <branch> into the master branch
+git branch --merged # see that the merge has worked.
+git branch -d <branch> # delete that branch locally.
+git push origin --delete <branch> delete that branch in the remote repository.
+\end{verbatim}
+
+\subsection{fast example:}\label{fast-example}
+
+\begin{verbatim}
+git branch subtract
+git checkout subtract
+git status # see that the working tree is clean.
+git add -A
+git commit -m <message>
+git push -u origin subtract # push this new branch to the remote repo
+git checkout master 
+git pull origin master # pull all changes (if there are any). 
+git merge subtract 
+git push origin master # push changes 
+\end{verbatim}
+
+\section{Sensor Routing}\label{sensor-routing}
+
+\subsection{Forms}\label{forms}
+
+There are 3 forms: A User Registration Form, a User Login Form, a Sensor
+Data Request Form and a Sensor Registration Form.
+
+\subsubsection{Sensor Registration Form}\label{sensor-registration-form}
+
+Options:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  sensor name
+\item
+  units
+\item
+  protocol
+\item
+  type
+\end{itemize}
+
+Upon submission, a new sensor that's tied to the current user logged in
+will be added to our SQLite database.
+
+\subsubsection{Sensor Data Request Form}\label{sensor-data-request-form}
+
+Options:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  sensors owned
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    a select field with all sensors owned
+  \end{itemize}
+\item
+  start date: what time do you want to start requesting data
+\item
+  end date: what time do you want to stop requesting data
+\item
+  interval: an interval to query the database from. Must be a multiple
+  of 10.
+\item
+  title: the title of the graph you want to plot
+\item
+  x axis: what you want your x axis to be called
+\item
+  y axis: what you want your y axis to be called
+\end{itemize}
+
+\subsubsection{User Login Form}\label{user-login-form}
+
+Options:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Username
+\item
+  Password
+\item
+  Remember Me
+\end{itemize}
+
+Upon submission, the database will lookup a user by username, and hash
+the provided password against the password stored in the database using
+a secret key.
+
+This way, even if someone accesses the database directly, they won't
+know everyone's password unless they also know the secret key used for
+that password.
+
+The Remember Me checkbox will tell the login manager to remember the
+user if the user closes the window or not by adding a cookie to the
+user's website.
+
+\subsubsection{User Registration Form}\label{user-registration-form}
+
+Options:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Username
+\item
+  email (only for password resets)
+\item
+  password
+\item
+  confirm password
+\end{itemize}
+
+Upon submission, the web server will take the username, email, and
+password, create a new User instance with no sensors attached, and add
+it to the SQLite database.
+
+\subsection{Models}\label{models}
+
+\subsubsection{User Model}\label{user-model}
+
+Login manager
+
+Properties:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  username
+\item
+  email
+\item
+  password (stored in SHA-256 format)
+\item
+  sensor list (we are backreferenced as `master')
+\end{itemize}
+
+\subsubsection{Sensor Model}\label{sensor-model}
+
+Properties:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  user id: the id of the user it belongs to.
+\item
+  name: the name of the sensor
+\item
+  type: what type of sensor it is
+\item
+  units: what units it measures
+\item
+  dataset: a list of Sensor Data Entries tied to it.
+\end{itemize}
+
+\subsubsection{Sensor Data Entry Model}\label{sensor-data-entry-model}
+
+Properties:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  date posted: what date was it posted. Default is time at creation.
+\item
+  JSON content: a JSON Encoded dictionary class that converts itself
+  back and forth from string as needed.
+\item
+  sensor id: the id number of the sensor that produced this piece of
+  data.
+\end{itemize}
+
+\section{Routes}\label{routes}
+
+\subsection{/sensors}\label{sensors}
+
+Link:
+
+http://arboretum-backend.soe.ucsc.edu/sensors
+
+Requires you to be logged in. If not logged in, redirects you to the
+login page.
+
+\subsection{/sensors/register}\label{sensorsregister}
+
+Link:
+
+http://arboretum-backend.soe.ucsc.edu/sensors/register
+
+Requires you to be logged in. Redirects you to login page if not logged
+in.
+
+Allows you to register a new sensor, and start accepting data from it.
+
+Unfortunately, it does not actually change the code on the Raspberry Pi
+itself.
+
+\subsection{/sensors/users/register}\label{sensorsusersregister}
+
+Link:
+
+http://arboretum-backend.soe.ucsc.edu/sensors/users/register
+
+Allows a new user to register themselves into the database.
+
+\subsection{/sensors/users/login}\label{sensorsuserslogin}
+
+Link:
+
+http://arboretum-backend.soe.ucsc.edu/sensors/users/login
+
+Allows a user to login.
+
+\subsection{/logout}\label{logout}
+
+Link: http://arboretum-backend.soe.ucsc.edu/logout
+
+Logs out a user upon visiting the URL.
+
+This link will be displayed on the navigation bar.
+
+\section{Post Route}\label{post-route}
+
+Route:
+
+http://arboretum-backend.soe.ucsc.edu/sensors/post-json/username/sensor\_name
+
+If a user by the name username exists and they have a sensor called
+sensor\_name, then it will add the JSON content of your post request to
+a new Sensor Data Entry.
+
+\section{Data Retrieval Routes}\label{data-retrieval-routes}
+
+\subsection{Multiple Data Point Route:}\label{multiple-data-point-route}
+
+Link:
+
+http://arboretum-backend.soe.ucsc.edu/sensors/get-sensor-json-data-range/sensor\_id/start\_date/end\_date/interval
+
+It's easier to search by sensor\_id instead of sensor\_name, and since
+the browser knows intrinsically what the sensor id is for each sensor,
+we can pass that instead of sensor name.
+
+Returns a JSON file with all data points from start\_date to end\_date
+in interval minutes.
+
+\subsection{Single data point route}\label{single-data-point-route}
+
+Link:
+
+http://arboretum-backend.soe.ucsc.edu/sensors/get-sensor-json-data-by-id/sensor\_id/date
+
+Returns a JSON file with a single data point. If there's no data point:
+returns this:
+
+\begin{verbatim}
+{
+    data: {},
+    date: <date>
+}
+\end{verbatim}
+
+\section{BMS and Tristar Forms \&
+Models}\label{bms-and-tristar-forms-models}
+
+\subsection{Forms}\label{forms-1}
+
+\subsubsection{Date\_Form}\label{dateux5fform}
+
+A front-end form used to request BMS data.
+
+Options:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  units
+\item
+  start date
+\item
+  end date
+\item
+  interval
+\item
+  title
+\item
+  x axis
+\item
+  y axis
+\item
+  date format (python strftime behavior)
+\item
+  style
+\item
+  tight layout
+\item
+  logarithmic scale
+\item
+  marker
+\end{itemize}
+
+\subsubsection{Tristar Form}\label{tristar-form}
+
+A front-end form used to request Tristar data.
+
+Options:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  units
+\item
+  start date
+\item
+  end date
+\item
+  interval
+\item
+  title
+\item
+  x axis
+\item
+  y axis
+\item
+  date format (python strftime behavior)
+\item
+  style
+\item
+  tight layout
+\item
+  logarithmic scale
+\item
+  marker
+\end{itemize}
+
+\subsection{Models}\label{models-1}
+
+\subsubsection{JSONDataEntry}\label{jsondataentry}
+
+An inheritable class.
+
+Properties
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  date posted
+\item
+  JSON content
+\end{itemize}
+
+Classes that inherit JSONDataEntry:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  BMSDataentry
+\item
+  TristarDataEntry
+\item
+  TristarDailyDataEntry
+\end{itemize}
+
+\section{Tristar and BMS routes}\label{tristar-and-bms-routes}
+
+\subsection{BMS}\label{bms}
+
+\subsubsection{Routes}\label{routes-1}
+
+\paragraph{/BMS}\label{bms-1}
+
+Serves the BMS request graph
+
+\paragraph{/BMS/server\_side}\label{bmsserverux5fside}
+
+Serves the server-side BMS request graph. Allows you to use matplotlib
+to do things.
+
+\paragraph{/BMS/Instantaneous}\label{bmsinstantaneous}
+
+Allows you to view the BMS data from the last known data point.
+
+\paragraph{/BMS/Pins}\label{bmspins}
+
+Allows you to see the pins currently attached.
+
+\subsubsection{POST routes}\label{post-routes}
+
+\paragraph{/BMS/post-json}\label{bmspost-json}
+
+Allows you to post BMS data.
+
+\subsubsection{Data retrieval Routes}\label{data-retrieval-routes-1}
+
+\paragraph{/BMS/api/single\_point/date/parameter}\label{bmsapisingleux5fpointdateparameter}
+
+Allows you to view a single data point at a specific date \#\#\#\#
+/BMS/api//// Allows you to view multiple data points from start\_date to
+end\_date
+
+\subsection{Tristar}\label{tristar}
+
+\subsubsection{Routes}\label{routes-2}
+
+\paragraph{/Tristar}\label{tristar-1}
+
+Serves the Tristar Request graph. \#\#\#\# /Tristar/ChargeSettings
+Allows you to view the current charge settings \#\#\#\#
+/Tristar/DailyValues Allows you to view last currently known Daily
+logger values. \#\#\# POST routes \#\#\#\# /Tristar/post-json Allows you
+to post instantaneous Tristar JSON data. \#\#\#\#
+/Tristar/post-json/daily Allows you to post daily Tristar JSON data.
+
+\subsubsection{Data Retrieval routes}\label{data-retrieval-routes-2}
+
+\paragraph{/Tristar/api/single\_data\_point/date/parameter}\label{tristarapisingleux5fdataux5fpointdateparameter}
+
+Allows you to view (in JSON format) a single Tristar data point with a
+certain parameter.
+
+\paragraph{/Tristar/api/start\_date/end\_date/interval/parameter}\label{tristarapistartux5fdateendux5fdateintervalparameter}
+
+Allows you to view (in JSON format) Tristar data points within a range
+from start date to end date with an interval.
+
+\section{JavaScript files}\label{javascript-files}
+
+With my limited knowledge of jQuery and JavaScript, I wrote a few
+JavaScript files to retrieve data from the server using the data
+retrieval routes I wrote and described earlier, and graph them using
+Plotly.js.
+
+View Tristar\_graph\_loader.js, BMS\_graph\_loader.js, and
+sensor\_graph\_loader.js for details, located in the static folder.
+
+\subsection{Javascript Summary}\label{javascript-summary}
+
+The template API URLs are passed through my templating engine, Jinja2,
+and stored into the form itself by setting data-URL and data-MULTI\_URL
+to the API URLs.
+
+Once the URLs have been passed the graph loaders when the form is
+submitted, the graph loaders turn the template API URLs into usable URLs
+that can request meaningful data using data from the form.
+
+The graph loader then sends an AJAX request with the API URL we built
+earlier, and upon success, stores all data in a \texttt{data\{\}}
+dictionary.
+
+\texttt{data\{\}} and then is passed to a \texttt{ChartIt()} method that
+takes a \texttt{data\{\}} dictionary, and a div id to store the chart
+into.
+
+Finally, this method is called:
+
+\begin{verbatim}
+ChartIt(data, 'chart');
+\end{verbatim}
+
+It takes a data dictionary containing x values (in our case, dates), y
+values (data points corresponding to those x\_values), a graph title,
+x-axis title, y-axis title, etc., and plots it in the div id provided.
+
+\section{Error Handling}\label{error-handling}
+
+This application handles errors using the functions in the
+errors/handlers.py file. This file is exported as a Flask blueprint, and
+applied to the main function by registering the blueprint in the
+\textbf{init}.py file.
+
+It can handle these HTTP error codes:
+403,404,500,401,405,408,410,413,414,415,429,451,502,503,504.
+
+When an error is thrown by the web server, the software will return an
+HTML template with information regarding the error.
+
+\subsection{Example:}\label{example}
+
+Not Found (404): The page you are looking for is not here. Server
+Malfunction (500): Our server is experiencing technical difficulties.
+
+\section{Deployment:}\label{deployment}
+
+To deploy this website to a Linux Ubuntu web server properly, follow
+these steps:
+
+\subsection{Update Linux}\label{update-linux}
+
+Call: apt update \&\& apt upgrade \#\# Set Hostname. Call:
+
+\begin{verbatim}
+hostnamectl set-hostname flask-greenhouse
+nano /etc/hosts
+\end{verbatim}
+
+While in the nano editor, add a new line, and add this data:
+
+\begin{verbatim}
+<hostname><tab>flask-greenhouse
+\end{verbatim}
+
+\texttt{\textless{}hostname\textgreater{}} is where the website is
+hosted.
+
+\texttt{\textless{}tab\textgreater{}} is a tab indent.
+
+\subsection{Add limited user}\label{add-limited-user}
+
+Add a new user that can execute privileged commands. It's safer than
+doing everything at root. Let's not have hackers here. Call:
+
+\begin{verbatim}
+adduser <username> #Then fill in all the information necessary.
+adduser <username> sudo
+# This gives <username> admin privileges.
+\end{verbatim}
+
+If you're going to do a GitHub transfer, skip the next two steps. \#\#
+Make a .ssh directory
+
+Call mkdir .ssh \#\# Upload your public key On your local machine (on
+either Cygwin or on a Linux machine): Call: ssh-keygen -b 4096 \#
+generates a SSH key public-private key pair scp
+\textasciitilde{}/.ssh/id\_rsa.pub @
+\textasciitilde{}/.ssh/authorized\_keys \# moves the public key to your
+server into the .ssh folder.
+
+On your server: Call:
+
+\begin{verbatim}
+sudo chmod 700 ~/.ssh
+sudo chmod 600 ~/.ssh/*
+sudo nano /etc/ssh/sshd_config
+\end{verbatim}
+
+Modify these parameters in the sshd\_config file as necessary so these
+parameters have these values:
+
+\begin{verbatim}
+PermitRootLogin no
+PasswordAuthentication no
+\end{verbatim}
+
+For safety reasons, we cannot permit a root login, nor can we allow
+hackers to brute-force any user's password. Since we have an SSH public
+key in our server now, we can disable password authentication, and
+disable root login.
+
+\subsection{Setup firewall:}\label{setup-firewall}
+
+Call:
+
+\begin{verbatim}
+sudo apt install ufw # this is an uncomplicated firewall. 
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh
+sudo ufw allow <port number> 
+\end{verbatim}
+
+This allows our port number to go through. For our test server, it will
+be 5000.
+
+\begin{verbatim}
+sudo ufw enable # activae our firewall.
+sudo ufw status # see what we have allowed, and not allowed.
+\end{verbatim}
+
+\subsection{Transfer Files.}\label{transfer-files.}
+
+You must get the source code of our website onto your server. You have
+several options to do this:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  git clone https://github.com/
+\item
+  Execute an SSH file transfer of the website's files using FileZilla or
+  another FTP client. Ask someone who works in IT if you are unsure of
+  how to do a SFTP over SSH. Ensure your private SSH key is applied to
+  your transfer, and that you have uploaded your public key to the
+  server properly.
+\end{enumerate}
+
+\subsection{Install Packages}\label{install-packages}
+
+We need to install python3, pip, venv, our requirements from our
+requirements.txt file, and create our virtual environment.
+
+Call:
+
+\begin{verbatim}
+sudo apt install python3-pip
+sudo apt install python3-venv
+python3 -m venv flask_greenhouse/venv 
+\end{verbatim}
+
+This creates our virtual environment. if you accidentally created the
+venv folder in the wrong place, you can move it with the mv command.
+
+\begin{verbatim}
+source flask_greenhouse/venv/bin/activate # activates our virtual environment
+pip install -r requirements.txt
+\end{verbatim}
+
+\subsection{Set Global Variables:}\label{set-global-variables}
+
+Instead of using environment variables, you should use a secure
+config.json file.
+
+Call: sudo touch /etc/config.json sudo nano/etc/config.json
+
+Your config.json file should contain:
+
+\begin{verbatim}
+{
+    ‘SECRET_KEY’: “<secret key (sensitive)>”,
+    ‘SQLALCHEMY_DATABASE_URI’: “<SQLALCHEMY database URI (sensitive)”,
+    ‘MAIL_USERNAME’: “<username (sensitive)>”,
+    ‘MAIL_PASSWORD’: “<password (sensitive)>”,
+}
+\end{verbatim}
+
+In your flask\_greenhouse folder, there should be a config.py file.
+
+Have our config.py file load config.json instead of use environment
+variables.
+
+\subsection{Running a Debug Server}\label{running-a-debug-server}
+
+To run a debug server, call:
+
+\begin{verbatim}
+export FLASK_APP=run.py
+flask run –host-0.0.0.0
+\end{verbatim}
+
+Your website should be running in debug mode. When you navigate to your
+website, it should load properly. If there's an error when loading your
+website, the console will display what type of error occurred. If you
+have set up error handling on your website (like I did), it should also
+work, too. My website should serve error templates back to the client in
+case of an error.
+
+\subsection{Install nginx and
+gunicorn}\label{install-nginx-and-gunicorn}
+
+These will be the two main engines that will serve our website for us
+while we are away. They are high performance engines, dedicated to
+serving websites. Call these commands:
+
+\begin{verbatim}
+cd ~/
+sudo apt install nginx
+pip install gunicorn  # ensure you’re still within your virtual environment.
+\end{verbatim}
+
+Nginx will handle static files (CSS, JavaScript, Pictures). Gunicorn
+will run the Python code.
+
+\subsection{Update Nginx configuration
+files}\label{update-nginx-configuration-files}
+
+Nginx does not come with our website enabled by default. To rectify
+that, Call:
+
+\begin{verbatim}
+sudo rm /etc/nginx/sites-enabled/default
+sudo nano /etc/nginx/sites-enabled/flask_greenhouse
+\end{verbatim}
+
+The flask\_greenhouse file will contain:
+
+\begin{verbatim}
+server {
+    listen 80;
+    server_name <hostname>; # example: arboretum-backend.soe.ucsc.edu
+    
+    location /static {
+        alias /home/<username>/greenhouse_website/flask_greenhouse/static;
+    }
+    location / {
+        proxy_pass http://localhost:8000; #forwards all other traffic to port 8000
+        include /etc/nginx/proxy_params;
+        proxy_redirect off;
+    }}
+\end{verbatim}
+
+Call:
+
+\begin{verbatim}
+sudo ufw allow http/tcp
+sudo ufw delete allow <port number> # where port number is your test port
+\end{verbatim}
+
+\subsection{Create supervisor}\label{create-supervisor}
+
+Create your supervisor that handles traffic without your presence Your
+website will run while you're in an SSH session, but without a
+supervisor, once you close your SSH session, your website will shut
+down. To have your website be served while you're not in an SSH session,
+install a supervisor to run your server without you.
+
+Call:
+
+\begin{verbatim}
+sudo apt install supervisor
+sudo nano /etc/supervisor/conf.d/flaskblog.conf
+\end{verbatim}
+
+The file flaskblog.conf will contain:
+
+\begin{verbatim}
+[program:flask_greenhouse]
+directory=/home/<username>/greenhouse_website
+command=/home/<username>/greenhouse_website/venv/bin/gunicorn -w 3 run:app
+user=<username>
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+stderr_logfile=/var/log/greenhouse_website/greenhouse_website.err.log
+stdout_logfile=/var/log/greenhouse_website/greenhouse_website.out.log
+\end{verbatim}
+
+Finally, call:
+
+\begin{verbatim}
+sudo mkdir -p /var/log/greenhouse_website
+sudo touch /var/log/greenhouse_website/greenhouse_website.err.log
+sudo touch /var/log/greenhouse_website/greenhouse_website.out.log
+sudo supervisorctl reload
+    # now, the supervisor should be restarted.
+\end{verbatim}
+
+Your website should be up and running now.

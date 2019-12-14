@@ -812,6 +812,236 @@ The code will then go into a forever looping code, executing these steps until s
 6. Close file pointesr.
 7. Send all JSON data to their respective folders.
 
+## Morningstar.py
+### Introduction:
+
+The TSMPPT has a Programmable Logic Controller (PLC) inside. The PLC can be reprogrammed to respond to different battery voltages. Example: when the battery goes to 3.7V, the battery goes to the equalize stage. To reprogram the Tristar MPPT, you must use a PC and a RS-232 to USB cable, and the program MSView, provided by Morningstar. 
+
+Link: https://www.morningstarcorp.com/msview/. 
+
+I also have a document called Viewing Data on Morningstar Devices that explains how to use the software.
+
+However, the Tristar MPPT can be monitored by any device capable of serial monitoring, such asa a Raspberry Pi. Morningstar.py will contain the code necessary to monitor data from a Tristar Morningstar MPPT solar charge controller.
+
+Morningstar has a MODBUS specification document for the Tristar Morningstar MPPT. It should be in my App Notes section. If not, here’s a link:
+
+Link: https://www.stellavolta.com/content/MSCTSModbusCommunication.pdf
+
+Morningstar.py contains a class that reads PLC data, denoted as Morningstar(). This class can monitor data by reading it and dumping the data to a JSON file. Details are in the upcoming sections.
+
+### Dependencies:
+
+#### modbus-tk:
+
+The Tristar MPPT uses a royalty-free serial protocol called MODBUS. There exist many libraries to read it. The Python language has pymodbus, and modbus-tk.  Since pymodbus is not reliable (and I want reliable code), I will be using the modbus-tk library. It is distributed under the GNU-LGPL license (GNU Lesser General Public License) © 2009. Created by Luc Jean – luc.jean@gmail.com and Apidev – http://www.apidev.fr. No warranty of any kind.
+
+#### json:
+Comes with every distribution of python. Necessary to convert dictionaries into JSON format and dump it directly to an outfile.
+
+#### serial:
+This is a serial library for Python. It’s easy to use, and free. Provided as-is. Install with pip install pyserial. Use by calling “import serial”. ©2015 Chris Liechi clichi@gmx.net  All Rights Reserved. 
+
+### Initialization
+
+The Morningstar() class (like most other classes) has an __init__() function, that calls itself whenever a Morningstar() object is created. It requires port, baudrate, and the MODBUS slave number as arguments. When a Morningstar() object is created, it will initialize the serial connection to the PLC using this information. Then, it will create a MODBUS RtuMaster() class from the MODBUS-TK library.
+
+After the MODBUS RtuMaster() class is initialized, it will call the internal function .scaling(). It will test what scaling factors are used.
+
+Dictionaries in Python are everywhere in this code.
+
+It will have methods to either dump data to the command line or dump data to an outfile. The outfile should be a .json file, since the contents will be written in JSON format.
+
+### Classes:
+
+#### Morningstar()
+
+##### Description:
+Reads data from the Tristar MPPT PLC. Takes PORT, BAUDRATE, and SLAVE_NUMBER upon initialization.
+
+##### Variables:
+
+- PORT: what port number are you using?
+- BAUD: what baudrate are communicating at?
+- SLAVE_NUMBER: what is the MODBUS slave number you’re reading from?
+- serial\_connection: the serial connection from pyserial that actually communicates with the PLC.
+- master: the class from modbus_tk that converts serial data into data we can read.
+
+
+##### Methods:
+
+- .scaling(): Sets the classes internal scaling properties (V_PU and I_PU). Also prints the current running version to the console. Runs every time an object of this class is created.
+
+- .ADCdata(): Returns a dictionary containing ‘battery voltage’, ‘battery terminal voltage’, ‘battery sense voltage’, ‘array voltage’, ‘battery current’, ‘array current’, ‘12V supply’, ‘3V supply’, ‘meterbus voltrage’, ‘1.8V supply’, and ‘reference voltage’.
+
+- .TemperatureData(): Returns a dictionary containing ‘heatsink temperature’, ‘RTS temperature’, and ‘battery regulation temperature’. All are in degrees Celsius.
+
+- .StatusData(): Returns a dictionary containing ‘battery_voltage’, ‘charging_current’, ‘minimum battery voltage’, ‘maximum battery voltage’, ‘hour meter’, a list of faults, a list of alarms, the current state of the DIP switch, and the current state of the LED.
+
+
+- .ChargerData(): Returns a dictionary containing ‘Charge State’, ‘target regulation voltage’, ‘Ah Charge Resettable’, ‘Ah Charge Total’, ‘kWhr Charge Resettable’, and ‘kWhr Charge Total’.
+
+- .MPPTData(): Returns a dictionary containing: ‘output power’, ‘input power’, ‘max power of last sweep’, ‘Vmp of last sweep’, and ‘Voc of last sweep’.
+
+- .Logger_TodaysValues(): Returns a dictionary containing: ‘Battery Voltage Minimum Daily’, ‘Battery Voltage Maximum Daily’, ‘Input Voltage Maximum Daily’, ‘Amp Hours Accumulated Daily’, ‘Watt hours accumulated daily’, ‘Maximum power output daily’, ‘Minimum temperature daily’, ‘Maximum Temperature Daily’, a list of daily faults, a list of daily alarms, ‘time_ab_daily’, ‘time_eq_daily’, and ‘time_fl_daily’.
+
+- .ChargeSettings(): Returns a dictionary containing: 'EV_absorp', 'EV_float', 'Et_absorp', ‘Et_absorp_ext', 'EV_absorp_ext', 'EV_float_cancel', 'Et_float_exit_cum', 'EV_eq'], 'Et_eqcalendar', 'Et_eq_above', 'Et_eq_reg', 'Et_battery_service', 'EV_tempcomp', 'EV_hvd', 'EV_hvr', 'Evb_ref_lim', 'ETb_max', 'ETb_min', 'EV_soc_g_gy', 'EV_soc_gy_y', 'EV_soc_y_yr', 'EV_soc_yr_r', 'Elb_lim', 'EVa_ref_fixed_init', 'Eva_ref_fixed_pet_init'
+
+- .DumpInstantenousDataToJSONFile(outfile): Calls all instantaneous data internal class methods (ADCdata(), TemperatureData(), StatusData(), ChargerData(), MPPTData()), and dumps them into an outfile using json.dumps(). Preferably, the file’s name will end in “.json” so the operating system can recognize that the file is in JSON format.
+
+- .DumpDailyDataToJSONFile(outfile): Calls all daily data internal class methods (Logger_TodaysValues() and ChargeSettings()) and dumps them into an outfile using json.dumps(). Preferably, the file’s name will end in “.json” so the operating system can recognize that the file is in JSON format.
+
+
+## BMS.py
+### Introduction:
+The Battery Management System (BMS) has a Programmable Logic Controller (PLC) in it. It can be used to monitor things such as charge dissipated, voltage levels of each individual cell, etc.
+The internal PLC can be monitored using a USB interface. This is what the Raspberry Pi will do using the interpreted Python Language.
+The Python language is dependent on classes to process data. So, I will be writing a Python class to ex-tract data from the BMS PLC.
+
+### Dependencies:
+#### pyserial: 
+This is a serial library for Python. It’s easy to use, and free. Provided as-is. Install with pip install pyserial. Use by calling “import serial”. ©2015 Chris Liechi clichi@gmx.net  All Rights Reserved. 
+
+Usage: https://pyserial.readthedocs.io/en/latest/pyserial.html
+
+#### crc8_dallas: 
+This is a CRC-8 library that uses the exact polynomial we need for this application: x^8 + x^2+x+1.  I had to modify the code to work with Python 3, since it was originally developed for Python 2.
+#### sys: 
+Comes with every distribution of python. Necessary to have a test bench.
+Usage: https://docs.python.org/3/library/sys.html
+
+#### json: 
+Comes with every distribution of python. Necessary to convert dictionaries into JSON format and dump it directly to an outfile.
+Usage: https://docs.python.org/3/library/json.html
+
+### Initialization:
+Create a BMS() object, passing in PORT and BAUDRATE. This will initialize the serial connection to the BMS PLC.
+The BMS() object will destroy itself when python exits.
+Classes:
+
+#### BMSStatistic():
+##### Description:
+An internal class that contains a statistic from the sentence SS1(). Makes it easier to do mass data collec-tion from a series of sentences if a request for every statistic available is made.
+##### Variables:
+
+Every BMSStatistic object contains at least 4 variables:
+
+-	statisticIdentifier: what is the ID of this statistic (i.e. what protocol to use to process it)
+-	statisticValue: what is the value spat out (in decimal converted earlier from hexadecimal) from the BMS system?
+-	statisticValueAdditionalInfo: any additional information spat out from the BMS system (e.g. Cell ID)?
+-	timestamp: what time (in seconds since January 1, 1970 at 00:00 GMT) recorded. The BMS sys-tem records it in seconds since January 1, 2000 at 00:00 GMT).
+Possible additional variables the class can have: 
+-	Name: What is the real name of the statistic?
+-	Unit: what unit is the value recorded in (e.g. V, mA, W)? If N/A, the value is simply how many times an event occurred.
+-	Cell_ID: What is the ID of the cell the statistic came from?
+Methods:
+-	.dict(): converts this class into a dictionary with keys being the class variables it has, and their cor-responding values.
+-	.string(): converts this class into a string in JSON format. 
+-	.__init__(): initializes the object. Takes statisticIdentifi-er,statisticValue,statisticValueAdditionalInfo,timestamp. Upon creation, runs a specific protocol to process the data based on its statisticIdentifier.
+
+### BMS():
+#### Description:
+A class that can read the BMS system. Call the .DumpToJSONFile() method to dump all data to an outfile. Details below.
+
+#### Variables:
+
+Every BMS() object contains at least 3 variables:
+
+-	PORT: what port number is the Raspberry Pi reading from?
+-	BAUDRATE: at what baudrate (in bits/second) is the Raspberry Pi reading at?
+-	ser: the serial object (from the pyserial library) that sends and receives data from the BMS.
+	
+#### Methods:
+
+-	.VR1(): returns a dictionary containing hardware type, serial number, and firmware version.
+-	.BB1(): returns a dictionary containing number of cells, minimum balancing rate, and average cell balancing rate.
+-	.BB2(): returns a dictionary containing cell string number, first cell number, size of group, and in-dividual cell module balancing rate of each cell group. 
+-	.BC1(): returns a dictionary containing battery charge, battery capacity, and state of charge.
+-	.BT1(): returns a dictionary containing the summary of cell module temperature values of the bat-tery pack.
+-	.BT2(): This sentence contains individual cell module temperatures of a group of cells. Each group consists of 1 to 8 cells. This sentence is sent only after Control Unit receives a request sentence from external device, where the only data field is ‘?’ symbol. The normal response to BT2 request message, when battery pack is made up of two parallel cell strings:
+-	.BT3(): This sentence contains the summary of cell temperature values of the battery pack. It is sent periodically with configurable time intervals for active and sleep states (Data Transmission to Display Period).	
+-	.BT4(): This sentence contains individual cell temperatures of a group of cells. Each group con-sists of 1 to 8 cells.
+-	.BV1(): Returns a dictionary containing a summary of cell voltages. contains number of cells, min-imum cell voltage, maximum cell voltage, average cell voltage, and total voltage.
+-	.BV2(): This sentence contains individual voltages of a group of cells. Each group consists of 1 to 8 cells.
+-	.CF2(parameterID): returns the parameter data of the parameter ID. Must be processed separately.
+-	.CG1(): This sentence contains the statuses of Emus internal CAN peripherals. Can include CAN current sensor, and CAN cell group, along with the cell group number.
+-	.CN1(): This sentence reports the CAN messages received on CAN bus by Emus BMS Control Unit, if “Send to RS232/USB” function is enabled.
+-	.CN2(): This sentence reports the CAN messages sent on CAN bus if "Send to RS232/USB func-tion is enabled.
+-	.CS1(): Returns a dictionary containing the parameters and status of the charger. Includes set volt-age, set current, actual voltage, actual current, number of connected charger, and CAN charger status.
+-	.CV1(): Returns a dictionary containing the values of total voltage of battery pack, and current flowing through the battery pack.
+-	.DT1(): This is a placeholder for an electric vehicle sentence. The code is being specifically programmed for a greenhouse, so this sentence will not be programmed and return an error.
+-	.FD1(): This sentence resets the unit to factory defaults. Use at your own risk.
+-	.IN1(): This sentence returns a dictionary containing the status of the input pins (AC sense, IGN In, FAST_CHG).
+-	.LG1(clear): This sentence can either: retrieve events logged, or clear the event logger.
+	- Retrieve Events Logged: pass in ‘N’ or a null value. 
+		- Every event is recorded in a dictionary form like this: [“log event number 1”]: [“log event”: “No event”, “unix time stamp”: 1567014467
+		- Possible events:
+			-	No Event
+			-	BMS started
+			-	Lost communication to cells
+			-	Established communication to cells
+			-	Cells voltage critically low
+			-	Critical low voltage recovered
+			-	Cells voltage critically high
+			-	Critical high voltage recovered
+			-	Discharge current critically high
+			-	Discharge critical high current recovered
+			-	Charge current critically high
+			-	Charge critical high current recovered
+			-	Cell module temperature critically high
+			-	Critical high cell module temperature recovered
+			-	Leakage detected
+			-	Leakage recovered
+			-	Warning: low voltage – reducing power
+			-	Power reduction due to low voltage recovered
+			-	Warning: high current – reducing power
+			-	Power reduction due to high current recovered
+			-	Warning: High Cell module temperature – reducing power
+			-	Power reduction due to high cell module temperature recovered.
+			-	Charger connected 
+			-	Charger disconnected
+			-	Started pre-heating stage
+			-	Started pre-charging stage
+			-	Started main charging stage
+			-	Started balancing stage
+			-	Charging finished
+			-	Charging error occurred
+			-	Retrying charging
+			-	Restarting charging
+			-	Cell Temperature Critically high
+			-	Critically high cell temperature recovered
+			-	Warning: High cell temperature – reducing power
+		-	Unix Timestamp: Time recorded in seconds since January 1, 1970 at 00:00 GMT.
+		-	Log event number: what event number it 
+	- Clear Event Logger: pass in the ascii value ‘C’ or ‘c’.
+-	.OT1(): Returns a dictionary containing the status of output pins (Charger pin, heater, bat. low, buzzer, chg. ind.)
+-	.PW1(request, password): Check the admin status with PW1(‘?’). Log into BMS system with PW1(‘P’, password). Logout with PW1().
+-	.PW2(request, newPassword): Sets a new password, or clears a password. To set new password, call PW2('S',"mynewpassword"), and substitute “mynewpassword” with whatever password you want. To clear your password, call PW2('C'). Returns true if successful, false if not successful.
+-	.RC1(): Resets the current sensor reading to zero. Used after current sensor is initially installed.
+-	.RS1(): Resets the Emus BMS control unit entirely. Like a sudo reboot on a linux machine. Re-quires admin clearance.
+-	.RS2(): This sentence is used to retrieve the reset source history log.
+-	.SC1(percentage): This sentence sets the current state of the charge of the battery in %. Send in an integer from 0 to 100. This method will convert to hexadecimal format first. Returns False if not successful or invalid percentage is passed. Returns True if successful.
+-	.SS1(request, statisticIdentifier): This sentence can either: Request All Statistics, Request a Specific Statistic (pass in a number), or Clear all unprotected statistics.
+	- Request All Statistics: call SS1(‘?’). This will return all statistics the BMS currently has in the form of dictionaries converted from BMSstatistic classes.
+	- Request a Specific Statistic: call SS1(‘N’, number), where number is a positive integer. Re-turns a dictionary containing a single statistic.
+	- Clear all unprotected statistics: call SS1(‘c’). 
+-	.ST1(): This sentence returns the status of the BMS in dictionary form. It contains these statistics:
+	- Charging flags: charging stage, last charging error, last charging error parameter (for de-bugging purposes), stage duration, 
+	- Status flags: Valid cell voltages, Valid balancing rates, valid number of live cells, battery charging finished, valid cell temperatures
+	- Protection flags: undervoltage, overvoltage, discharge overcurrent, charge overcurrent, cell module overheat, leakage, no_cell_comm, cell_overheat
+	- Power flags: warning: power reduction: low voltage, warning: power reduction: high cur-rent, warning: power reduction: high cell module temperature,  warning: power reduction: high cell temperature
+	- Pin flags: ```no_function```, ```speed_sensor```, ```fast_charge_switch```, ```ign_key```, ```charger_mains_AC_sense```, ```heater_enable```, ```sound_buzzer```, ```battery_low```, ```charging_indication```, ```charger_enable_output```, ```state_of_charge```, ```battery_contactor```, ```battery_fan```, ```current_sensor```, ```leakage_sensor```, ```power_reduction```, ```charging_interlock```, ```analog_charger_control```, ```ZVU_boost_charge```, ```ZVU_slow_charge```, ```ZVU_buffer_mode```, ```BMS_failure```, ```equalization_enable```, ```DCDC_control```, ```ESM_rectifier_current_limit```, ```contactor_precharge```
+-	.TD1(): Returns time and date according the BMS in dictionary form. Returns year, month, day, hour, minute, second, and the amount of uptime the unit has in seconds.
+-	.TC2(): Used to calibrate cell temperature by a PC, not a microcontroller.
+-	.DumpToJSONfile(outfile): Calls all data methods listed above, then dumps all data returned into an outfile in JSON format.
+Note: Every data harvesting method returns “Cannot communicate to cells” if it fails.
+
+### Private Methods:
+
+#### bitAt(bitfield, position): 
+
+##### Description:
+
+Returns True if the bit is 1 at the position of the bitfield, False of 0. Used to analyze bitfields with fewer lines.
 
 
 
@@ -826,13 +1056,11 @@ The code will then go into a forever looping code, executing these steps until s
 
 
 
-
-
-#Summary
+# Summary
 This website, as it pertains to my Senior thesis, is complete. I will add this README.md file to my Senior Thesis.
 
 
-#Sources
+# Sources
 https://docs.nginx.com/nginx/admin-guide/basic-functionality/runtime-control/
 
 https://gunicorn.org/
